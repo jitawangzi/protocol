@@ -10,7 +10,7 @@ import "RewardMsg.proto" ;
 message ItemUseRequest_0b000003{
      uint32 id = 1;				//道具ID（Item表id）
      uint32 count = 2;		    //使用数量
-     uint32 param = 3;          // 道具使用参数，比如当道具的ItemType为4任选英雄道具时，为选择的英雄id
+     uint32 param = 3;          // 道具使用参数，比如当道具的ItemType为4任选道具时，为Item表 Para1参数索引
 }
 
 // 使用道具后可能会给资源，道具等。
