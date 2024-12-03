@@ -88,6 +88,14 @@ message BattleRewardRequest_13000022{
 message BattleRewardResponse_13000023{
    repeated RewardInfo reward = 1;
 }
+//领取关卡章节奖励
+message BattleChapterRewardRequest_13000222{
+   uint32 id = 1; 			// Battle表的id，每章的最后一关
+}
+//领取关卡章节奖励返回
+message BattleChapterRewardResponse_13000223{
+   repeated RewardInfo reward = 1;
+}
 
 //合成领取战役  首次胜利奖励	首次半血胜利奖励	首次无损胜利奖励,可以一次领多个战役的。
 message HCBattleRewardRequest_13000027{

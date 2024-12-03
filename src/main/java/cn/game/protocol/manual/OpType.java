@@ -104,6 +104,8 @@ public enum OpType{
 	FairyFriend(180, "仙友"),
 	SoulPet(181, "灵宠"),
 	Secretscript(182, "神通"),
+	BattleFirstReward(183, "关卡首通奖励"),
+	BattleChapterFirstReward(184, "章节首通奖励"),
 
 	Questionnaire(185, "调查问卷"),
 
