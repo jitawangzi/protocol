@@ -304,6 +304,8 @@ message PlayerInfo{
     uint32 headFrame = 11;//头像框id
     uint32 image = 12;//形象
 	string offlineTime	= 	22;	//上次下线时间的时间戳（毫秒）
+	string serverId = 30; // 玩家所在虚拟服务器id
+	string serverName = 31; // 玩家所在虚拟服务器名
 }
 /*** 玩家所有数据，一般在创建用户后，或者登陆后下发 ***/
 message PlayerAllInfo{
