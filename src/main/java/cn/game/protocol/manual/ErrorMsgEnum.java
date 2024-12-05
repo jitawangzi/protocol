@@ -37,6 +37,7 @@ public enum ErrorMsgEnum {
 	request_timeout(15, "请求超时没有返回数据"),
 	disable_ios_pay(16, "当前的客户端版本，禁用ios支付"),
 	gm_cmd_not_exist(18, "不存在的gm指令"),
+	gm_cmd_param(19, "gm指令参数错误"),
 
 	// #通用错误 50 - 99
 	/** 玩家数据校验错误。 */
