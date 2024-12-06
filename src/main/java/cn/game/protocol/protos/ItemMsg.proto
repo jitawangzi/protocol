@@ -5,6 +5,9 @@ package Protos;
 import "RewardMsg.proto" ;
 //import "BaseMsg.proto" ;
 
+//@HandlerPackage cn.game.games.net.game.module.item
+//@MessageModule 0b
+
 // 道具相关协议
 //使用道具
 message ItemUseRequest_0b000003{

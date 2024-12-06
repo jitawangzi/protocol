@@ -109,6 +109,8 @@ public enum OpType{
 
 	Questionnaire(185, "调查问卷"),
 
+	ItemSell(186, "道具出售"),
+
 	BoxOpen(200, "合并开宝箱"),
 	MergeEquipLvUp(201, "合并装备升级"),
 	HCHeroPieceAds(203, "看广告获得觉醒合成英雄碎片"),
