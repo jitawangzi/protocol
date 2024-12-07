@@ -170,3 +170,35 @@ message ActivityJQBInfoResponse_11000082{
   int32  activityId = 1; //查看的活动id
    int32 taskId = 2;//当前进行的任务id
 }
+//︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼幸运转盘抽奖︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
+//转盘信息
+message ActivityWestLuckyInfoRequest_11000091{
+    int32 activityId = 1;
+}
+message ActivityWestLuckyInfoResponse_11000092{
+  int32 activityId =1;
+  map<int32,int32> buyMap =2;//购买的物品的数量
+}
+//抽取转盘
+message ActivityWestLuckyDrawRequest_11000093{
+  int32 activityId = 1; //活动ID
+  int32 drawNum = 2;//抽取数量 1 单抽,10 10连抽
+}
+message ActivityWestLuckyDrawResponse_11000094{
+  int32 activityId = 1; //活动ID
+  int32 drawNum = 2;//抽取数量 1 单抽,10 10连抽
+  repeated RewardInfo drops = 3;//抽取的道具
+  repeated int32 drawIds = 4;//抽取的id集合
+}
+//购买转盘道具
+message ActivityWestLuckyBuyRequest_11000095{
+  int32 activityId = 1;//活动id
+  int32 id = 2;//物品id
+}
+message ActivityWestLuckyBuyResponse_11000096{
+  int32 activityId = 1;//活动id
+  int32 id = 2;//物品id
+  repeated RewardInfo drops = 3;//购买的物品
+}
+
+
