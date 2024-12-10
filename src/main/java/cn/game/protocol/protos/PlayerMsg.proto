@@ -295,6 +295,19 @@ message BatchItem {
   bytes payload = 4;
 }
 
+// 多个返回消息合并成一个后返回
+message PlayerBatchResponse_01100500 {
+  repeated ResponseMessage messages = 1;
+}
+
+message ResponseMessage{
+  int32 msgId = 1;
+  bytes payload = 2;
+  int32 seq = 3;
+  int32 errorCode = 4;
+}
+
+
 //用户基本信息
 message PlayerInfo{
     uint32 id = 1;//用户id
