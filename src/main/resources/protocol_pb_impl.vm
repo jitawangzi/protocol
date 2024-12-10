@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.protobuf.Message;
 import com.google.protobuf.Parser;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import cn.game.protocol.parser.ProtocolParser;
@@ -54,6 +55,19 @@ public class PbProtocol implements ProtocolParser {
 		} catch (InvalidProtocolBufferException e) {
 			log.error("Failed to parse message. ID: {}, Data length: {}, First 20 bytes: {}", msgID, data.length,
 				ByteHelp.toString(data, 20));
+			throw new RuntimeException(e);
+		}
+	}
+	public Message parseFrom(int msgID, ByteString data) {
+		Parser<?> parser = parsersMap.get(msgID);
+		if (parser == null) {
+			throw new IllegalArgumentException("message not found : " + msgID);
+		}
+		try {
+			return (Message) parser.parseFrom(data);
+		} catch (InvalidProtocolBufferException e) {
+			log.error("Failed to parse message. ID: {}, Data length: {}, First 20 bytes: {}", msgID, data.size(),
+					ByteHelp.toString(data.toByteArray(), 20));
 			throw new RuntimeException(e);
 		}
 	}
