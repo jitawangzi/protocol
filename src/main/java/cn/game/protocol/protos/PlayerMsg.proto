@@ -377,6 +377,7 @@ message PlayerAllInfo{
    int32 heavenlyDaoLevel = 60;        //天道修为等级。HeavenlyDao表id
    map<uint32, uint32> potentialLvMap = 62;    	// 修炼数据，包括潜力和强援，key：属性id value：等级
    map<uint32, bool> potentialBreak = 63;    	// 潜力修炼每xx级需要突破，是否突破了。
+   map<uint32, uint32> potentiaBreakLevelMap = 64; // 潜力修炼的突破等级 key：属性id value：突破等级，没突破过是0
    repeated GuideInfo guides = 65;    	// 弃用了。
    int32 battleType = 68 ;     // 已经开始，尚未结束的战斗类型，暂时没有用到。
    int32 battleId = 69 ;     // 已经开始，尚未结束的战斗id，battle 表id
