@@ -129,6 +129,8 @@ message GmMailInfo{
   int32 levelStart = 13;      //限制起始等级
   int32 levelEnd = 14;      //限制结束等级
   repeated string playerIds = 15;  // 接受邮件的玩家,类型是个人邮件时有效
+	int32 sendStartTime = 16;  		//全服邮件的 验证起始时间（秒时间戳）
+	int32 sendEndTime = 17;  		//全服邮件的验证 截止时间（秒时间戳）
 }
 
 
