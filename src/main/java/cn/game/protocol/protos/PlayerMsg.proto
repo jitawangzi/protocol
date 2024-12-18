@@ -194,6 +194,15 @@ message PlayerShowResponse_0100003a{
 	PlayerShowInfo player = 1;
 }
 
+/*** 请求巡逻数据，一般是在功能刚开启时请求。  ***/
+message PlayerPatrolInfoRequest_01000070{
+}
+
+message PlayerPatrolInfoResponse_01000071{
+	PatrolInfo patrol = 1;//巡逻/挂机
+}
+
+
 
 //@NotUseStart
 
@@ -222,13 +231,6 @@ message PlayerAlchemyRequest_01000040{
 }
 
 message PlayerAlchemyResponse_01000041{
-}
-/*** 请求巡逻数据，一般是在功能刚开启时请求。  ***/
-message PlayerPatrolInfoRequest_01000070{
-}
-
-message PlayerPatrolInfoResponse_01000071{
-	PatrolInfo patrol = 1;//巡逻/挂机
 }
 
 /*** 跨天的时候，通知在线的客户端，重置跨天的一些数据，一般是客户端缓存了的数据，才需要重置。
