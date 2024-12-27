@@ -224,6 +224,17 @@ message ServerObjectTestRequest_7d000033{
 
 message ServerObjectTestResponse_7d000034{
 }
+
+//玩家邀请绑定关系请求
+message NotifyInviteBindAndLvUpRequest_7d000041{
+	int64 pid = 1; //邀请玩家
+	int64 targetPid = 2;//被邀请玩家
+	int32  lv = 3;//被邀请玩家当前等级
+}
+message NotifyInviteBindAndLvUpResponse_7d000042{
+	bool  result = 1;
+}
+
 // ︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻旧协议，不用了︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
 
 // Game向Cross发数据，请求转发消息给指定玩家
