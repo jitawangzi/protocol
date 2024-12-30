@@ -90,6 +90,33 @@ message QuestListAllResponse_20000052
    repeated QuestGroupInfo questGroups = 1 ;  // 任务数据
 }
 
+//︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻好友邀请︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
+message InviteTask{
+	int32 index = 1;
+	int32 num = 2; //完成数量
+}
+//邀请任务请求
+message InviteTaskListRequest_20000041{
+
+}
+message InviteTaskListResponse_20000042{
+	repeated InviteTask taskList = 1;  //邀请任务列表信息
+	repeated int32 rewardIndexList = 2; //已经领取的邀请任务列表
+}
+
+//领取邀请任务奖励
+message RewardInviteTaskRequest_20000043{
+	repeated int32  indexList = 1;
+}
+message RewardInviteTaskResponse_20000044{
+	repeated RewardInfo drops = 1;
+	repeated int32  indexList = 2;
+}
+
+//︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻好友邀请︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
+
+
+
 
 //@NotUseStart
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻这些暂时不会用到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
