@@ -78,6 +78,13 @@ message BattleReliveRequest_13000010{
 message BattleReliveResponse_13000011{
 }
 
+//战斗中看广告选取全部肉鸽
+message BattleRogueAdvertiseRequest_13000012{
+}
+
+message BattleRogueAdvertiseResponse_13000013{
+}
+
 
 //领取战役  首次胜利奖励	首次半血胜利奖励	首次无损胜利奖励,可以一次领多个战役的。
 message BattleRewardRequest_13000022{
