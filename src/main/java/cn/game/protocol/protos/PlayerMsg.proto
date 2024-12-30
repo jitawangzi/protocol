@@ -385,6 +385,7 @@ message PlayerAllInfo{
    int32 battleId = 69 ;     // 已经开始，尚未结束的战斗id，battle 表id
    repeated BattleLineupInfo battleLineups = 70;  // 所有武将阵容。
    repeated int32 battleChapterIds = 72 ;     // 领取过奖励的每章的最后一关，Battle表的id
+   int32 renameCount = 74 ;     // 改名次数
 
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
