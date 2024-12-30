@@ -130,8 +130,9 @@ public enum OpType{
 
 	BuyXianShiLiBao(216, "限时礼包购买" ),
 	ZhuanPanClearItem(217, "转盘结束销毁身上的抽奖卷" ),
-	ZhuanPanDraw(217, "转盘抽奖" ),
-	ZhuanPanItemBuy(217, "购买转盘抽奖道具" ),
+	ZhuanPanDraw(218, "转盘抽奖"), ZhuanPanItemBuy(219, "购买转盘抽奖道具"),
+
+	Rename(225, "改名"),
 
 
 	PressureTest(888, "压力测试"),
