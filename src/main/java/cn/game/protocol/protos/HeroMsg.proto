@@ -125,8 +125,15 @@ message HeroIllustrationsListRequest_16000040{
 
 message HeroIllustrationsListResponse_16000041{
 	repeated int32 heroIds = 1; 	// 曾经拥有过，但是现在已经不在了的英雄id  Hero表id
-	map<int32,int32> heroStarsMap = 2; // 领取过图鉴奖励的英雄,key： Hero表id  value：领取过几星的奖励了
+	repeated QualityStar heroStars = 2; // 领取过图鉴奖励的英雄数据
 	int32 rewardLevel = 3;	// 领取过图鉴等级奖励的等级
+}
+
+// 领取过图鉴奖励的星级，和最高品质。
+message QualityStar{
+	int32 heroId = 1;
+	int32 quality = 2;
+	int32 star = 3;
 }
 
 //领取英雄的图鉴经验奖励
