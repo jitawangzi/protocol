@@ -111,6 +111,8 @@ public enum OpType{
 
 	ItemSell(186, "道具出售"),
 
+	FuncOpen(187, "功能开启"),
+
 	HeroIllustrationsLevelReward(187, "图鉴等级奖励"),
 
 	BoxOpen(200, "合并开宝箱"),

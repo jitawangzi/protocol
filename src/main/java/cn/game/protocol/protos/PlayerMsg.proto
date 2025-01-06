@@ -287,6 +287,16 @@ message PlayerQuestionnaireRewardResponse_01000303{
 }
 
 
+/*** 领取功能开启的奖励  **/
+message PlayerFuncOpenRewardRequest_01000305{
+	uint32 id = 1;  	// InitialUI表id
+}
+/***  功能开启的奖励  **/
+message PlayerFuncOpenRewardResponse_01000306{
+	repeated RewardInfo rewards = 1 ; 			// 获得的奖励
+}
+
+
 // 一次推送多个消息
 message PlayerBatchPush_01100100 {
   repeated BatchItem items = 1;
@@ -386,6 +396,7 @@ message PlayerAllInfo{
    repeated BattleLineupInfo battleLineups = 70;  // 所有武将阵容。
    repeated int32 battleChapterIds = 72 ;     // 领取过奖励的每章的最后一关，Battle表的id
    int32 renameCount = 74 ;     // 改名次数
+   repeated int32 funcOpenRewardIds = 76 ;     // 领取过的功能开启奖励的功能id
 
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
