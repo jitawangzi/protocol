@@ -409,6 +409,8 @@ message PlayerAllInfo{
    int32 renameCount = 74 ;     // 改名次数
    repeated int32 funcOpenRewardIds = 76 ;     // 领取过的功能开启奖励的功能id
 
+	repeated QualityStar heroStars = 78; // 领取过图鉴奖励的英雄数据
+	int32 rewardLevel = 79;	// 领取过图鉴等级奖励的等级
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
    repeated ShopGroupItemInfo shopGroupItems  = 100;        //商店数据

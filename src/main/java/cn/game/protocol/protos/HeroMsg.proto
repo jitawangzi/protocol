@@ -129,13 +129,6 @@ message HeroIllustrationsListResponse_16000041{
 	int32 rewardLevel = 3;	// 领取过图鉴等级奖励的等级
 }
 
-// 领取过图鉴奖励的星级，和最高品质。
-message QualityStar{
-	int32 heroId = 1;
-	int32 quality = 2;
-	int32 star = 3;
-}
-
 //领取英雄的图鉴经验奖励
 message HeroIllustrationsRewardRequest_16000042{
 	int32 heroId = 1;			// Hero表id

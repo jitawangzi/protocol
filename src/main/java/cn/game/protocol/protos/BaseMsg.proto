@@ -140,6 +140,14 @@ message SecretscriptInfo{
 	int32 star = 3;  // 星级
 }
 
+// 领取过图鉴奖励的星级，和最高品质。
+message QualityStar{
+	int32 heroId = 1;
+	int32 quality = 2;
+	int32 star = 3;
+}
+
+
 
 // 玩家的简单信息
 message SimplePlayerInfo{
