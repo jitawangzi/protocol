@@ -154,6 +154,17 @@ message PlayerExpLevelPush_01100050{
    ExpLevelInfo expLevel = 1;   //
 }
 
+/*** 手动升级请求 ***/
+message PlayerLevelUpRequest_01000055{
+    uint32 id = 1;		//Asset表id,用来区分什么类型的经验或者等级
+}
+
+/*** 手动升级返回 ***/
+message PlayerLevelUpResponse_01000056{
+   ExpLevelInfo expLevel = 1;   // 更新当前的经验和等级
+}
+
+
 /*** 保存新手引导步骤 ***/
 message PlayerGuideRequest_01000060{
 	uint32 type = 1;  	//类型
