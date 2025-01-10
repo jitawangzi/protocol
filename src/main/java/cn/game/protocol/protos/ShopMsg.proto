@@ -135,7 +135,7 @@ message ShopFundPassRewardResponse_15000033{
 // 通行证数据
 message FundPassInfo{
   int32 id = 1;  // FundPass表id
-  repeated int32 rewardIds = 2;  // FundPassReward表id，已经领取过的奖励id
+  repeated int32 rewardIds = 2;  // Fund PassReward表id，已经领取过的奖励id
 }
 
 message ShopGroupItemInfo{
