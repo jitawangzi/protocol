@@ -20,8 +20,8 @@ public enum GoodsTypeEnum{
 	Pet(6, "宠物"),
 	/** 装备，这个暂时没用到 */
 	Equipment(7, "装备"),
-	/** 英雄时装 暂时没用到*/
-	Fashion(8, "英雄时装"),
+	/** 英雄皮肤*/
+	HeroSkin(8, "英雄皮肤"),
 	/** 合成英雄 */
 	HCHero(9, "合成英雄"),
 
@@ -41,6 +41,7 @@ public enum GoodsTypeEnum{
 	/** 皮肤 */
 	Skin(88, "皮肤"),
 	Gem(80, "宝石"),
+	GemMMM(81, "宝石"),
     ;
 	/** id */
 	private int id ; 

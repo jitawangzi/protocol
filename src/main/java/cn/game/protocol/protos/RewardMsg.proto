@@ -21,6 +21,7 @@ message RewardInfo{
     MergeEquipmentInfo mergeEquip = 20;  //合并游戏里面的装备
     HCHeroInfo hcHero = 21;		// 合成英雄奖励
     int32 head = 22;		// 头像框
+    int32 heroSkin = 23;		// 英雄皮肤
     PetInfo pet = 25;		// 宠物
     SecretscriptInfo secretscript = 26;		// 神通
 }

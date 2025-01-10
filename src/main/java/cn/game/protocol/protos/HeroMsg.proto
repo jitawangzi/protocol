@@ -165,3 +165,11 @@ message HeroDisassembleResponse_16000053{
 }
 
 
+//英雄换皮肤
+message HeroSkinRequest_16000060{
+	int32 id = 1;			// 皮肤id，HeroSkin表id
+}
+
+message HeroSkinResponse_16000061{
+}
+

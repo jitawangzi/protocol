@@ -139,6 +139,7 @@ public enum OpType{
 	Rename(225, "改名"),
 
 	inviteReward(218,"邀请分享任务奖励"),
+	HeroSkinBreakdown(230, "英雄皮肤分解"),
 
 	PressureTest(888, "压力测试"),
 	None(999, "未定义");

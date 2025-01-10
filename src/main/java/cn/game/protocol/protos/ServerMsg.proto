@@ -73,6 +73,13 @@ message GameStatusPublish_7d000017{
 	uint32 onlinePlayerCount = 3;				// 当前服务器在线人数
 }
 
+
+// 一般是由Game发出的跨服玩家事件,这里只定义了消息id
+message GamePlayerEventPush_7d010100{
+}
+
+
+
 message LoginPlayerUidRequest_7d000018{
 	string passportSessionId = 1;
 }
@@ -81,6 +88,7 @@ message LoginPlayerUidResponse_7d000019{
 	string accountId = 2; // unionid
 	string deviceId = 3; // openid
 }
+
 
 // 请求创建支付订单
 message PaymentOrderCreateRequest_7d000020{

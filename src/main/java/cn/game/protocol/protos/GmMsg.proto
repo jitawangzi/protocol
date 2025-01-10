@@ -334,8 +334,6 @@ message GmServerStatusResponse_77000033{
 }
 
 
-
-
 // 请求踢下线
 message GmPlayerLogoutRequest_77000009{
 	string playerId = 1;
@@ -344,4 +342,14 @@ message GmPlayerLogoutRequest_77000009{
 message GmPlayerLogouttResponse_7700000a{
 	uint32 errorCode = 1;
 }
+
+// gm改名
+message GmPlayerRenameRequest_77000050{
+	string playerId = 1;
+	string name = 2;
+}
+// gm改名返回
+message GmPlayerRenameResponse_77000051{
+}
+
 
