@@ -352,4 +352,13 @@ message GmPlayerRenameRequest_77000050{
 message GmPlayerRenameResponse_77000051{
 }
 
+// gm删除某个玩家数据
+message GmPlayerDeleteRequest_77000052{
+	string playerId = 1;
+}
+// gm删除某个玩家数据返回
+message GmPlayerDeleteResponse_77000053{
+}
+
+
 
