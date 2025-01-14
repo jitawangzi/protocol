@@ -361,4 +361,15 @@ message GmPlayerDeleteResponse_77000053{
 }
 
 
+// gm设置天道修为等级
+message GmPlayerTDLevelRequest_77000054{
+	string playerId = 1;
+	int32 level = 2;
+}
+// gm设置天道修为等级返回
+message GmPlayerTDLevelResponse_77000055{
+}
+
+
+
 
