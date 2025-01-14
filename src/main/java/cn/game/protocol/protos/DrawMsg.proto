@@ -26,6 +26,7 @@ message DrawInfo{
 
 	int32  wishHeroId = 5;  // 选择的心愿英雄id
 	int32  wishHeroTimes = 6;  // 还剩几次红卡次数必出心愿英雄，最小是1
+	int32  freeDrawCount = 7;  // 今天免费抽了几次
 }
 
 
