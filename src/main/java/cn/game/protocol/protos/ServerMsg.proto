@@ -214,6 +214,7 @@ message GameOpResponse_7d000374{
 // 清档，一般只在测试时使用。
 message LoginPlayerDeleteRequest_7d000080{
 	int64 playerId = 1;
+	string account = 2;
 }
 message LoginPlayerDeleteResponse_7d000081{
 }
