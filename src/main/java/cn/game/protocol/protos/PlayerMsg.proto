@@ -323,6 +323,13 @@ message PlayerBatchResponse_01100500 {
   repeated ResponseMessage messages = 1;
 }
 
+//微信设置相关
+message WechatSettingRequest_01100601{
+  WechatSetting setting = 1;
+}
+message WechatSettingResponse_01100602{
+
+}
 message ResponseMessage{
   int32 msgId = 1;
   bytes payload = 2;
@@ -429,6 +436,7 @@ message PlayerAllInfo{
    bool battleSpeedUnlock = 112;  //是否已经解锁了战中倍速
    int32 battleSpeedAdsCount = 113;  //如果没有解锁战中倍速，已经看了多少次广告了
 
+   WechatSetting wechatSetting = 114;//微信设置相关
 
 //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼合并游戏独有的数据︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
    string disableIosPayVersion  = 200;        //禁用ios充值的客户端版本，一般在提审中使用。
@@ -437,5 +445,12 @@ message PlayerAllInfo{
 
 }
 
+//微信设置相关
+message WechatSetting{
+    bool isOpenNotifyEnergy = 1; //是否开启体力满了微信 推送
+    bool isOpenNotifyAoYouReward = 2; //是否开启遨游奖励满了微信 推送
+    bool isOpenNotifyFirstRechargeReward = 3; //是否开启首充次日领取微信 推送
+    bool isOpenNotifyMonthSignReward = 4; //是否开启月签到微信 推送
+}
 
 

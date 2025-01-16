@@ -244,6 +244,15 @@ message NotifyInviteBindAndLvUpResponse_7d000042{
 	bool  result = 1;
 }
 
+//微信订阅推送协议
+message NotifyWechatSubscribeMessageRequest_7d000043{
+	string openid = 1;//微信openid 接收者（用户）的 openid
+	string templateId = 2;//所需下发的订阅模板 id
+	map<string,string> jsonData = 3;//模板内容
+}
+message NotifyWechatSubscribeMessageResponse_7d000044{
+	bool  result = 1;
+}
 // ︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻旧协议，不用了︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
 
 // Game向Cross发数据，请求转发消息给指定玩家
