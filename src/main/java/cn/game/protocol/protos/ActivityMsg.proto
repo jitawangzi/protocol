@@ -179,6 +179,8 @@ message ActivityWestLuckyInfoResponse_11000092{
   int32 activityId =1;
   map<int32,int32> buyMap =2;//购买的物品的数量
   map<int32,int32> dramaMap =3;//转盘格子抽奖的次数
+  int32 outDrawNum = 4;//外圈抽取次数
+
 }
 //抽取转盘
 message ActivityWestLuckyDrawRequest_11000093{
@@ -190,6 +192,7 @@ message ActivityWestLuckyDrawResponse_11000094{
   int32 drawNum = 2;//抽取数量 1 单抽,10 10连抽
   repeated RewardInfo drops = 3;//抽取的道具
   repeated int32 drawIds = 4;//抽取的id集合
+  int32 outDrawNum = 5;//外圈抽取次数
 }
 //购买转盘道具
 message ActivityWestLuckyBuyRequest_11000095{
