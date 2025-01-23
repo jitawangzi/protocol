@@ -24,6 +24,7 @@ message RewardInfo{
     int32 heroSkin = 23;		// 英雄皮肤
     PetInfo pet = 25;		// 宠物
     SecretscriptInfo secretscript = 26;		// 神通
+    int32 headPortrait = 30;		// 头像
 }
 
 //奖励推送,客户端收到这个协议之后，将奖励增加到本地。

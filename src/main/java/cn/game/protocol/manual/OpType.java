@@ -1,5 +1,7 @@
 package cn.game.protocol.manual;
 
+import cn.game.util.UniqueValueEnum;
+
 /**
  * 操作类型
  * 2020年10月9日 上午10:46:02
@@ -140,6 +142,7 @@ public enum OpType{
 
 	inviteReward(218,"邀请分享任务奖励"),
 	HeroSkinBreakdown(230, "英雄皮肤分解"),
+	HeadPortraitRepeat(231, "头像重复获取"),
 
 	PressureTest(888, "压力测试"),
 	None(999, "未定义");
@@ -152,6 +155,7 @@ public enum OpType{
 		this.id = id; 
 		this.name = name; 
 		this.desc = desc; 
+		UniqueValueEnum.checkDuplicateValue(this.getClass(), id);
 	}
 
 	private OpType(int id, String desc) {

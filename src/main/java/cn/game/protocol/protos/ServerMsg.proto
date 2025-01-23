@@ -78,6 +78,16 @@ message GameStatusPublish_7d000017{
 message GamePlayerEventPush_7d010100{
 }
 
+// Game收到消息，转发给其他Game处理
+message GameMessageForwardRequest_7d000200{
+	uint32 id = 2;				// 消息id
+	bytes data = 3;				// 消息内容
+}
+message GameMessageForwardResponse_7d000201{
+	uint32 id = 2;				// 消息id
+	bytes data = 3;				// 消息内容
+}
+
 
 
 message LoginPlayerUidRequest_7d000018{
