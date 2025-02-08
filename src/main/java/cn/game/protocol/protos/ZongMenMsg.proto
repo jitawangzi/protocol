@@ -1,0 +1,159 @@
+syntax = "proto3";
+option java_package = "cn.game.protocol.protobuf";
+//option optimize_for = LITE_RUNTIME;
+package Protos;
+import "RewardMsg.proto" ;
+import "BaseMsg.proto" ;
+
+//宗门简单信息
+message ZongMenSimpleInfoProto{
+  int64 id = 1; //宗门id
+  string name = 2; //宗门名称
+  int32 level = 3; //宗门等级
+  int32 icon = 4; //宗门ICON
+  int32 memberNum = 5; //成员数量
+  int32 totalPower = 6; //总战力
+  bool  isAutoJoin = 7; //是否允许自动加入 true 自动加入 ,false 不自动加入
+  int32 tianDaoLevel = 8; //天道的等级
+}
+//宗门成员信息
+message ZongMenMemberProto{
+  int64 pid = 1;//玩家id
+  SimplePlayerInfo simplePlayer = 2;//玩家信息
+  int32 todayContribute = 3;//今日贡献
+  int32 totalContribute = 4;//累计历史贡献
+  int32 joinTime = 5;//加入时间
+  int32 position = 6;//职位
+}
+//宗门设置相关
+message ZongMenSettingProto{
+  string wx = 1;//宗主的微信号
+  int32 wxChangeNum = 2;//微信号修改次数
+  string notice = 3;//公告
+  string declaration = 4;//宣言
+  repeated int32 iconList = 5;//解锁的ICON列表
+  int32 lastChangeNameTimer = 6;//最后修改名称时间
+  int32 lastChangeWxTimer = 7;//最后修改微信号时间
+}
+
+//宗门操作日志
+message ZongMenLogProto{
+  int32  createTimer = 1;//创建时间
+  int32  type = 3;//操作类型
+  repeated string params = 4;//参数 更具操作类型不同
+}
+//宗门商店
+message ZongMenShopProto{
+
+}
+//宗门悬赏
+message ZongMenXuanShangProto{
+
+}
+//宗门任务相关
+message ZongMenTaskProto{
+
+}
+//宗门活动
+message ZongMenActivityProto{
+
+}
+
+//宗门相关
+message ZongMenInfoProto{
+  ZongMenSimpleInfoProto simpleInfo = 1; //简单信息
+  int32 exp = 2; //宗门经验
+  ZongMenSettingProto setting = 3; //设置信息
+  repeated ZongMenMemberProto memberList = 4; //成员列表
+  repeated SimplePlayerInfo applyList = 5;//申请列表
+  repeated ZongMenLogProto logList = 6;//操作日志
+  ZongMenShopProto shop = 7;//商店
+  ZongMenXuanShangProto xuanShang = 8;//悬赏
+  ZongMenTaskProto task = 9;//任务
+  ZongMenActivityProto activity = 10;//活动
+}
+
+//宗门列表
+message  getZongMenListRequest_40000001{
+  int32 page = 1;//页码 从0开始 默认1页20条数据
+}
+message  getZongMenListResponse_40000002{
+  repeated ZongMenSimpleInfoProto zongMenList = 1;
+  int32 total = 2;//总条数
+  int32 page = 3;//当前页码
+}
+
+//查找宗门
+message  findZongMenRequest_40000003{
+  int64 id = 1;//宗门id
+}
+message  findZongMenResponse_40000004{
+  ZongMenSimpleInfoProto zongMen = 1;
+}
+
+//创建宗门
+message  createZongMenRequest_40000005{
+  string name = 1;//宗门名称
+}
+message  createZongMenResponse_40000006{
+  ZongMenInfoProto zongMen = 1;
+}
+
+//申请加入宗门
+message  applyJoinZongMenRequest_40000007{
+  int64 id = 1;//宗门id
+}
+message  applyJoinZongMenResponse_40000008{
+  ZongMenInfoProto zongMen = 1;
+}
+
+
+
+//解散宗门
+message  dissolveZongMenRequest_40000011{
+}
+message  dissolveZongMenResponse_40000012{
+  bool result = 1;//是否成功
+}
+
+//宗门设置相关 有值 则替换，没有值 则不修改
+message  setZongMenSettingRequest_40000013{
+  string wx = 1;//微信号
+  string notice = 2;//公告
+  string declaration = 3;//宣言
+  int32 icon = 4;//ICON
+  int32 autoJoin = 5;//是否允许自动加入 1 允许, 2 不允许
+  int32 tianDaoLevel = 6;//天道的等级
+}
+message  setZongMenSettingResponse_40000014{
+  bool result = 1;//是否成功
+}
+
+//宗门权限管理
+message  setZongMenMemberPositionRequest_40000015{
+  int64 targetPid = 1;//目标玩家id
+  int32 position = 2;//新的职位
+}
+message  setZongMenMemberPositionResponse_40000016{
+  bool result = 1;//是否成功
+  int32 position = 2;//新的职位
+  int64 targetPid = 3;//目标玩家id
+}
+//退出宗门
+message  quitZongMenRequest_40000017{
+}
+message  quitZongMenResponse_40000018{
+  bool result = 1;//是否成功
+}
+
+//获取宗门信息
+message  getZongMenInfoRequest_40000021{
+}
+message getZongMenInfoResponse_40000022{
+  ZongMenInfoProto info = 1;
+}
+
+//解散宗门 通知玩家退出宗门
+message notifyQuitZongMen_40000024
+{
+}
