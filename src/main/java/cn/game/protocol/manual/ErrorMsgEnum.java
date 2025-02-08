@@ -155,7 +155,21 @@ public enum ErrorMsgEnum {
 	xian_shi_li_bao_not_found(407,"购买的限时礼包不存在"),
 	xian_shi_li_bao_time_is_fail(408,"限时礼包已经过期，不可购买"),
 	xian_shi_li_bao_buy_num_is_max(409, "限时礼包已经购买过了，不可重复购买"),
-	xian_shi_li_bao_buy_fail(410, "购买限时礼包失败");
+	xian_shi_li_bao_buy_fail(410, "购买限时礼包失败"),
+
+	//宗门相关
+	zong_men_not_exist(411, "宗门不存在"),
+	max_zong_men_num(412, "宗门成员数量达到上限"),
+	zong_men_exist(413, "宗门已经存在,不可重复加入"),
+	zong_men_name_repeat(414, "宗门名称重复"),
+	zong_men_apply_exist(415, "该宗门已经申请过，不可重复申请"),
+	zong_men_player_apply_has(416, "该玩家已经在宗门中，不可重复加入"),
+	zong_men_full(418, "宗门成员数量达到上限"),
+	zong_men_permission_not_enough(417, "宗门权限不足，不可操作"),
+	zong_men_apply_join_timer(419, "宗门申请加入冷却时间未到，不可申请"),
+
+
+	max_error_id(999, "占位错误码");
 
 	/** id */
 	public int ID;
