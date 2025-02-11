@@ -167,6 +167,9 @@ public enum ErrorMsgEnum {
 	zong_men_full(418, "宗门成员数量达到上限"),
 	zong_men_permission_not_enough(417, "宗门权限不足，不可操作"),
 	zong_men_apply_join_timer(419, "宗门申请加入冷却时间未到，不可申请"),
+	zong_men_player_member_not_exist(420, "宗门成员不存在"),
+	zong_men_position_member_num_not_enough(421, "宗门职位成员数量不足，不可操作"),
+
 
 
 	max_error_id(999, "占位错误码");
