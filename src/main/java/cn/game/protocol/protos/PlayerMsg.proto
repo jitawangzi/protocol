@@ -420,6 +420,7 @@ message PlayerAllInfo{
 	int32 rewardLevel = 79;	// 领取过图鉴等级奖励的等级
 	repeated int32 heroSkinIds = 82;	// 拥有的英雄皮肤，HeroSkin表id
 	repeated int32 headPortraits = 84;	// 玩家的获取的头像（通过奖励获取的，靠获取英雄解锁的不算）
+	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id
 
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻

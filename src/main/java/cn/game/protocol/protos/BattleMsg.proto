@@ -437,7 +437,6 @@ message BattleRougeRefreshRequest_13000052{
 message BattleRougeRefreshResponse_13000053{
 }
 
-
 /*** 领取体力 ***/
 message BattleStaminaRequest_13000050{
 	int32 time = 1; //领取哪个时间的体力
@@ -445,6 +444,15 @@ message BattleStaminaRequest_13000050{
 
 message BattleStaminaResponse_13000051{
 }
+
+/*** 战斗选择强援技能id ***/
+message BattleRescueSkillIdRequest_13000057{
+	int32 id = 1; //Rescue表id
+}
+
+message BattleRescueSkillIdResponse_13000058{
+}
+
 // ****************************************大道争锋********************************************
 //目标列表刷新 请求
 message BattlePvPTargetListRequest_13000111{
