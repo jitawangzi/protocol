@@ -463,7 +463,6 @@ message BattlePvPTargetListResponse_13000112{
 	repeated int32 scoreList = 2;//查询到的目标的当前积分列表
 	int32 freeRefreshNum = 3; //今日 免费刷新次数
 	int32 refreshNum = 4; //今日 付费刷新次数
-	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id
 }
 
 //开始战斗请求
