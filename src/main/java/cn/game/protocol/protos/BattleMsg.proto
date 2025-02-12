@@ -437,7 +437,6 @@ message BattleRougeRefreshRequest_13000052{
 message BattleRougeRefreshResponse_13000053{
 }
 
-
 /*** 领取体力 ***/
 message BattleStaminaRequest_13000050{
 	int32 time = 1; //领取哪个时间的体力
