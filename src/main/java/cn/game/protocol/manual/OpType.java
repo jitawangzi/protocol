@@ -1,6 +1,5 @@
 package cn.game.protocol.manual;
 
-import cn.game.util.UniqueValueEnum;
 
 /**
  * 操作类型
@@ -144,6 +143,9 @@ public enum OpType{
 	HeroSkinBreakdown(230, "英雄皮肤分解"),
 	HeadPortraitRepeat(231, "头像重复获取"),
 
+	ZongMenActive(232, "宗门活跃度奖励"),
+	ZongMenShopReward(233,"宗门商店掉落"),
+
 	PressureTest(888, "压力测试"),
 	None(999, "未定义");
 
@@ -155,7 +157,7 @@ public enum OpType{
 		this.id = id; 
 		this.name = name; 
 		this.desc = desc; 
-		UniqueValueEnum.checkDuplicateValue(this.getClass(), id);
+//		UniqueValueEnum.checkDuplicateValue(this.getClass(), id);
 	}
 
 	private OpType(int id, String desc) {
