@@ -445,6 +445,12 @@ message BattleStaminaRequest_13000050{
 
 message BattleStaminaResponse_13000051{
 }
+/*** 战斗选择强援技能id ***/
+message BattleRescueSkillIdRequest_13000057{
+	int32 id = 1; //Rescue表id
+}
+message BattleRescueSkillIdResponse_13000058{
+}
 // ****************************************大道争锋********************************************
 //目标列表刷新 请求
 message BattlePvPTargetListRequest_13000111{
@@ -458,7 +464,7 @@ message BattlePvPTargetListResponse_13000112{
 	repeated int32 scoreList = 2;//查询到的目标的当前积分列表
 	int32 freeRefreshNum = 3; //今日 免费刷新次数
 	int32 refreshNum = 4; //今日 付费刷新次数
-
+	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id
 }
 
 //开始战斗请求

@@ -220,3 +220,12 @@ message notifyJoinZongMen_40000044 {
   repeated int64 targetPids = 1;//被通知的对象
   ZongMenInfoProto zongMen = 2;//宗门对象
 }
+
+//领取宗门活跃度奖励
+message ZongMenActiveRewardRequest_40000045{
+  repeated int32 indexList = 1;//要领取的活跃度 下标集合
+}
+message ZongMenActiveRewardResponse_40000046{
+  repeated int32 rewardIndexList = 1;//当前领取的集合
+  repeated RewardInfo drops = 2;//掉落
+}
