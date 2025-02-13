@@ -45,7 +45,8 @@ message ZongMenLogProto{
 }
 //宗门商店
 message ZongMenShopProto{
-
+  int64 nextRefreshTimer = 1;//商店下一次刷新时间戳
+  map<int32,int32> itemBuyNumMap = 2;//商店物品购买次数 key 物品id，val 购买数量
 }
 //宗门悬赏
 message ZongMenXuanShangProto{
@@ -173,7 +174,7 @@ message getZongMenLogResponse_40000026{
 message getZongMenShopRequest_40000027{
 }
 message getZongMenShopResponse_40000028{
-    repeated ZongMenShopProto shopList = 1;
+     ZongMenShopProto shopList = 1;
 }
 
 
@@ -228,4 +229,13 @@ message ZongMenActiveRewardRequest_40000045{
 message ZongMenActiveRewardResponse_40000046{
   repeated int32 rewardIndexList = 1;//当前领取的集合
   repeated RewardInfo drops = 2;//掉落
+}
+
+//购买宗门商店物品
+message ZongMenBuyShopRequest_40000047{
+  int32 itemId = 1;//商品id
+  int32 count = 2;//购买数量
+}
+message ZongMenBuyShopResponse_40000048{
+  repeated RewardInfo drops = 1;//掉落
 }
