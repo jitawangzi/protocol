@@ -36,6 +36,15 @@ message ZongMenSettingProto{
   int32 lastChangeNameTimer = 6;//最后修改名称时间
   int32 lastChangeWxTimer = 7;//最后修改微信号时间
 }
+//宗门砍价相关
+message ZongMenBargainProto{
+  int32 bargainItemId = 1;//刷新出来的砍价物品id ： GuildBargain 表id
+  int32 totalMemberCount = 2;//累计砍价的人数
+  int32 totalBargainCount = 3;//累计砍掉的价格
+
+  bool isBargain = 5;//是否砍过价
+  bool isBargainBuy = 6;//是否购买了砍价的物品
+}
 
 //宗门操作日志
 message ZongMenLogProto{
@@ -73,6 +82,7 @@ message ZongMenInfoProto{
   ZongMenShopProto shop = 7;//商店
   ZongMenXuanShangProto xuanShang = 8;//悬赏
   int32 liveness = 9;//活跃度
+  ZongMenBargainProto bargain = 15;//砍价相关，一般只有查看自己所在宗门，这个数据才有效
 }
 
 //宗门列表
@@ -238,4 +248,28 @@ message ZongMenBuyShopRequest_40000047{
 }
 message ZongMenBuyShopResponse_40000048{
   repeated RewardInfo drops = 1;//掉落
+}
+
+
+//宗门砍价
+message ZongMenBargainRequest_40000060{
+}
+message ZongMenBargainResponse_40000061{
+  int32 count = 1;//	砍掉了多少
+}
+
+
+//购买宗门砍价物品
+message ZongMenBargainBuyRequest_40000062{
+}
+message ZongMenBargainBuyResponse_40000063{
+  repeated RewardInfo rewards = 1; //
+}
+
+
+//查看宗门砍价物品价格
+message ZongMenBargainPriceRequest_40000064{
+}
+message ZongMenBargainPriceResponse_40000065{
+  repeated RewardInfo rewards = 1; //
 }
