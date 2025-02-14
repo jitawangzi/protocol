@@ -13,8 +13,9 @@ message ZongMenSimpleInfoProto{
   int32 icon = 4; //宗门ICON
   int32 memberNum = 5; //成员数量
   int32 totalPower = 6; //总战力
-  bool  isAutoJoin = 7; //是否允许自动加入 true 自动加入 ,false 不自动加入
+  int32  isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
   int32 tianDaoLevel = 8; //天道的等级
+  repeated uint32 applyPidList = 9;//当前的申请加入列表
 }
 //宗门成员信息
 message ZongMenMemberProto{
@@ -32,7 +33,7 @@ message ZongMenSettingProto{
   int32 wxChangeNum = 2;//微信号修改次数
   string notice = 3;//公告
   string declaration = 4;//宣言
-  repeated int32 iconList = 5;//解锁的ICON列表
+  map<int32,int32> iconList = 5;//解锁的ICON列表 key ICON id, value 剩余时间戳 秒， -1 表示永久
   int32 lastChangeNameTimer = 6;//最后修改名称时间
   int32 lastChangeWxTimer = 7;//最后修改微信号时间
 }
@@ -124,7 +125,7 @@ message  setZongMenSettingRequest_40000013{
   string notice = 2;//公告
   string declaration = 3;//宣言
   int32 icon = 4;//ICON
-  int32 autoJoin = 5;//是否允许自动加入 1 允许, 2 不允许
+  int32 autoJoin = 5;//1 快速加入、2 需要验证加入、3 不可加入；
   int32 tianDaoLevel = 6;//天道的等级
   string name = 7;//宗门名称
 }
@@ -246,6 +247,7 @@ message ZongMenUpdateMemberFightPower_40000052{
   int32 fightPower = 2;//战斗力
 }
 
+//宗门 GM 操作
 message ZongMenGmTestRequest_40000053{
   string cmd = 1;//命令
   repeated string param = 2;//参数
@@ -253,3 +255,11 @@ message ZongMenGmTestRequest_40000053{
 message ZongMenGmTestResponse_40000054{
   bool result = 1;//是否成功
 }
+
+//获取我已经申请的宗门id列表
+message ZongMenGetMyApplyZongMenIdListRequest_40000055{
+}
+message ZongMenGetMyApplyZongMenIdListResponse_40000056{
+  repeated uint32 zongMenIdList = 1;//宗门id集合
+}
+
