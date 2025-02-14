@@ -171,6 +171,8 @@ public enum ErrorMsgEnum {
 	zong_men_position_member_num_not_enough(421, "宗门职位成员数量不足，不可操作"),
 	zong_men_active_reward_already_get(422, "宗门活跃度奖励已经领取过了"),
 
+	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
+
 
 	max_error_id(999, "占位错误码");
 

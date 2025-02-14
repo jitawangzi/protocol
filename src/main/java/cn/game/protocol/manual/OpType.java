@@ -146,6 +146,7 @@ public enum OpType{
 	ZongMenActive(232, "宗门活跃度奖励"),
 	ZongMenShopReward(233,"宗门商店掉落"),
 	zongMenChangeName(234,"宗门改名"),
+	ZongMenBargain(236, "宗门购买砍价物品"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义");
 
