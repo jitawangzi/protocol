@@ -48,7 +48,6 @@ message ServerChatMessagePush_31000010{
 	string content = 3;   // 消息内容
 	repeated string atPlayerIds = 4;   // @的玩家
 	string serverId = 8;   // 广播给哪个服
-
 }
 
 
