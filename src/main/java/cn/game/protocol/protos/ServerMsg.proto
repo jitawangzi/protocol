@@ -283,7 +283,7 @@ message ZongMenMsgResponse_7d000046{
 message NotifyZongMenMsgToGame_7d000047{
 	int32 	msgId = 1; //消息id
 	bytes data = 2; //数据
-	int64 playerId = 3; //玩家id
+	repeated int64 playerId = 3; //玩家id
 }
 
 // ︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻旧协议，不用了︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻

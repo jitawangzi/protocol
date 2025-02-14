@@ -7,7 +7,7 @@ import "BaseMsg.proto" ;
 
 //宗门简单信息
 message ZongMenSimpleInfoProto{
-  int64 id = 1; //宗门id
+  uint32 id = 1; //宗门id
   string name = 2; //宗门名称
   int32 level = 3; //宗门等级
   int32 icon = 4; //宗门ICON
@@ -18,7 +18,7 @@ message ZongMenSimpleInfoProto{
 }
 //宗门成员信息
 message ZongMenMemberProto{
-  int64 pid = 1;//玩家id
+  uint32 pid = 1;//玩家id
   SimplePlayerInfo simplePlayer = 2;//玩家信息
   int32 todayContribute = 3;//今日贡献
   int32 totalContribute = 4;//累计历史贡献
@@ -69,15 +69,15 @@ message ZongMenInfoProto{
   ZongMenSettingProto setting = 3; //设置信息
   repeated ZongMenMemberProto memberList = 4; //成员列表
   repeated SimplePlayerInfo applyList = 5;//申请列表
-  repeated ZongMenLogProto logList = 6;//操作日志
-  ZongMenShopProto shop = 7;//商店
+  repeated ZongMenLogProto logList = 6;//操作日志 废弃 不下发
+  ZongMenShopProto shop = 7;//商店 废弃 不下发
   ZongMenXuanShangProto xuanShang = 8;//悬赏
   int32 liveness = 9;//活跃度
 }
 
 //宗门列表
 message  getZongMenListRequest_40000001{
-  int32 page = 1;//页码 从0开始 默认1页20条数据
+  int32 page = 1;//页码 从1开始 默认1页20条数据
 }
 message  getZongMenListResponse_40000002{
   repeated ZongMenSimpleInfoProto zongMenList = 1;
@@ -87,10 +87,10 @@ message  getZongMenListResponse_40000002{
 
 //查找宗门
 message  findZongMenRequest_40000003{
-  int64 id = 1;//宗门id
+  uint32 id = 1;//宗门id
 }
 message  findZongMenResponse_40000004{
-  ZongMenSimpleInfoProto zongMen = 1;
+  ZongMenInfoProto zongMen = 1;
 }
 
 //创建宗门
@@ -103,7 +103,7 @@ message  createZongMenResponse_40000006{
 
 //申请加入宗门
 message  applyJoinZongMenRequest_40000007{
-  int64 id = 1;//宗门id
+  uint32 id = 1;//宗门id
 }
 message  applyJoinZongMenResponse_40000008{
   ZongMenInfoProto zongMen = 1;
@@ -134,13 +134,13 @@ message  setZongMenSettingResponse_40000014{
 
 //宗门权限管理
 message  setZongMenMemberPositionRequest_40000015{
-  int64 targetPid = 1;//目标玩家id
+  uint32 targetPid = 1;//目标玩家id
   int32 position = 2;//新的职位
 }
 message  setZongMenMemberPositionResponse_40000016{
   bool result = 1;//是否成功
   int32 position = 2;//新的职位
-  int64 targetPid = 3;//目标玩家id
+  uint32 targetPid = 3;//目标玩家id
 }
 //退出宗门
 message  quitZongMenRequest_40000017{
@@ -209,7 +209,7 @@ message updateZongMenAssetResponse_40000038{
 
 //宗门成员权限管理
 message updateMemberAuthRequest_40000041 {
-  repeated int64  targetPidList = 1;//操作的玩家id集合
+  repeated uint32  targetPidList = 1;//操作的玩家id集合
   int32 optType = 2; //1 申请同意加入， 2 申请拒绝加入， 3 踢人
 }
 message updateMemberAuthResponse_40000042{
@@ -218,7 +218,7 @@ message updateMemberAuthResponse_40000042{
 
 //通知目标加入宗门
 message notifyJoinZongMen_40000044 {
-  repeated int64 targetPids = 1;//被通知的对象
+  repeated uint32 targetPids = 1;//被通知的对象
   ZongMenInfoProto zongMen = 2;//宗门对象
 }
 
@@ -238,4 +238,18 @@ message ZongMenBuyShopRequest_40000047{
 }
 message ZongMenBuyShopResponse_40000048{
   repeated RewardInfo drops = 1;//掉落
+}
+
+//更新玩家战斗力
+message ZongMenUpdateMemberFightPower_40000052{
+  int64 pid = 1;//玩家id
+  int32 fightPower = 2;//战斗力
+}
+
+message ZongMenGmTestRequest_40000053{
+  string cmd = 1;//命令
+  repeated string param = 2;//参数
+}
+message ZongMenGmTestResponse_40000054{
+  bool result = 1;//是否成功
 }
