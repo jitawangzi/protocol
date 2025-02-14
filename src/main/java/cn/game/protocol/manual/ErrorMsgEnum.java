@@ -170,7 +170,7 @@ public enum ErrorMsgEnum {
 	zong_men_player_member_not_exist(420, "宗门成员不存在"),
 	zong_men_position_member_num_not_enough(421, "宗门职位成员数量不足，不可操作"),
 	zong_men_active_reward_already_get(422, "宗门活跃度奖励已经领取过了"),
-
+	zong_men_not_allow_join(423, "宗门不让加入"),
 	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
 
 
