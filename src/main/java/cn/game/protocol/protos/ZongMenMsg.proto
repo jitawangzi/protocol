@@ -107,6 +107,9 @@ message  findZongMenResponse_40000004{
 //创建宗门
 message  createZongMenRequest_40000005{
   string name = 1;//宗门名称
+  string notice = 2;//公告
+  string declaration = 3;//宣言
+  int32 icon = 4;//ICON
 }
 message  createZongMenResponse_40000006{
   ZongMenInfoProto zongMen = 1;
