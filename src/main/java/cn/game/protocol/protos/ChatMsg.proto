@@ -39,6 +39,7 @@ message ChatMessageInfo{
 	SimplePlayerInfo sendPlayer = 2; // 消息发送人。
 	string content = 3;   // 消息内容
 	bool atMe = 4;   // 这条消息是否@了我
+	int32 optType = 5;//1  是宗门日志操作
 }
 
 
