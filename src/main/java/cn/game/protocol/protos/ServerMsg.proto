@@ -264,21 +264,6 @@ message NotifyWechatSubscribeMessageResponse_7d000044{
 	bool  result = 1;
 }
 
-// 宗门 gameServer => 发送到zongMenServer 的消息
-message ZongMenMsgRequest_7d000045{
-	int32 msgId = 1; //宗门相关的协议
-	bytes data = 2; //数据
-	int64 playerId = 3; //玩家id
-	int64 zongMenId = 4; //宗门id
-	repeated string params = 5;// 上下文参数
-}
-message ZongMenMsgResponse_7d000046{
-	int32 	errorCode = 1; //错误码
-	int32 	msgId = 2; //消息id
-	bytes data = 4; //数据
-	int64 playerId = 5; //玩家id
-}
-
 //ZongMenServer notify to GameServer
 message NotifyZongMenMsgToGame_7d000047{
 	int32 	msgId = 1; //消息id
