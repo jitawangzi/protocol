@@ -288,3 +288,11 @@ message ZongMenGetMyApplyZongMenIdListResponse_40000056{
   repeated uint32 zongMenIdList = 1;//宗门id集合
 }
 
+//更新宗门贡献值
+message ZongMenUpdateContributeValueReq_40000057{
+  bool isAdd = 1;//是否增加
+  int32 value = 2;//增加的值
+}
+message ZongMenUpdateContributeValueRes_40000058{
+  bool result = 1;
+}
