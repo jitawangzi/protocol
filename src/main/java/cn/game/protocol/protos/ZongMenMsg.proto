@@ -45,6 +45,8 @@ message ZongMenBargainProto{
 
   bool isBargain = 5;//是否砍过价
   bool isBargainBuy = 6;//是否购买了砍价的物品
+  //宗门砍价记录 key: 砍价人的名字 value: 砍掉的数量
+  map<string,int32> bargainLogMap = 7;
 }
 
 //宗门操作日志
