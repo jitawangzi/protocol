@@ -276,7 +276,7 @@ message ZongMenUpdateMemberFightPowerRequest_40000051{
   int64 pid = 1;//玩家id
   int32 fightPower = 2;//战斗力
 }
-message ZongMenUpdateMemberFightPower_40000052{
+message ZongMenUpdateMemberFightPowerResponse_40000052{
   bool result = 1;
 }
 
