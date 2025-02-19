@@ -48,6 +48,45 @@ message ZongMenBargainProto{
   //宗门砍价记录 key: 砍价人的名字 value: 砍掉的数量
   map<string,int32> bargainLogMap = 7;
 }
+//悬赏相关
+message ZongMenBountyProto{
+  ZongMenBountyMissionProto bountyMission = 1;
+  int32 acceptCount = 3;	// 当天已经接取的悬赏次数。
+  int32 refreshCount = 4;	// 目标刷新次数
+  int32 challengeCount = 5;	// 挑战次数
+}
+
+//悬赏任务数据
+message ZongMenBountyMissionProto{
+  int32 id = 1;				//悬赏任务id： GuildBountyBar 表id
+  int32	startPlace = 2;		//	悬赏任务的起点 GuildBargainPlace 表id
+  int32 endPlace = 3;		//	悬赏任务的终点 GuildBargainPlace 表id
+  int32 state = 4 ; 		// "任务状态, 2:可接 3:已接（进行中，未完成）4: 任务结束,可领奖。
+  int32 startTime = 5 ; 	// 针对state是3 已接的任务，任务的接受时间(秒时间戳)
+  int32 endTime = 6 ; 		// 针对state是3 已接的任务，任务的实际结束时间(秒时间戳，算上了)
+}
+//参与悬赏任务的玩家
+message ZongMenBountyPlayerProto{
+  SimplePlayerInfo player = 1;//玩家信息
+  ZongMenBountyMissionProto mission = 2; //悬赏任务数据
+}
+//宗门悬赏任务战报
+message ZongMenBountyBattleReport{
+  string uid = 1;			// 战报唯一id
+  int32 id = 2;				//悬赏任务id： GuildBountyBar 表id
+  int32 attackTime = 3;		//挑战时间， 秒时间戳
+  string attackerId = 4;	//挑战者id
+  string attackerName = 5;	//挑战者名字
+  string attackerHead = 6;	//挑战者头像
+  string playerName = 8;	//接任务者名字
+  bool isWin = 9; 			//挑战结果
+  bool isLoss = 10;	 		//挑战成功时， 是否损失了奖励
+}
+//宗门悬赏任务战报,带有挑战者的状态
+message ZongMenBountyBattleReportAttacker{
+  ZongMenBountyBattleReport report = 1;
+  bool isAttatckerMission = 2;	 		//挑战者是否正在进行悬赏任务
+}
 
 //宗门操作日志
 message ZongMenLogProto{
@@ -59,10 +98,6 @@ message ZongMenLogProto{
 message ZongMenShopProto{
   int64 nextRefreshTimer = 1;//商店下一次刷新时间戳
   map<int32,int32> itemBuyNumMap = 2;//商店物品购买次数 key 物品id，val 购买数量
-}
-//宗门悬赏
-message ZongMenXuanShangProto{
-
 }
 //宗门任务相关
 message ZongMenTaskProto{
@@ -83,9 +118,13 @@ message ZongMenInfoProto{
   repeated SimplePlayerInfo applyList = 5;//申请列表
   repeated ZongMenLogProto logList = 6;//操作日志 废弃 不下发
   ZongMenShopProto shop = 7;//商店 废弃 不下发
-  ZongMenXuanShangProto xuanShang = 8;//悬赏
   int32 liveness = 9;//活跃度
   ZongMenBargainProto bargain = 15;//砍价相关，一般只有查看自己所在宗门，这个数据才有效
+  ZongMenBountyProto bounty = 16;//悬赏相关，一般只有查看自己所在宗门，这个数据才有效
+  int32 bountyExp = 17;//悬赏经验
+  int32 bountyLevel = 18;//悬赏等级。
+  int32 bountyExpAdd = 19;//今天增加的悬赏经验
+
 }
 
 //宗门列表
@@ -208,12 +247,6 @@ message getZongMenActivityRequest_40000033{
 message getZongMenActivityResponse_40000034{
 
 }
-//宗门悬赏请求
-message getZongMenXuanShangRequest_40000035{
-}
-message getZongMenXuanShangResponse_40000036{
-  repeated ZongMenXuanShangProto xuanShangList = 1;
-}
 
 //更新宗门资产 宗门活跃度 宗门经验 个人贡献 ...
 message updateZongMenAssetRequest_40000037 {
@@ -270,6 +303,98 @@ message ZongMenBargainBuyRequest_40000062{
 message ZongMenBargainBuyResponse_40000063{
   repeated RewardInfo rewards = 1; //
 }
+
+// 接悬赏任务
+message ZongMenBountyAcceptRequest_40000070{
+}
+message ZongMenBountyAcceptResponse_40000071{
+}
+
+// 领取当前悬赏任务奖励
+message ZongMenBountyAcceptRequest_40000072{
+}
+message ZongMenBountyAcceptResponse_40000073{
+  int32 event = 1;    			//悬赏结束时产生的奇遇事件， GuildAdventureEvent 表id
+  repeated RewardInfo eventRewards = 2; // 奇遇事件奖励
+  repeated RewardInfo bountyRewards = 3; // 悬赏奖励
+  ZongMenBountyProto bounty = 4;   		// 更新悬赏数据，会有新的悬赏任务
+}
+
+
+// 刷新悬赏的目标列表
+message ZongMenBountyTargetRefreshRequest_40000074{
+}
+message ZongMenBountyTargetRefreshResponse_40000075{
+	repeated ZongMenBountyPlayerProto players = 1;
+}
+
+
+// 悬赏挑战、 反击  开始战斗
+message ZongMenBountyBattleStartRequest_40000076{
+	string playerId = 1;	// 攻击的玩家id
+}
+message ZongMenBountyBattleStartResponse_40000077{
+}
+
+// 悬赏挑战、 反击  结束战斗
+message ZongMenBountyBattleEndRequest_40000078{
+	string playerId = 1;	// 攻击的玩家id
+	bool isWin = 2;			// 是否胜利
+}
+message ZongMenBountyBattleEndResponse_40000079{
+}
+// 悬赏战报
+message ZongMenBountyBattleReportRequest_4000007a{
+	bool isZongMen = 1;  // true ：查看宗门战报， false：查看个人战报
+}
+message ZongMenBountyBattleReportResponse_4000007b{
+	repeated  ZongMenBountyBattleReportAttacker reports = 1;
+}
+// 查看某个玩家当前的悬赏详情
+message ZongMenBountyPlayerRequest_4000007c{
+	string playerId = 1;
+}
+message ZongMenBountyPlayerResponse_4000007d{
+ 	 SimplePlayerInfo player = 1;//玩家基本数据
+	 ZongMenBountyMissionProto mission = 2; // 悬赏数据，如果没有进行中的悬赏任务，则为null
+}
+
+
+message ZongMenRankInfo{
+	ZongMenSimpleInfoProto zongMen = 1;  //宗门基本数据
+	int32 rank = 2; //排名，-1或0表示没有进入排行榜，没有名次
+	string score = 3; //参与排行的分数，例如悬赏任务积分
+}
+
+//请求宗门排行
+message ZongMenRankListRequest_40000080{
+  int32 type = 1; // 排行类型  RankType表id
+  int32 page = 2; // 分页显示使用，当前页，从1开始，如果不分页设置1
+  int32 pageSize = 3; // 每页显示数量。
+  repeated int32 ext = 4; // 额外的参数，对于不同的排行类型RankType有不同含义，
+  // 比如对于宗门悬赏排行榜，需要有一个参数表示本周还是上周，  0 本周排行，1上周排行
+}
+
+message ZongMenRankListResponse_40000081{
+	int32 rank = 1; // 我的宗门排名，-1或0表示没有进入排行榜，没有名次
+	string score = 2;  //我的宗门分数，参与排行的分数。
+	repeated ZongMenRankInfo players = 3;
+
+	repeated int32 ext = 4; // 额外的返回参数，对于不同的排行类型RankType有不同含义，
+	// 比如对于宗门悬赏上周的排行榜， 0表示 没有膜拜过，1膜拜过
+}
+
+// 膜拜宗门排行
+message ZongMenRankWorshipRequest_40000082{
+  int32 type = 1; // 排行类型  RankType表id
+  int32 ext = 4; // 额外的参数，比如对于宗门悬赏排行榜， 0表示 本周排行，1上周排行（只能膜拜上周的）
+}
+
+message ZongMenRankWorshipResponse_40000083{
+  repeated RewardInfo rewards = 1; // 获得的奖励
+}
+
+
 
 //更新玩家战斗力
 message ZongMenUpdateMemberFightPower_40000052{
