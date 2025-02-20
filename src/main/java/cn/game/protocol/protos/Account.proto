@@ -34,6 +34,7 @@ enum AccountChannelType{
 	NONE=0; //
 	OFFICIAL=1; // 官方渠道
 	WECHAT=2; //	微信渠道
+	CHANGYOU=3; //	畅游sdk
 }
 
 /*** 请求服务器列表****/
@@ -62,7 +63,7 @@ message HttpResult{
 	AccountErrorCode errorCode = 2;   // 具体的错误
 }
 
-// 账号的渠道类型
+// 账号校验失败时的错误类型
 enum AccountErrorCode{
 	ACCOUNT_EMPTY=0; // 注册时账号为空
 	ACCOUNT_EXIST=1; //	注册时账号已经存在了
@@ -72,4 +73,5 @@ enum AccountErrorCode{
 	PASSPORT_SESSION_ERROR=5; //错误的sessinon，可能没有登陆，或者过期了。
 	CHANNEL_CHECK_FAIL=6; // 渠道账号校验错误
 	ACCOUNT_CREATE_FAIL=8; // 账号创建失败
+	ACCOUNT_BANNED=10; // 账号被封---目前在畅游sdk登陆，有可能有这个错误
 }
