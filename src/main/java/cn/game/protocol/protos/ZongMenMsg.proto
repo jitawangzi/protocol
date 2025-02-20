@@ -429,3 +429,10 @@ message ZongMenUpdateContributeValueReq_40000057{
 message ZongMenUpdateContributeValueRes_40000058{
   bool result = 1;
 }
+
+//快速一键加入宗门
+message ZongMenQuickJoinRequest_40000065{
+}
+message ZongMenQuickJoinResponse_40000066{
+  ZongMenInfoProto info = 1;
+}
