@@ -18,7 +18,8 @@ message AccountRegisterResponse{
 /*** 登陆账号 ****/
 message AccountLogin{
   AccountChannelType channel                    = 1;//渠道
-  string token = 2;						// 渠道token
+  string token = 2;						// 渠道token,如果 channel 是OFFICIAL ，则token格式为“账号 密码”
+  // 如果channel 是CHANGYOU，则格式为一个json字符串 {"channelId":xxxx,"data":xxxx} , 其中data为 畅游移动SDK调用login接口后返回data值
 }
 
 message AccountLoginResponse{
