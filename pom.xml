@@ -18,18 +18,47 @@
 	</parent>
 	<build>
 		<plugins>
-			<!--			<plugin>-->
-			<!--				<artifactId>maven-compiler-plugin</artifactId>-->
-			<!--				<version>3.8.0</version>-->
-			<!--				<configuration>-->
-			<!--					<release>21</release>-->
-			<!--				</configuration>-->
-			<!--			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.5</version>
 			</plugin>
+	<!-- 添加 os-maven-plugin 以识别操作系统 -->
+<!--        <plugin>-->
+<!--            <groupId>kr.motd.maven</groupId>-->
+<!--            <artifactId>os-maven-plugin</artifactId>-->
+<!--            <version>1.7.1</version>-->
+<!--            <executions>-->
+<!--                <execution>-->
+<!--                    <phase>initialize</phase>-->
+<!--                    <goals>-->
+<!--                        <goal>detect</goal>-->
+<!--                    </goals>-->
+<!--                </execution>-->
+<!--            </executions>-->
+<!--        </plugin>-->
+<!--		<plugin>-->
+<!--            <groupId>org.xolstice.maven.plugins</groupId>-->
+<!--            <artifactId>protobuf-maven-plugin</artifactId>-->
+<!--            <version>0.6.1</version> -->
+<!--            <configuration>-->
+<!--                <protoSourceRoot>src/main/java/cn/game/protocol/protos</protoSourceRoot>-->
+<!--                <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>-->
+<!--                <attachProtoSources>true</attachProtoSources>-->
+<!--                <protocArtifact>com.google.protobuf:protoc:3.12.2:exe:${os.detected.classifier}</protocArtifact>-->
+<!--            </configuration>-->
+<!--            <executions>-->
+<!--                <execution>-->
+<!--                    <goals>-->
+<!--                        <goal>compile</goal>-->
+<!--                    </goals>-->
+<!--                </execution>-->
+<!--            </executions>-->
+<!--        </plugin>-->
+        
+        
+        
+        
 		</plugins>
 
 	</build>
@@ -39,7 +68,6 @@
 		<dependency>
 			<groupId>cn.game</groupId>
 			<artifactId>util</artifactId>
-			<version>1.0</version>
 		</dependency>
 
 		<dependency>
