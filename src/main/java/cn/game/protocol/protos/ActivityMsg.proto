@@ -206,3 +206,25 @@ message ActivityWestLuckyBuyResponse_11000096{
 }
 
 
+
+//︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻每日特惠礼包︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
+//查看每日特惠礼包数据
+message ActivityDayGiftRequest_11000100{
+   uint32 id = 1; 		//活动id Activity表的id,如果同类型活动有多个，可以用id区分。
+}
+//每日特惠礼包
+message ActivityDayGiftResponse_11000101{
+  map<int32,int32> buyCountMap = 2 ;//key: 礼包id(ActivityMeiRiTeHui表id) value: 购买次数，一般购买过才有value值
+}
+
+//购买每日特惠礼包
+message ActivityDayGiftBuyRequest_11000102{
+   uint32 id = 1; 		//活动id Activity表的id,如果同类型活动有多个，可以用id区分。
+   uint32 giftId  = 2;    //  ActivityMeiRiTeHui表id，如果是99表示打包购买
+}
+message ActivityDayGiftBuyResponse_11000103{
+   repeated RewardInfo rewards = 1;//购买的物品
+}
+
+//︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼每日特惠礼包︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
+
