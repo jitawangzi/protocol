@@ -130,12 +130,16 @@ public enum OpType{
 	DA_DAO_JOIN(213, "每天前5场战斗都会获得10争锋值"),
 	DA_DAO_Buy(214, "大道争锋购买"),
 	DA_DAO_FREE_ADD(215, "大道争锋每日免费奖励挑战券"),
-	HeroFragmentCompose(250, "英雄合成"),
-	HeroDisassemble(251, "英雄分解"),
+
 
 	BuyXianShiLiBao(216, "限时礼包购买" ),
 	ZhuanPanClearItem(217, "转盘结束销毁身上的抽奖卷" ),
-	ZhuanPanDraw(218, "转盘抽奖"), ZhuanPanItemBuy(219, "购买转盘抽奖道具"),
+	ZhuanPanDraw(218, "转盘抽奖"), 
+	ZhuanPanItemBuy(219, "购买转盘抽奖道具"),
+	ActivityMeiRiTeHui(220, "每日特惠礼包购买"),
+
+	HeroFragmentCompose(250, "英雄合成"), 
+	HeroDisassemble(251, "英雄分解"),
 
 	Rename(225, "改名"),
 
