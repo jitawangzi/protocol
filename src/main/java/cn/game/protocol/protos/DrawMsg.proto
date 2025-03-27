@@ -35,6 +35,7 @@ message DrawRequest_37000003{
 	int32  id = 1;  // Draw表id，代表高级抽卡还是至尊抽卡。
 	bool ten = 2;  // 是否是十连抽
 	bool freeOnce = 3;  // 是否是免费的单抽
+	int32 count = 5;  // 抽卡次数---某些抽卡玩法会用到,如果指定了这个次数，则优先使用这个次数
 }
 
 // 抽卡结果
