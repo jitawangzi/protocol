@@ -40,7 +40,7 @@ public class ClassGenerator {
 	/** 
 	 * 根据xxxMsg.proto,创建处理请求消息的 xxxHandler类
 	 * @param handlerPath Handler文件路径
-	 * @param pkg Handler所在包名  msg中定义 /@HandlerPackage cn.game.games.net.game.module.develop.pet
+	 * @param pkg Handler所在包名  msg中定义 //@HandlerPackage cn.game.games.net.game.module.develop.pet
 	 * @param className xxxHandler
 	 * @param moduleCode  模块号， msg中定义 //@MessageModule 19
 	 * @throws IOException
@@ -146,9 +146,9 @@ public class ClassGenerator {
 					}
 					String fieldGetCode;
 					if (field.isRepeated() || field.isMapField()) {
-						fieldGetCode = generateRepeatedOrMapFieldCode(fieldName, field);
+						fieldGetCode = generateRepeatedOrMapFieldCode("req", fieldName, field);
 					} else {
-						fieldGetCode = generateSingleFieldCode(fieldName, field);
+						fieldGetCode = generateSingleFieldCode("req", fieldName, field);
 					}
 					blockStmtMessage.addStatement(fieldGetCode);
 				}
@@ -219,6 +219,102 @@ public class ClassGenerator {
 		Files.write(filePath, cu.toString().getBytes());
 	}
 
+	public static void updateClientHandlerJavaFile(String handlerPath, String className, String module, List<String> messages,
+			String function) throws Exception {
+		// 首先设置语言级别
+		StaticJavaParser.getConfiguration().setLanguageLevel(LanguageLevel.JAVA_17);
+		Path filePath = Paths.get(handlerPath);
+		// 在解析代码时保存原始格式信息
+		CompilationUnit cu = StaticJavaParser.parse(filePath);
+		LexicalPreservingPrinter.setup(cu);
+
+		ClassOrInterfaceDeclaration classDeclaration = cu.getClassByName(className)
+				.orElseThrow(() -> new RuntimeException("Class not found in file"));
+
+		// 在inititialize方法中，根据putInvoker，找到存在的请求消息名并排除。
+		MethodDeclaration inititializeMethod = classDeclaration.getMethodsByName("inititialize").get(0);
+		BlockStmt blockStmt = inititializeMethod.getBody().get();
+		List<Node> childNodes = blockStmt.getChildNodes();
+		for (Node node : childNodes) {
+			String nodeString = node.toString();
+			if (nodeString.contains("putInvoker")) {
+				int lastIndexOf = nodeString.lastIndexOf("PbProtocol.");
+				int indexOf = nodeString.indexOf(",");
+				String reqMessage = nodeString.substring(lastIndexOf + "PbProtocol.".length(), indexOf);
+				messages.remove(reqMessage);
+			}
+		}
+		if (messages.isEmpty()) {
+			return;
+		}
+
+		boolean hasMap = false;
+		boolean hasList = false;
+		for (String respMessage : messages) {
+//			String respMessage = getRespMessage(reqMessage);
+//			checkImport("cn.game.protocol.protobuf." + module + "Msg", reqMessage, cu);
+			checkImport("cn.game.protocol.protobuf." + module + "Msg", respMessage, cu);
+			// 增加putInvoker
+			String respMethod = getRespMethod(respMessage, module);
+			blockStmt.addStatement(String.format("putInvoker(PbProtocol.%s, this::%s);", respMessage, respMethod));
+
+			// 新增处理消息的方法
+			MethodDeclaration messageMethod = classDeclaration.addMethod(respMethod,
+					com.github.javaparser.ast.Modifier.Keyword.PRIVATE);
+			messageMethod.setType(new com.github.javaparser.ast.type.VoidType());
+			messageMethod.addParameter("NetClient", "netClient");
+			messageMethod.addParameter("Object", "message");
+			LambdaExpr lambda = new LambdaExpr();
+			BlockStmt blockStmtMessage = new BlockStmt();
+			blockStmtMessage.addStatement(respMessage + " resp = (" + respMessage + ") message;");
+
+			Class<?> respMessageClass = Class.forName("cn.game.protocol.protobuf." + module + "Msg$" + respMessage);
+			Message respMessageInstance = (Message) respMessageClass.getDeclaredMethod("getDefaultInstance").invoke(null);
+			Descriptors.Descriptor respDescriptor = respMessageInstance.getDescriptorForType();
+			// 生成请求消息的 数据 get方法。
+			if (!respDescriptor.getFields().isEmpty()) {
+				for (FieldDescriptor field : respDescriptor.getFields()) {
+					String fieldName = field.getName();
+					if (field.isMapField()) {
+						hasMap = true;
+					} else if (field.isRepeated()) {
+						hasList = true;
+					}
+					String fieldGetCode;
+					if (field.isRepeated() || field.isMapField()) {
+						fieldGetCode = generateRepeatedOrMapFieldCode("resp", fieldName, field);
+					} else {
+						fieldGetCode = generateSingleFieldCode("resp", fieldName, field);
+					}
+					blockStmtMessage.addStatement(fieldGetCode);
+				}
+			}
+			blockStmtMessage.addStatement("Client client = (Client) netClient;");
+
+			// 逻辑代码。。。
+
+			lambda.setBody(blockStmtMessage);
+			messageMethod.setBody(lambda.getBody().asBlockStmt());
+
+			// 导入方法需要的类
+			checkImport("cn.game.core.net.client.NetClient", cu);
+			checkImport("cn.game.simulation.client.Client", cu);
+			checkImport("cn.game.protocol.protobuf.PbProtocol", cu);
+			if (hasList) {
+				checkImport("java.util.List", cu);
+			}
+			if (hasMap) {
+				checkImport("java.util.Map", cu);
+			}
+		}
+
+		// 使用 LexicalPreservingPrinter 输出修改后的代码
+		String modifiedCode = LexicalPreservingPrinter.print(cu);
+
+		// 将更新后的类写回文件
+		Files.write(filePath, cu.toString().getBytes());
+	}
+
 	private static void checkImport(String importPackageOrClass, String importClass, CompilationUnit cu) {
 		boolean isImported = cu
 				.getImports()
@@ -262,7 +358,14 @@ public class ClassGenerator {
 		return Character.toLowerCase(method.charAt(0)) + method.substring(1);
 	}
 
-	private static String generateRepeatedOrMapFieldCode(String fieldName, Descriptors.FieldDescriptor fieldDescriptor) {
+	public static String getRespMethod(String reqpMessage, String module) {
+		int indexOf = reqpMessage.indexOf("_");
+		String method = reqpMessage.substring(0, indexOf);
+		method = method.replace(module, "").replace("Response", "");
+		return Character.toLowerCase(method.charAt(0)) + method.substring(1);
+	}
+
+	private static String generateRepeatedOrMapFieldCode(String obj, String fieldName, Descriptors.FieldDescriptor fieldDescriptor) {
 		Descriptors.FieldDescriptor.Type fieldType = fieldDescriptor.getType();
 		String capitalizedFieldName = capitalize(fieldName);
 
@@ -272,7 +375,7 @@ public class ClassGenerator {
 			String keyType = getJavaType(keyDescriptor);
 			String valueType = getJavaType(valueDescriptor);
 
-			return "Map<" + keyType + ", " + valueType + "> " + fieldName + "Map = req.get" + capitalizedFieldName + "Map();";
+			return "Map<" + keyType + ", " + valueType + "> " + fieldName + "Map = " + obj + ".get" + capitalizedFieldName + "Map();";
 		} else if (fieldDescriptor.isRepeated()) {
 			switch (fieldType) {
 			case INT32:
@@ -280,29 +383,29 @@ public class ClassGenerator {
 			case SINT32:
 			case FIXED32:
 			case SFIXED32:
-				return "List<Integer> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<Integer> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case INT64:
 			case UINT64:
 			case SINT64:
 			case FIXED64:
 			case SFIXED64:
-				return "List<Long> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<Long> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case FLOAT:
-				return "List<Float> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<Float> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case DOUBLE:
-				return "List<Double> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<Double> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case BOOL:
-				return "List<Boolean> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<Boolean> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case STRING:
-				return "List<String> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<String> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case BYTES:
-				return "List<ByteString> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<ByteString> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case ENUM:
 				String enumType = fieldDescriptor.getEnumType().getName();
-				return "List<" + enumType + "> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<" + enumType + "> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			case MESSAGE:
 				String messageType = fieldDescriptor.getMessageType().getName();
-				return "List<" + messageType + "> " + fieldName + "List = req.get" + capitalizedFieldName + "List();";
+				return "List<" + messageType + "> " + fieldName + "List = " + obj + ".get" + capitalizedFieldName + "List();";
 			default:
 				throw new IllegalArgumentException("Unsupported repeated field type: " + fieldType);
 			}
@@ -344,34 +447,34 @@ public class ClassGenerator {
 		}
 	}
 
-	private static String generateSingleFieldCode(String fieldName, Descriptors.FieldDescriptor fieldDescriptor) {
+	private static String generateSingleFieldCode(String obj, String fieldName, Descriptors.FieldDescriptor fieldDescriptor) {
 		switch (fieldDescriptor.getType()) {
 		case INT32:
 		case UINT32:
 		case SINT32:
 		case FIXED32:
 		case SFIXED32:
-			return "int " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "int " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case INT64:
 		case UINT64:
 		case SINT64:
 		case FIXED64:
 		case SFIXED64:
-			return "long " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "long " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case FLOAT:
-			return "float " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "float " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case DOUBLE:
-			return "double " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "double " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case BOOL:
-			return "boolean " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "boolean " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case STRING:
-			return "String " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "String " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case BYTES:
-			return "ByteString " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return "ByteString " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case ENUM:
-			return fieldDescriptor.getEnumType().getName() + " " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return fieldDescriptor.getEnumType().getName() + " " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		case MESSAGE:
-			return fieldDescriptor.getMessageType().getName() + " " + fieldName + " = req.get" + capitalize(fieldName) + "();";
+			return fieldDescriptor.getMessageType().getName() + " " + fieldName + " = " + obj + ".get" + capitalize(fieldName) + "();";
 		default:
 			return "// Unsupported field type: " + fieldDescriptor.getType().name();
 		}

@@ -74,11 +74,11 @@ message TestPlayerDeleteResponse_6f000045{
 }
 
 // 只是测试
-message TestRequest_6f000020{
+message TestRunRequest_6f000020{
 	uint32 id 	= 1 ;		//
 }
 
-message TestResponse_6f000021{
+message TestRunResponse_6f000021{
 	uint32 data 	= 1 ;		//
 
 }

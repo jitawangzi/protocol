@@ -57,6 +57,7 @@ public class PbProtocolGenerator {
 		// 生成XXXHandler类的参数
 		Map<String, HandlerParam> handlerMap = new HashMap<String, HandlerParam>();
 		Multimap<String, String> classNameRequestMessageMap = ArrayListMultimap.create();
+		Multimap<String, String> classNameResponseMessageMap = ArrayListMultimap.create();
 		
 		List<String> outClass = new ArrayList<>();
 		List<MessageObject> messages = new ArrayList<>();
@@ -104,6 +105,9 @@ public class PbProtocolGenerator {
 				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@handlerpackage")) {
 					handlerMap.computeIfAbsent(out, k -> new HandlerParam()).setHandlerPackage(str.split(" ")[1].trim());
 				}
+				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@clienthandlerpackage")) {
+					handlerMap.computeIfAbsent(out, k -> new HandlerParam()).setClientHandlerPackage(str.split(" ")[1].trim());
+				}
 				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@function")) {
 					handlerMap.computeIfAbsent(out, k -> new HandlerParam()).setFunction(str.split(" ")[1].trim());
 				}
@@ -149,8 +153,11 @@ public class PbProtocolGenerator {
 
 					messages.add(message);
 					if (message.isRequest()) {
-//						if (message.isRequest() || message.isPush()) {
 						classNameRequestMessageMap.put(out, message.getShortName());
+					} else {
+						if (message.isPush() || message.isResponse()) {
+							classNameResponseMessageMap.put(out, message.getShortName());
+						}
 					}
 					if (notParseProtos.contains(out) || notUesd) {
 						notGenRequestMessages.add(message.getShortName());
@@ -181,7 +188,8 @@ public class PbProtocolGenerator {
 		// 生成协议列表，压测使用。
 		genMessageDescCSV(messages);
 		// 生成服务器的Handler类
-		updateHandler(handlerMap, classNameRequestMessageMap);
+		updateHandler(handlerMap, classNameRequestMessageMap, true);
+		updateHandler(handlerMap, classNameResponseMessageMap, false);
 
 		// 注意把MessageObject 的值修改了
 		for (MessageObject messageObject : messages) {
@@ -535,7 +543,9 @@ public class PbProtocolGenerator {
 		writer.close();
 	}
 
-	private static void updateHandler(Map<String, HandlerParam> handlerMap, Multimap<String, String> classNameRequestMessageMap) throws Exception {
+	@Deprecated
+	private static void updateHandlerOld(Map<String, HandlerParam> handlerMap, Multimap<String, String> classNameRequestMessageMap)
+			throws Exception {
 		Set<Entry<String, HandlerParam>> entrySet = handlerMap.entrySet();
 		for (Entry<String, HandlerParam> entry : entrySet) {
 			String k = entry.getKey();
@@ -552,6 +562,44 @@ public class PbProtocolGenerator {
 				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, module + "Handler", "0x" + messageModule);
 			}
 			ClassGenerator.updateHandlerJavaFile(handlerPath, module + "Handler", module, messages, function);
+		}
+	}
+
+	private static void updateHandler(Map<String, HandlerParam> handlerMap, Multimap<String, String> classNameMessageMap,
+			boolean isServer)
+			throws Exception {
+		Set<Entry<String, HandlerParam>> entrySet = handlerMap.entrySet();
+		for (Entry<String, HandlerParam> entry : entrySet) {
+			String k = entry.getKey();
+			HandlerParam v = entry.getValue();
+			String serverHandlerPackage = v.getHandlerPackage();
+			String clientHandlerPackage = v.getClientHandlerPackage();
+			if (isServer && serverHandlerPackage == null) {
+				continue;
+			}
+			if (!isServer && clientHandlerPackage == null) {
+				continue;
+			}
+			String function = v.getFunction();
+			String messageModule = v.getMessageModule();
+			String className = k;
+			List<String> messages = (List<String>) classNameMessageMap.get(className);
+			String module = className.replace("Msg", "");
+			String projectDir = isServer ? "game" : "simulationclient";
+			String moduleClassName = (isServer ? "" : "Client") + module + "Handler";
+			String handlerPackage = isServer ? serverHandlerPackage : clientHandlerPackage;
+			String handlerPath = workspace + "/" + projectDir + "/src/main/java/" + handlerPackage.replace(".", "/") + "/"
+					+ moduleClassName + ".java";
+			File file = new File(handlerPath);
+			if (!file.exists()) {
+				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, moduleClassName, "0x" + messageModule);
+			}
+			if (isServer) {
+				ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
+			} else {
+				ClassGenerator.updateClientHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
+			}
+//			ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
 		}
 	}
 

@@ -40,6 +40,11 @@ public class MessageObject implements Comparable<MessageObject> {
 		return shortName.indexOf("Request") >= 0;
 	}
 
+	public boolean isResponse() {
+
+		return shortName.indexOf("Response") >= 0;
+	}
+
 	public boolean isPush() {
 
 		return shortName.indexOf("Push") >= 0;
