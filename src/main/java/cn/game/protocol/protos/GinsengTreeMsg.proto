@@ -1,0 +1,95 @@
+syntax = "proto3";
+option java_package = "cn.game.protocol.protobuf";
+//option optimize_for = LITE_RUNTIME;
+package Protos;
+import "RewardMsg.proto" ;
+//import "BaseMsg.proto" ;
+
+//@HandlerPackage cn.game.games.net.game.module.ginseng
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@MessageModule 39
+
+// 人参果树相关协议
+
+//请求人参果树数据
+message GinsengTreeInfoRequest_39000001{
+}
+
+// 人参果树数据
+message GinsengTreeInfoResponse_39000002{
+	GinsengTreeInfo treeInfo = 1;
+}
+// 人参果树数据
+message GinsengTreeInfo{
+	uint32 level = 1;		// 实际等级，RSGTreeLv表id，不是显示的等级
+	uint32 exp = 2;		// 	当前等级的经验
+	map<int32 ,int32> fruitMap = 3; // 果实数据：  key: 实际有果实的位置，从0开始;  value: 此位置的果实，还剩多少秒成熟，0表示已经成熟了
+	int32 bugs = 5; 		// 有几条虫子
+	int32 insecticidesTimes = 6; 		// 杀虫剂购买/使用 次数
+	int32  insecticidesEndRemainingSeconds = 7; //  杀虫剂还有多少秒效果结束。
+	int32 waterTimes = 10; 		// 浇水次数
+	int32 hangUpSeconds = 11; 		// 挂机时长，秒
+	map<int32 ,int32> hangUpRandomRewardMap = 12; // 挂机的随机奖励部分，key 道具或资源id，value  数量
+
+}
+
+//人参果树浇水
+message GinsengTreeWateringRequest_39000003{
+}
+
+message GinsengTreeWateringResponse_39000004{
+	// 灵叶，升级奖励。 经验和等级有单独协议更新
+	repeated  RewardInfo rewards =1;
+}
+
+
+//人参果树手动除虫
+message GinsengTreeBugRequest_39000005{
+}
+
+message GinsengTreeBugResponse_39000006{
+	// 灵叶奖励。
+	repeated  RewardInfo rewards =1;
+}
+
+
+//人参果树购买杀虫剂除虫
+message GinsengTreeInsecticidesRequest_39000007{
+	int32 count = 1;   // 购买次数/数量
+}
+
+message GinsengTreeInsecticidesResponse_39000008{
+	GinsengTreeInfo treeInfo = 1;
+}
+
+// 人参果树施肥
+message GinsengTreeFertilizationRequest_39000011{
+}
+
+message GinsengTreeFertilizationResponse_39000012{
+	// 灵叶奖励。
+	repeated  RewardInfo rewards =1;
+	// 更新相关数据
+	GinsengTreeInfo treeInfo = 2;
+}
+
+
+//收获人参果树果实
+message GinsengTreeHarvestRequest_39000013{
+	int32 pos = 1;   // 果实位置，从0开始
+}
+
+message GinsengTreeHarvestResponse_39000014{
+	// 果实奖励
+	repeated  RewardInfo rewards =1;
+}
+
+
+//领取人参果树挂机奖励
+message GinsengTreeHangUpRequest_39000015{
+}
+
+message GinsengTreeHangUpResponse_39000016{
+	repeated  RewardInfo rewards =1;
+}
+

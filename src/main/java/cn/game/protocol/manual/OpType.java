@@ -138,8 +138,6 @@ public enum OpType{
 	ZhuanPanItemBuy(219, "购买转盘抽奖道具"),
 	ActivityMeiRiTeHui(220, "每日特惠礼包购买"),
 
-	HeroFragmentCompose(250, "英雄合成"), 
-	HeroDisassemble(251, "英雄分解"),
 
 	Rename(225, "改名"),
 
@@ -151,8 +149,20 @@ public enum OpType{
 	ZongMenShopReward(233,"宗门商店掉落"),
 	zongMenChangeName(234,"宗门改名"),
 	ZongMenBargain(236, "宗门购买砍价物品"),
+	
+
+	HeroFragmentCompose(250, "英雄合成"), 
+	HeroDisassemble(251, "英雄分解"),
+	
+	GinsengTreeWarter(260, "人参果树浇水"), 
+	GinsengTreeInsectic(261, "人参果树施肥"),
+	GinsengTreeLevelUp(262, "人参果树升级"),
+	GinsengTreeBug(263, "人参果树捉虫"),
+	GinsengTreeInsecticidesBug(264, "人参果树购买杀虫剂"),
+	GinsengTreeHangUp(265, "人参果树挂机"),
+
 	PressureTest(888, "压力测试"),
-	None(999, "未定义");
+	None(999, "未定义"),;
 
 	private int id ;
 	private String name ; 
