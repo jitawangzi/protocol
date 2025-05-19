@@ -173,6 +173,7 @@ public enum ErrorMsgEnum {
 	zong_men_not_allow_join(423, "宗门不让加入"),
 	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
 
+	draw_refresh_gold(450, "抽卡刷新时，元宝消耗校验错误"),
 
 	max_error_id(999, "占位错误码");
 

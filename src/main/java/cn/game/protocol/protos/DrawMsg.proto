@@ -64,6 +64,11 @@ message DrawHeroInfoRequest_37000011{
 
 // 英雄招募数据返回
 message DrawHeroInfoResponse_37000012{
+	DrawHeroInfo drawHeroInfo = 1;
+
+}
+message DrawHeroInfo{
+
 	repeated int32 itemId = 1;		// 英雄碎片id
 	repeated int32 itemCount = 2;	// 英雄碎片id对应的数量
 	repeated int32	recruitedPos = 3;  // 已经招募过的英雄碎片位置，从0开始
@@ -78,25 +83,26 @@ message DrawHeroInfoResponse_37000012{
 
 // 新神将招募刷新，花费元宝
 message DrawHeroRefreshRequest_37000013{
+	//客户端计算出来的元宝消耗数量，如果和服务器计算出来的数量不等并且服务器端数量大，则返回错误
+	int32 gold = 1;
 }
 
 // 新神将招募刷新返回
 message DrawHeroRefreshResponse_37000014{
 	repeated int32 itemId = 1;		// 英雄碎片id
 	repeated int32 itemCount = 2;	// 英雄碎片id对应的数量
+	int32 freeRefreshRemaningSeconds = 4;  // 还剩多少秒自动刷新
 }
 
 // 新神将招募
 message DrawHeroRecruitRequest_37000015{
 	int32 multiple = 1;   			// 倍数设置，只有在普通招募阶段才能设置
+	int32 pos = 2;     			// 招募的神将位置，从0开始
 }
 
 // 新神将招募返回
 message DrawHeroRecruitResponse_37000016{
 	repeated RewardInfo items	=	1;	// 获得的英雄碎片
-	// 更新保底相关数据
-	int32 luckyValue = 8;   			// 当前保底幸运值
-	int32 luckyValueMax = 9;   			// 最大保底幸运值
-	int32 luckyValueQuality = 10;   	// 当前保底品质--幸运值颜色
+	DrawHeroInfo drawHeroInfo = 2;		// 刷新所有数据
 }
 

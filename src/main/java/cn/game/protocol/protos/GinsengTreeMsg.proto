@@ -30,6 +30,7 @@ message GinsengTreeInfo{
 	int32 waterTimes = 10; 		// 浇水次数
 	int32 hangUpSeconds = 11; 		// 挂机时长，秒
 	map<int32 ,int32> hangUpRandomRewardMap = 12; // 挂机的随机奖励部分，key 道具或资源id，value  数量
+	repeated int32  heroIdList = 13;    // 上阵凑羁绊的英雄id
 
 }
 
@@ -92,4 +93,15 @@ message GinsengTreeHangUpRequest_39000015{
 message GinsengTreeHangUpResponse_39000016{
 	repeated  RewardInfo rewards =1;
 }
+
+
+
+//人参果树英雄上阵
+message GinsengTreeHeroRequest_39000017{
+	int32  heroId = 1;    // Hero表id
+}
+
+message GinsengTreeHeroResponse_39000018{
+}
+
 
