@@ -189,6 +189,7 @@ public class PbProtocolGenerator {
 		genMessageDescCSV(messages);
 		// 生成服务器的Handler类
 		updateHandler(handlerMap, classNameRequestMessageMap, true);
+		// 生成客户端的Handler类
 		updateHandler(handlerMap, classNameResponseMessageMap, false);
 
 		// 注意把MessageObject 的值修改了

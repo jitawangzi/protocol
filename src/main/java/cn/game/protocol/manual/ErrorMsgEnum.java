@@ -15,11 +15,11 @@ public enum ErrorMsgEnum {
 	/** 暂时不能登录 */
 	login_forbidden(3, "暂时不能登录"),
 	/** 重连失败，需要重新登录 */
-	reconnect_fail(4, "重连失败，需要重新登录"),
+	reconnect_fail(4, "重连失败，需要重新登录", true),
 	/** 需要重新登录 */
-	need_login(5, "需要重新登录"),
+	need_login(5, "需要重新登录", true),
 	/** 版本不匹配 */
-	version_mismatch(6, "版本不匹配"),
+	version_mismatch(6, "版本不匹配", true),
 	/**当前服务器状态不允许进入 */
 	server_status(7, "当前服务器状态不允许进入"),
 	/** 没有获取到玩家锁 */
@@ -30,7 +30,7 @@ public enum ErrorMsgEnum {
 	request_remote_server(10, "远程服务器请求失败，可能多种原因"),
 	/** 不在线/不在当前服务器 */
 	not_online(11, "不在线/不在当前服务器"),
-	session_not_exist(12, "session错误，需要先登陆"),
+	session_not_exist(12, "session错误，需要先登陆", true),
 	requests_too_frequent(13, "请求太频繁"),
 	async_request_fail(14, "异步请求失败"),
 	/** 特别注意这个错误只是 客户端使用，服务器不用这个错误码，只是给客户端定义的。  */
@@ -38,6 +38,7 @@ public enum ErrorMsgEnum {
 	disable_ios_pay(16, "当前的客户端版本，禁用ios支付"),
 	gm_cmd_not_exist(18, "不存在的gm指令"),
 	gm_cmd_param(19, "gm指令参数错误"),
+	system_overload(20, "系统过载，拒绝处理请求", true),
 
 	// #通用错误 50 - 99
 	/** 玩家数据校验错误。 */
@@ -181,10 +182,17 @@ public enum ErrorMsgEnum {
 	public int ID;
 	/** 描述 */
 	private String desc;
+	/** 客户端是否需要特别处理这个错误码 */
+	private boolean needProcessed;
 
 	private ErrorMsgEnum(int id, String desc) {
+		this(id, desc, false);
+	}
+
+	private ErrorMsgEnum(int id, String desc, boolean needProcessed) {
 		this.ID = id;
 		this.desc = desc;
+		this.needProcessed = needProcessed;
 	}
 
 	public int getId() {
@@ -192,5 +200,9 @@ public enum ErrorMsgEnum {
 	}
 	public String getDesc() {
 		return this.desc;
+	}
+
+	public boolean isNeedProcessed() {
+		return needProcessed;
 	}
 }
