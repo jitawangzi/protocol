@@ -172,6 +172,13 @@ message BattleLineupResponse_13000049{
 }
 
 
+/*** 选择当前使用的阵容 ***/
+message BattleLineupChooseRequest_13000031{
+	int32 battleType = 1;			// 玩法类型，梦魇秘境  9   大道争锋 50
+	int32 seq = 2;					//  使用的哪个阵容，从0开始
+}
+message BattleLineupChooseResponse_13000032{
+}
 
 /*** 合成游戏保存棋盘数据 ***/
 message HCBattleDataSaveRequest_13000100{
@@ -279,6 +286,7 @@ message LineupInfo{
 message BattleLineupInfo{
 	int32 battleType = 1;			// 玩法类型，梦魇秘境  9  ，大道争锋（离线pvp）50
 	repeated LineupInfo lineups = 2;//  阵容数据
+	int32 useSeq = 3;			// 当前使用的是第几个阵容，从0开始。
 }
 
 

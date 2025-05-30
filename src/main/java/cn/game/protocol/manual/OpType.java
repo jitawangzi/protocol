@@ -160,6 +160,7 @@ public enum OpType{
 	GinsengTreeBug(263, "人参果树捉虫"),
 	GinsengTreeInsecticidesBug(264, "人参果树购买杀虫剂"),
 	GinsengTreeHangUp(265, "人参果树挂机"),
+	GinsengTreeHarvest(266, "人参果树收获果实"),
 
 	DrawHeroRefresh(270, "招募刷新英雄"),
 	DrawHero(271, "招募英雄"),

@@ -55,7 +55,7 @@ message HeroConflateInfo{
 	  string uid = 1; // 本体英雄唯一id
   	// 被消耗的英雄唯一id,如果使用了万能耗材，万能耗材不用填写这个值,  废弃了。
   	repeated string consumedUid = 2;
-  	// 消耗的同职业碎片id和数量
+  	// 消耗的同职业碎片id和数量,  废弃了。
   	map<int32,int32> sameProfessionItems = 5 ;
 }
 
