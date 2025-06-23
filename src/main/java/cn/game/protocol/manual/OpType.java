@@ -102,6 +102,9 @@ public enum OpType{
 	ShiLuoZhenJing(170, "失落真经"),
 
 	WorldBoss(171, "世界boss"),
+
+	XiangYaoChuMo(173, "降妖除魔"),
+
 	FairyFriend(180, "仙友"),
 	SoulPet(181, "灵宠"),
 	Secretscript(182, "神通"),

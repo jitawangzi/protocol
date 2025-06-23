@@ -529,6 +529,26 @@ message BattleBuyPvPTimeResponse_13000122{
 	int32 buyNum = 1; //今日购买的挑战券次数
 	repeated RewardInfo rewards = 2; // 获得的奖励
 }
+
+
+// ****************************************降妖除魔********************************************
+
+// 请求降妖除魔数据
+message BattleXiangYaoChuMoRequest_13000501
+{
+}
+
+// 返回降妖除魔数据
+message BattleXiangYaoChuMoResponse_13000502
+{
+	int32 sweepTimes = 1;  // 每日扫荡了几次
+	int32 lastCompleteBattleId = 2;  // 已经通关的最高id  Battle表id
+}
+
+
+
+
+
 //@NotUseStart
 //神通秘术 消息
 message BattleSecretscriptInfo{

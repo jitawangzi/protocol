@@ -27,6 +27,8 @@ public enum DungeonTypeEnum{
 	/** 失落真经 */
 	ShiLuoZhenJing(20, "失落真经"),
 
+	XiangYaoFuMo(22, "降妖伏魔"),
+
 	/** 突发事件 */
 	BattleEvent(33, "突发事件"),
 	/** 探索战斗 */
