@@ -58,6 +58,19 @@ public class PbProtocol implements ProtocolParser {
 			throw new RuntimeException(e);
 		}
 	}
+	@Override
+	public Message parseFrom(int msgID, ByteBuffer data) {
+		Parser<?> parser = parsersMap.get(msgID);
+		if (parser == null) {
+			throw new IllegalArgumentException("message not found : " + msgID);
+		}
+		try {
+			return (Message) parser.parseFrom(data);
+		} catch (InvalidProtocolBufferException e) {
+			log.error("Failed to parse message. ID: {}, Data length: {}, Data: {}", msgID, data.capacity(),data);
+			throw new RuntimeException(e);
+		}
+	}
 	public Message parseFrom(int msgID, ByteString data) {
 		Parser<?> parser = parsersMap.get(msgID);
 		if (parser == null) {
