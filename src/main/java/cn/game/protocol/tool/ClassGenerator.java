@@ -100,6 +100,16 @@ public class ClassGenerator {
 		List<Node> childNodes = blockStmt.getChildNodes();
 		for (Node node : childNodes) {
 			String nodeString = node.toString();
+
+			// 注释和实际代码混一起了， 使用正则表达式去除注释
+			StringBuilder sb = new StringBuilder();
+			for (String line : nodeString.split("\\R")) {
+				if (!line.trim().startsWith("//")) {
+					sb.append(line);
+				}
+			}
+			nodeString = sb.toString();
+
 			if (nodeString.contains("putInvoker")) {
 				int lastIndexOf = nodeString.lastIndexOf("PbProtocol.");
 				int indexOf = nodeString.indexOf(",");

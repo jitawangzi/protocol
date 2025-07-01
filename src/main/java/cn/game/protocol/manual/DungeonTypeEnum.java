@@ -29,6 +29,8 @@ public enum DungeonTypeEnum{
 
 	XiangYaoFuMo(22, "降妖伏魔"),
 
+	LingShanWenChan(23, "灵山问禅"),
+
 	/** 突发事件 */
 	BattleEvent(33, "突发事件"),
 	/** 探索战斗 */

@@ -25,11 +25,5 @@ message RankInfo{
 	repeated PlayerRankInfo players = 3;
 }
 
-message PlayerRankInfo{
-	SimplePlayerInfo player = 1;  //玩家基本数据
-	int32 rank = 2; //排名，-1或0表示没有进入排行榜，没有名次
-	string score = 3; //参与排行的分数，例如等级数、战力值、关卡id等等。
-}
-
 
 

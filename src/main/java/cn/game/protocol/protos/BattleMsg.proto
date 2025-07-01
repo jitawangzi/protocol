@@ -3,6 +3,11 @@ option java_package = "cn.game.protocol.protobuf";
 package Protos;
 import "RewardMsg.proto" ;
 import "BaseMsg.proto";
+
+
+//@HandlerPackage cn.game.games.net.game.module.battle
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@MessageModule 13
 // 章节关卡协议
 // 开始关卡战斗请求
 message BattleFieldStartRequest_13000001{
@@ -543,6 +548,56 @@ message BattleXiangYaoChuMoResponse_13000502
 {
 	int32 sweepTimes = 1;  // 每日扫荡了几次
 	int32 lastCompleteBattleId = 2;  // 已经通关的最高id  Battle表id
+}
+
+
+// ****************************************灵山问禅********************************************
+
+// 请求灵山问禅数据
+message BattleLingShanRequest_13000511
+{
+}
+
+// 返回灵山问禅数据
+message BattleLingShanResponse_13000512
+{
+	int32 battleTimes = 1;  // 每日挑战+扫荡次数
+	int32 lastCompleteBattleId = 2;  // 最后通关的最高id  Battle表id
+	int32 payTimes = 3;		// 付费购买的次数
+	repeated int32 rewardBattleIds = 4; // 领取过层数宝箱奖励的索引，从0开始
+
+	repeated PlayerRankInfo rankPlayers = 5; // 前3名玩家数据
+}
+
+// 请求购买灵山问禅次数
+message BattleLingShanBuyTimesRequest_13000513
+{
+}
+
+message BattleLingShanBuyTimesResponse_13000514
+{
+}
+
+// 领取灵山问禅层数宝箱奖励
+message BattleLingShanRewardRequest_13000515
+{
+	int32 index = 1; // 层数宝箱奖励的索引，从0开始
+}
+
+message BattleLingShanRewardResponse_13000516
+{
+	repeated RewardInfo rewards = 1; // 获得的奖励
+}
+
+// 领取灵山问禅层数宝箱奖励
+message BattleLingShanReward2Request_13000517
+{
+	int32 index = 1; // 层数宝箱奖励的索引，从0开始
+}
+
+message BattleLingShanReward2Response_13000518
+{
+	repeated RewardInfo rewards = 1; // 获得的奖励
 }
 
 
