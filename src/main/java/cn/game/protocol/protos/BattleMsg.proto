@@ -589,19 +589,6 @@ message BattleLingShanRewardResponse_13000516
 	repeated RewardInfo rewards = 1; // 获得的奖励
 }
 
-// 领取灵山问禅层数宝箱奖励
-message BattleLingShanReward2Request_13000517
-{
-	int32 index = 1; // 层数宝箱奖励的索引，从0开始
-}
-
-message BattleLingShanReward2Response_13000518
-{
-	repeated RewardInfo rewards = 1; // 获得的奖励
-}
-
-
-
 
 
 //@NotUseStart
