@@ -25,6 +25,7 @@ message RewardInfo{
     PetInfo pet = 25;		// 宠物
     SecretscriptInfo secretscript = 26;		// 神通
     int32 headPortrait = 30;		// 头像
+    int32 figure = 32;		// 形象
 }
 
 //奖励推送,客户端收到这个协议之后，将奖励增加到本地。

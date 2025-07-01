@@ -33,6 +33,9 @@ public enum GoodsTypeEnum{
 	/** 头像*/
 	HeadPortrait(13, "头像"),
 
+	/** 形象 */
+	Figure(14, "形象"),
+
 	Secretscript(35, "神通"),
 	/** 暂时没用到 */
 	Sword(36, "武器"),

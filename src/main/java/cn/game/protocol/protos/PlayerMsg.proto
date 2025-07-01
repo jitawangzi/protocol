@@ -92,6 +92,16 @@ message PlayerImageResponse_0100001a{
 }
 
 
+/*** 修改形象 **/
+message PlayerFigureRequest_01000021{
+    int32 id = 1;  // PlayerFigure表id
+}
+/*** 修改形象返回 **/
+message PlayerFigureResponse_01000022{
+}
+
+
+
 /*** 断线重连，和手机端通用 **/
 message PlayerReconnecRequest_01000065{
     string sessionId = 1;//登陆服产生的会话id
@@ -421,6 +431,8 @@ message PlayerAllInfo{
 	repeated int32 heroSkinIds = 82;	// 拥有的英雄皮肤，HeroSkin表id
 	repeated int32 headPortraits = 84;	// 玩家的获取的头像（通过奖励获取的，靠获取英雄解锁的不算）
 	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id
+    map<int32, int32> figureMap = 88;		// 玩家拥有的形象，key：PlayerFigure表id value： 还剩多少秒过期，0表示不过期
+    int32 figure = 89;		// 当前使用的形象，PlayerFigure表id
 
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
