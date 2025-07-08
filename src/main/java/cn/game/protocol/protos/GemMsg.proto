@@ -3,6 +3,10 @@ option java_package = "cn.game.protocol.protobuf";
 package Protos;
 import "BaseMsg.proto" ;
 
+//@HandlerPackage cn.game.games.net.game.module.develop.gem
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@MessageModule 10
+
 // 宝石协议
 //宝石镶嵌/替换
 message GemWearRequest_10000001 {
@@ -25,7 +29,7 @@ message GemTeardownResponse_10000004 {
 
 //宝石锁定
 message GemLockRequest_10000005 {
-  string uid = 1; //唯一id
+  repeated  string uid = 1; //唯一id
   bool lock = 2;   // true 锁定,false  解锁
 }
 

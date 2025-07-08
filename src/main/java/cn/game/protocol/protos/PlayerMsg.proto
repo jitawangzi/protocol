@@ -375,7 +375,7 @@ message PlayerAllInfo{
    string heroSwordUid  = 9;        //当前穿戴的英雄武器唯一id
    repeated GemInfo gems = 10;        //宝石
    repeated EquipInfo equips = 11;        //拥有的装备
-   repeated EquipPartInfo equipParts = 12;        //装备部位，1-头盔2-披风3-衣服4-项链5-戒指6-靴子，对应HeroEquip的ItemType。
+   repeated EquipPartInfo equipParts = 12;        //装备部位，1-头盔2-披风3-衣服4-项链5-戒指6-靴子，对应Equip的pos。
    map<uint32, uint32> alchemys = 14;        //炼金 key:Alchemy表id value：炼金等级。
    map<uint32, uint32> dragons = 16;    	//龙。 key:Dragon表id。value：龙的星级
    map<uint32, uint32> dragonSkills = 17;   //龙技能。 key:DragonSkill表id。value：技能等级

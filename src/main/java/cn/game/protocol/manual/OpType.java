@@ -106,6 +106,8 @@ public enum OpType{
 	XiangYaoChuMo(173, "降妖除魔"),
 
 	LingShanWenChan(175, "灵山问禅"),
+	LingShanBuyTimes(176, "灵山问禅购买次数"),
+	LingShanWenChanFloorReward(177, "灵山问禅层奖励"),
 
 	FairyFriend(180, "仙友"),
 	SoulPet(181, "灵宠"),

@@ -59,17 +59,17 @@ message MergeEquipmentInfo{
   uint32 id  = 1; //Equip配置表id
   uint32 level = 2;  // 等级
 }
-//英雄装备
+//装备
 message EquipInfo{
   string uid	   = 1; //唯一id
-  uint32 configId  = 2; //HeroEquip配置表id
+  uint32 configId  = 2; //Equip配置表id
   map<uint32, uint32> attrs = 6; //装备附加属性条目
 }
-//装备部位，1-头盔2-披风3-衣服4-项链5-戒指6-靴子，对应HeroEquip的ItemType。
+//装备部位，1-头盔2-披风3-衣服4-项链5-戒指6-靴子，对应Equip的pos。
 message EquipPartInfo{
   uint32 type  = 1; //部位类型，1-6
   uint32 strength = 2; //强化等级
-  uint32 breakthrough = 3; //突破等级
+//  uint32 breakthrough = 3; //突破等级
   string equipUid	 = 4; //这个装备部位上安装的装备唯一id
   repeated string gemUids	 = 5; //这个装备部位上安装的宝石唯一id
 }
@@ -103,7 +103,7 @@ message AttrGrowInfo{
 message GemInfo{
   string uid	   = 1; //唯一id
   uint32 configId  = 2; //Gem配置表id
-  map<uint32, uint32> attrs = 3; //宝石附加属性条目
+  map<uint32, uint32> attrs = 3; //宝石附加属性条目---目前宝石只有一条附加属性
   bool isLock = 4;  // 锁定状态，true：锁定了。
 }
 

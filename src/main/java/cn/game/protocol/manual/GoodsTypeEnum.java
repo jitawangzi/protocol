@@ -36,6 +36,8 @@ public enum GoodsTypeEnum{
 	/** 形象 */
 	Figure(14, "形象"),
 
+	Gem(15, "宝石"),
+
 	Secretscript(35, "神通"),
 	/** 暂时没用到 */
 	Sword(36, "武器"),
@@ -46,7 +48,6 @@ public enum GoodsTypeEnum{
 	Merge_Equip(51, "合并装备"),
 	/** 皮肤 */
 	Skin(88, "皮肤"),
-	Gem(80, "宝石"),
 	GemMMM(81, "宝石"),
     ;
 	/** id */
