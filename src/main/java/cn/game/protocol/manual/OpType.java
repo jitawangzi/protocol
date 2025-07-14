@@ -172,6 +172,9 @@ public enum OpType{
 	DrawHeroRefresh(270, "招募刷新英雄"),
 	DrawHero(271, "招募英雄"),
 
+	EquipDecompose(280, "装备分解"),
+	EquipPartStrength(281, "装备部位强化"),
+
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 

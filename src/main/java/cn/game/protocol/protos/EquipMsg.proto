@@ -2,6 +2,8 @@ syntax = "proto3";
 option java_package = "cn.game.protocol.protobuf";
 package Protos;
 import "BaseMsg.proto" ;
+import "RewardMsg.proto" ;
+
 
 //@HandlerPackage cn.game.games.net.game.module.develop.equip
 //@ClientHandlerPackage cn.game.simulation.client.handler
@@ -32,17 +34,16 @@ message EquipDecomposeRequest_09000005 {
 }
 
 message EquipDecomposeResponse_09000006 {
-
+	repeated RewardInfo reward  = 1; // 获取的东西
 }
 
 
 //装备部位强化
 message EquipPartStrengthRequest_09000007 {
-	 int32 type = 1; //装备部位类型： 1-6，0表示一键强化。
+	 int32 type = 1; //装备部位类型： 1-6
 }
 
 message EquipPartStrengthResponse_09000008 {
-	repeated EquipPartInfo parts = 1; // 更新装备部位
 }
 
 
