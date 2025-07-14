@@ -2,6 +2,7 @@ syntax = "proto3";
 option java_package = "cn.game.protocol.protobuf";
 package Protos;
 import "BaseMsg.proto" ;
+import "RewardMsg.proto" ;
 
 //@HandlerPackage cn.game.games.net.game.module.develop.gem
 //@ClientHandlerPackage cn.game.simulation.client.handler
@@ -44,5 +45,6 @@ message GemComposeRequest_10000007 {
 }
 
 message GemComposeResponse_10000008 {
-  repeated GemInfo gems = 1;// 合成的新的宝石
+	// 生成的新的宝石,客户端自己删除掉参与合成的宝石
+	repeated RewardInfo rewards = 1;
 }

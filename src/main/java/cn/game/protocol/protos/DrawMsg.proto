@@ -89,9 +89,7 @@ message DrawHeroRefreshRequest_37000013{
 
 // 新神将招募刷新返回
 message DrawHeroRefreshResponse_37000014{
-	repeated int32 itemId = 1;		// 英雄碎片id
-	repeated int32 itemCount = 2;	// 英雄碎片id对应的数量
-	int32 freeRefreshRemaningSeconds = 4;  // 还剩多少秒自动刷新
+	DrawHeroInfo drawHeroInfo = 1;
 }
 
 // 新神将招募

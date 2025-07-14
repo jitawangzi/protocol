@@ -89,10 +89,6 @@ public enum ErrorMsgEnum {
 	buy_over_limit(108, "购买超上限"),
 	/** 玩家名字不合法  */
 	player_name_illegal(109, "玩家名字不合法"),
-	/** 不能出售 */
-	not_sale(114, "不能出售"),
-	/** 不能使用 */
-	not_use(115, "不能使用"),
 
 	/** 名字不合法 */
 	not_name(118, "名字不合法"),
@@ -108,10 +104,6 @@ public enum ErrorMsgEnum {
 	black_friend_not_send(131, "不能跟已经被拉黑的好友说话"),
 	/** 初始化异常 */
 	init_error(135, "初始化异常"),
-	/** 前置剧情没有完成 */
-	story_pre_not_finish(145, "前置剧情没有完成"),
-	/** 该名称已存在 */
-	name_exist(166, "该名称已存在"),
 	/** 服务器没有处理对应的红点类型 */
 	red_point_not_support(170, "服务器没有处理对应的红点类型"),
 
