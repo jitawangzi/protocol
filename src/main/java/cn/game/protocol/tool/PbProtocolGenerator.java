@@ -560,7 +560,7 @@ public class PbProtocolGenerator {
 			String handlerPath = workspace + "/game/src/main/java/" + handlerPackage.replace(".", "/") + "/" + module + "Handler.java";
 			File file = new File(handlerPath);
 			if (!file.exists()) {
-				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, module + "Handler", "0x" + messageModule);
+				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, module + "Handler", "0x" + messageModule, function);
 			}
 			ClassGenerator.updateHandlerJavaFile(handlerPath, module + "Handler", module, messages, function);
 		}
@@ -593,7 +593,7 @@ public class PbProtocolGenerator {
 					+ moduleClassName + ".java";
 			File file = new File(handlerPath);
 			if (!file.exists()) {
-				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, moduleClassName, "0x" + messageModule);
+				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, moduleClassName, "0x" + messageModule, function);
 			}
 			if (isServer) {
 				ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);

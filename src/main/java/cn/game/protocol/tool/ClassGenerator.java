@@ -11,18 +11,10 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.FieldAccessExpr;
 import com.github.javaparser.ast.expr.LambdaExpr;
-import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.IfStmt;
-import com.github.javaparser.ast.stmt.ReturnStmt;
 import com.github.javaparser.printer.lexicalpreservation.LexicalPreservingPrinter;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -45,7 +37,8 @@ public class ClassGenerator {
 	 * @param moduleCode  模块号， msg中定义 //@MessageModule 19
 	 * @throws IOException
 	 */
-	public static void createHandlerJavaFile(String handlerPath, String pkg, String className, String moduleCode) throws IOException {
+	public static void createHandlerJavaFile(String handlerPath, String pkg, String className, String moduleCode, String function)
+			throws IOException {
 		// 首先设置语言级别
 		StaticJavaParser.getConfiguration().setLanguageLevel(LanguageLevel.JAVA_17);
 		CompilationUnit cu = new CompilationUnit();
@@ -62,6 +55,15 @@ public class ClassGenerator {
 		methodGetModule.addMarkerAnnotation("Override");
 		methodGetModule.setType(com.github.javaparser.ast.type.PrimitiveType.intType());
 		methodGetModule.setBody(StaticJavaParser.parseBlock(String.format("{ return %s; }", moduleCode)));
+		// 添加功能模块
+		if (function != null) {
+			MethodDeclaration methodFunctionModule = classDeclaration.addMethod("getInitialUI", Modifier.Keyword.PROTECTED);
+			methodFunctionModule.addMarkerAnnotation("Override");
+			methodFunctionModule.setType(new com.github.javaparser.ast.type.ClassOrInterfaceType("InitialUI"));
+			methodFunctionModule.setBody(StaticJavaParser.parseBlock(String.format("{ return InitialUI.%s; }", function)));
+
+			cu.addImport("cn.game.protocol.generated.enume.InitialUI");
+		}
 		// 添加inititialize方法
 		MethodDeclaration methodInititialize = classDeclaration.addMethod("inititialize", Modifier.Keyword.PROTECTED);
 		methodInititialize.addMarkerAnnotation("Override");
@@ -171,32 +173,26 @@ public class ClassGenerator {
 				respInsatnce = "defaultInstance";
 			}
 			blockStmtMessage.addStatement("Player player = PlayerManager.getInstance().getPlayer(client.getPlayerId());");
-//			if (function != null) {
-//				blockStmt2
-//						.addStatement("if (!player.isFuncOpen(InitialUI." + function + ")) {")
-//						.addStatement("client.sendProtocol(resp.build(), ErrorMsgEnum.func_not_open.getId());")
-//						.addStatement("return;")
-//						.addStatement("}");
-//			}
-			if (function != null) {
-				// 生成功能开启检查代码
-				// 创建 if 条件
-				Expression condition = new MethodCallExpr(new NameExpr("player"), "isFuncOpen",
-						new NodeList<>(new FieldAccessExpr(new NameExpr("InitialUI"), function)));
 
-				// 创建 if 语句体
-				BlockStmt ifBody = new BlockStmt()
-						.addStatement(new MethodCallExpr(new NameExpr("client"), "sendProtocol",
-								new NodeList<>(new NameExpr("defaultInstance"),
-										new MethodCallExpr(new FieldAccessExpr(new NameExpr("ErrorMsgEnum"), "func_not_open"), "getId"))))
-						.addStatement(new ReturnStmt());
-
-				// 创建完整的 if 语句
-				IfStmt ifStmt = new IfStmt(new UnaryExpr(condition, UnaryExpr.Operator.LOGICAL_COMPLEMENT), ifBody, null);
-				// 将 if 语句添加到主语句块
-				blockStmtMessage.addStatement(ifStmt);
-			}
+			/*			if (function != null) {
+							// 生成功能开启检查代码
+							// 创建 if 条件
+							Expression condition = new MethodCallExpr(new NameExpr("player"), "isFuncOpen",
+									new NodeList<>(new FieldAccessExpr(new NameExpr("InitialUI"), function)));
 			
+							// 创建 if 语句体
+							BlockStmt ifBody = new BlockStmt()
+									.addStatement(new MethodCallExpr(new NameExpr("client"), "sendProtocol",
+											new NodeList<>(new NameExpr("defaultInstance"),
+													new MethodCallExpr(new FieldAccessExpr(new NameExpr("ErrorMsgEnum"), "func_not_open"), "getId"))))
+									.addStatement(new ReturnStmt());
+			
+							// 创建完整的 if 语句
+							IfStmt ifStmt = new IfStmt(new UnaryExpr(condition, UnaryExpr.Operator.LOGICAL_COMPLEMENT), ifBody, null);
+							// 将 if 语句添加到主语句块
+							blockStmtMessage.addStatement(ifStmt);
+						}
+						*/
 			// 逻辑代码。。。
 
 			if (!respDescriptor.getFields().isEmpty()) {
