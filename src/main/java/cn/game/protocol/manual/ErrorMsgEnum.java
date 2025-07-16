@@ -165,6 +165,7 @@ public enum ErrorMsgEnum {
 	zong_men_active_reward_already_get(422, "宗门活跃度奖励已经领取过了"),
 	zong_men_not_allow_join(423, "宗门不让加入"),
 	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
+	zong_men_create_failed(428, "宗门创建失败"),
 
 	draw_refresh_gold(450, "抽卡刷新时，元宝消耗校验错误"),
 

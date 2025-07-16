@@ -4,7 +4,6 @@ option java_package = "cn.game.protocol.protobuf";
 package Protos;
 //import "RewardMsg.proto" ;
 //@File 宠物相关协议
-
 //@HandlerPackage cn.game.games.net.game.module.develop.pet
 //@ClientHandlerPackage cn.game.simulation.client.handler
 //@Function SoulPets

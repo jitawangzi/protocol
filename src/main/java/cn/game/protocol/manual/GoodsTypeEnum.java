@@ -35,6 +35,8 @@ public enum GoodsTypeEnum{
 
 	/** 形象 */
 	Figure(14, "形象"),
+	/** 防线皮肤 */
+	DefenceSkin(18, "防线皮肤"),
 
 	Gem(15, "宝石"),
 

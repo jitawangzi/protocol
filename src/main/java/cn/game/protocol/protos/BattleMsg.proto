@@ -4,7 +4,6 @@ package Protos;
 import "RewardMsg.proto" ;
 import "BaseMsg.proto";
 
-
 //@HandlerPackage cn.game.games.net.game.module.battle
 //@ClientHandlerPackage cn.game.simulation.client.handler
 //@MessageModule 13
