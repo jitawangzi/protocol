@@ -1,0 +1,55 @@
+syntax = "proto3";
+package cn.game.protocol.protobuf;
+//option optimize_for = LITE_RUNTIME;
+
+import "BaseMsg.proto" ;
+
+// @的功能似乎不用单独做，可以写到消息内容里？
+
+/*** 请求聊天 ****/
+message ChatRequest_31000001{
+	ChatType chatType = 1;// 消息类型
+	string content = 2;   // 消息内容
+	repeated string atPlayerIds = 3;   // @的玩家
+	string targetPlayerId = 4;   // 私聊时候的目标玩家id
+}
+
+/*** 请求聊天返回 * ***/
+message ChatResponse_31000002{
+}
+
+
+// 聊天消息推送
+message ChatMessagePush_31010001 {
+    repeated ChatMessageInfo messageInfo = 1;
+}
+
+
+enum ChatType {
+  WORLD_CHAT = 0;//世界聊天，同服聊天
+  UNINON_CHAT = 1;//公会聊天
+  SYSTEM_CHAT = 2;//系统公告
+  PRIVATE_CHAT = 4;//私聊，同服聊天
+  MARQUEE = 6;//跑马灯
+	UNINON_OPT_LOG =7;//工会日志
+}
+
+message ChatMessageInfo{
+	ChatType chatType = 1;// 消息类型
+	SimplePlayerInfo sendPlayer = 2; // 消息发送人。
+	string content = 3;   // 消息内容
+	bool atMe = 4;   // 这条消息是否@了我
+	int32 optType = 5;//1  是宗门日志操作
+}
+
+
+// 只服务器使用。
+message ServerChatMessagePush_31000010{
+	ChatType chatType = 1;// 消息类型
+	SimplePlayerInfo sendPlayer = 2; // 消息发送人。
+	string content = 3;   // 消息内容
+	repeated string atPlayerIds = 4;   // @的玩家
+	string serverId = 8;   // 广播给哪个服
+}
+
+

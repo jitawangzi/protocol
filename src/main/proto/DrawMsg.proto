@@ -1,0 +1,106 @@
+syntax = "proto3";
+package cn.game.protocol.protobuf;
+
+import "RewardMsg.proto" ;
+
+//@HandlerPackage cn.game.games.net.game.module.draw
+//@Function PleaseGod
+//@MessageModule 37
+
+// 请求卡池界面数据
+message DrawListRequest_37000001{
+	int32  id = 1;  // Draw表id，代表高级抽卡还是至尊抽卡。
+}
+
+// 响应卡池界面
+message DrawListResponse_37000002{
+	DrawInfo draw = 1;  // 抽卡相关数据
+}
+
+message DrawInfo{
+	// 废弃了：  还有xxx次赠送xxx品质的卡，key:品质,value:次数
+	map<int32,int32> giftRemainingTimes = 1;
+	// 废弃了： 赠送当前品质的卡，需要的次数。 key:品质,value:次数
+	map<int32,int32> giftMaxTimes = 3;
+	int32 nextFreeTime = 2;  // 距离下次免费单抽的时间(秒)
+
+	int32  wishHeroId = 5;  // 选择的心愿英雄id
+	int32  wishHeroTimes = 6;  // 还剩几次红卡次数必出心愿英雄，最小是1
+	int32  freeDrawCount = 7;  // 今天免费抽了几次
+}
+
+
+// 请求抽卡
+message DrawRequest_37000003{
+	int32  id = 1;  // Draw表id，代表高级抽卡还是至尊抽卡。
+	bool ten = 2;  // 是否是十连抽
+	bool freeOnce = 3;  // 是否是免费的单抽
+	int32 count = 5;  // 抽卡次数---某些抽卡玩法会用到,如果指定了这个次数，则优先使用这个次数
+}
+
+// 抽卡结果
+message DrawResponse_37000004{
+	repeated RewardInfo rewards	=	1;	// 抽卡获得的英雄,道具等。
+	int32 gold =	2;	// 抽卡获得的金币
+	DrawInfo draw = 3;  // 更新相关数据
+	repeated RewardInfo heros	=	4;	// 额外赠送的英雄，废弃了
+}
+
+
+// 选择心愿红卡
+message DrawHeroWishRequest_37000005{
+	int32  heroId = 1;  // Hero表id
+}
+
+// 选择心愿红卡返回
+message DrawHeroWishResponse_37000006{
+}
+
+// 新的英雄招募
+
+// 	请求英雄招募数据
+message DrawHeroInfoRequest_37000011{
+}
+
+// 英雄招募数据返回
+message DrawHeroInfoResponse_37000012{
+	DrawHeroInfo drawHeroInfo = 1;
+
+}
+message DrawHeroInfo{
+
+	repeated int32 itemId = 1;		// 英雄碎片id
+	repeated int32 itemCount = 2;	// 英雄碎片id对应的数量
+	repeated int32	recruitedPos = 3;  // 已经招募过的英雄碎片位置，从0开始
+	int32 freeRefreshRemaningSeconds = 4;  // 还剩多少秒自动刷新
+	bool canMultiple = 5; 			// 是否可以开启多倍招募
+	int32 multiple = 6;   			// 招募时选择的倍数
+	int32 luckyValue = 8;   			// 当前保底幸运值
+	int32 luckyValueMax = 9;   			// 最大保底幸运值
+	int32 luckyValueQuality = 10;   	// 当前保底品质--幸运值颜色
+
+}
+
+// 新神将招募刷新，花费元宝
+message DrawHeroRefreshRequest_37000013{
+	//客户端计算出来的元宝消耗数量，如果和服务器计算出来的数量不等并且服务器端数量大，则返回错误
+	int32 gold = 1;
+}
+
+// 新神将招募刷新返回
+message DrawHeroRefreshResponse_37000014{
+	DrawHeroInfo drawHeroInfo = 1;
+}
+
+// 新神将招募
+message DrawHeroRecruitRequest_37000015{
+	int32 multiple = 1;   			// 倍数设置，只有在普通招募阶段才能设置
+	int32 pos = 2;     			// 招募的神将位置，从0开始
+}
+
+// 新神将招募返回
+message DrawHeroRecruitResponse_37000016{
+	repeated RewardInfo items	=	1;	// 获得的英雄碎片
+	DrawHeroInfo drawHeroInfo = 2;		// 刷新所有数据
+}
+

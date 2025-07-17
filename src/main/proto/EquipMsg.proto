@@ -1,0 +1,50 @@
+syntax = "proto3";
+package cn.game.protocol.protobuf;
+
+import "BaseMsg.proto" ;
+import "RewardMsg.proto" ;
+
+
+//@HandlerPackage cn.game.games.net.game.module.develop.equip
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@MessageModule 09
+
+// 装备、装备部位协议
+//装备 穿戴/替换
+message EquipWearRequest_09000001 {
+  string uid = 1; //唯一id
+}
+
+message EquipWearResponse_09000002 {
+
+}
+
+//装备卸下
+message EquipTeardownRequest_09000003 {
+  string uid = 1; //唯一id
+}
+
+message EquipTeardownResponse_09000004 {
+
+}
+
+//装备分解
+message EquipDecomposeRequest_09000005 {
+  repeated string uid = 1; //唯一id
+}
+
+message EquipDecomposeResponse_09000006 {
+	repeated RewardInfo reward  = 1; // 获取的东西
+}
+
+
+//装备部位强化
+message EquipPartStrengthRequest_09000007 {
+	 int32 type = 1; //装备部位类型： 1-6
+}
+
+message EquipPartStrengthResponse_09000008 {
+}
+
+
+

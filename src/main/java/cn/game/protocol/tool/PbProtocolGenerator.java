@@ -52,13 +52,14 @@ public class PbProtocolGenerator {
 	private static Set<String> notGenRequestMessages = new HashSet<String>();
 	private static String notParseRequestPrefix;
 
-	public static void readProtos(String protoPath, String inputTemplate, String outputFile, String chareset) throws Exception {
+	public static void readProtos(String protoPath, String inputTemplate, String outputFile, String chareset)
+			throws Exception {
 
 		// 生成XXXHandler类的参数
 		Map<String, HandlerParam> handlerMap = new HashMap<String, HandlerParam>();
 		Multimap<String, String> classNameRequestMessageMap = ArrayListMultimap.create();
 		Multimap<String, String> classNameResponseMessageMap = ArrayListMultimap.create();
-		
+
 		List<String> outClass = new ArrayList<>();
 		List<MessageObject> messages = new ArrayList<>();
 		List<String> packages = new ArrayList<>();
@@ -95,7 +96,7 @@ public class PbProtocolGenerator {
 				String clientStr = str.trim();
 				// 把所有的message，单独生成到一个文件里
 				if (clientStr.length() > 0 && !clientStr.startsWith("syntax") && !clientStr.startsWith("option")
-//						&& !clientStr.startsWith("//") 
+				//						&& !clientStr.startsWith("//") 
 						&& !clientStr.startsWith("package") && !clientStr.startsWith("import")) {
 					clientProtoLines.add(clientStr);
 				}
@@ -103,10 +104,12 @@ public class PbProtocolGenerator {
 					notUesd = false;
 				}
 				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@handlerpackage")) {
-					handlerMap.computeIfAbsent(out, k -> new HandlerParam()).setHandlerPackage(str.split(" ")[1].trim());
+					handlerMap.computeIfAbsent(out, k -> new HandlerParam())
+							.setHandlerPackage(str.split(" ")[1].trim());
 				}
 				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@clienthandlerpackage")) {
-					handlerMap.computeIfAbsent(out, k -> new HandlerParam()).setClientHandlerPackage(str.split(" ")[1].trim());
+					handlerMap.computeIfAbsent(out, k -> new HandlerParam())
+							.setClientHandlerPackage(str.split(" ")[1].trim());
 				}
 				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@function")) {
 					handlerMap.computeIfAbsent(out, k -> new HandlerParam()).setFunction(str.split(" ")[1].trim());
@@ -119,10 +122,16 @@ public class PbProtocolGenerator {
 				// System.out.println(str);
 				if (str.trim().startsWith("//") && str.trim().toLowerCase().contains("@notusestart")) {
 					notUesd = true;
-//					continue;
-				} else if (str.indexOf("java_package") > -1) {
+					//					continue;
+				} else if (str.indexOf("java_package") > -1) { // 这个应该用不到了
 					int begin = str.indexOf("\"");
 					int end = str.lastIndexOf("\"");
+					String p = str.substring(begin + 1, end).trim();
+					curPackage = p;
+					packages.add(p);
+				} else if (str.indexOf("package") > -1) {
+					int begin = str.lastIndexOf("package") + "package".length();
+					int end = str.lastIndexOf(";");
 					String p = str.substring(begin + 1, end).trim();
 					curPackage = p;
 					packages.add(p);
@@ -196,7 +205,7 @@ public class PbProtocolGenerator {
 		for (MessageObject messageObject : messages) {
 
 			String id = messageObject.getId();
-//			System.err.println(id);
+			//			System.err.println(id);
 			id = id.replace("0x", "");
 			Integer idInt = Integer.valueOf(id, 16);
 			messageObject.setId(idInt.toString());
@@ -208,8 +217,8 @@ public class PbProtocolGenerator {
 
 		messages = readMessageObject(protoPath);
 		// 这个项目暂时不用这个
-//		generateClient(messages, "protos.d.ts.vm", jsPath + File.separator + "protos.d.ts", chareset);
-//		generateClient(messages, "ProtosEnum.ts.vm", jsPath + File.separator + "ProtosEnum.ts", chareset);
+		//		generateClient(messages, "protos.d.ts.vm", jsPath + File.separator + "protos.d.ts", chareset);
+		//		generateClient(messages, "ProtosEnum.ts.vm", jsPath + File.separator + "ProtosEnum.ts", chareset);
 
 		// 所有proto，生成到一个文件里给客户端使用
 		mergeAllProto4Client(clientProtoLines, jsPath);
@@ -266,7 +275,8 @@ public class PbProtocolGenerator {
 		String[] headers = new String[] { "序号", "协议名", "协议号", "模块", "功能组", "组顺序", "权重", "描述" };
 		String filePath = System.getProperty("user.dir") + "/../simulationclient/messages.csv";
 		Set<String> protoNameSet = new HashSet<String>();
-		List<List<String>> oldDataList = new ArrayList<>();;
+		List<List<String>> oldDataList = new ArrayList<>();
+		;
 		if (new File(filePath).exists()) {
 			oldDataList = CSVUtil.read(filePath, headers);
 			for (List<String> list : oldDataList) {
@@ -431,8 +441,8 @@ public class PbProtocolGenerator {
 
 	}
 
-	public static void generate(List<MessageObject> messages, List<String> outClass, List<String> packages, Set<String> prefixs, String inputTemplate,
-			String outputFile, String chareset) throws Exception {
+	public static void generate(List<MessageObject> messages, List<String> outClass, List<String> packages,
+			Set<String> prefixs, String inputTemplate, String outputFile, String chareset) throws Exception {
 
 		VelocityContext context = new VelocityContext();
 		context.put("messages", messages);
@@ -467,7 +477,8 @@ public class PbProtocolGenerator {
 		writer.close();
 	}
 
-	public static void generateClient(List<MessageObject> messages, String inputTemplate, String outputFile, String chareset) throws Exception {
+	public static void generateClient(List<MessageObject> messages, String inputTemplate, String outputFile,
+			String chareset) throws Exception {
 
 		VelocityContext context = new VelocityContext();
 		Template template = null;
@@ -545,8 +556,8 @@ public class PbProtocolGenerator {
 	}
 
 	@Deprecated
-	private static void updateHandlerOld(Map<String, HandlerParam> handlerMap, Multimap<String, String> classNameRequestMessageMap)
-			throws Exception {
+	private static void updateHandlerOld(Map<String, HandlerParam> handlerMap,
+			Multimap<String, String> classNameRequestMessageMap) throws Exception {
 		Set<Entry<String, HandlerParam>> entrySet = handlerMap.entrySet();
 		for (Entry<String, HandlerParam> entry : entrySet) {
 			String k = entry.getKey();
@@ -557,18 +568,19 @@ public class PbProtocolGenerator {
 			String className = k;
 			List<String> messages = (List<String>) classNameRequestMessageMap.get(className);
 			String module = className.replace("Msg", "");
-			String handlerPath = workspace + "/game/src/main/java/" + handlerPackage.replace(".", "/") + "/" + module + "Handler.java";
+			String handlerPath = workspace + "/game/src/main/java/" + handlerPackage.replace(".", "/") + "/" + module
+					+ "Handler.java";
 			File file = new File(handlerPath);
 			if (!file.exists()) {
-				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, module + "Handler", "0x" + messageModule, function);
+				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, module + "Handler",
+						"0x" + messageModule, function);
 			}
 			ClassGenerator.updateHandlerJavaFile(handlerPath, module + "Handler", module, messages, function);
 		}
 	}
 
-	private static void updateHandler(Map<String, HandlerParam> handlerMap, Multimap<String, String> classNameMessageMap,
-			boolean isServer)
-			throws Exception {
+	private static void updateHandler(Map<String, HandlerParam> handlerMap,
+			Multimap<String, String> classNameMessageMap, boolean isServer) throws Exception {
 		Set<Entry<String, HandlerParam>> entrySet = handlerMap.entrySet();
 		for (Entry<String, HandlerParam> entry : entrySet) {
 			String k = entry.getKey();
@@ -589,18 +601,19 @@ public class PbProtocolGenerator {
 			String projectDir = isServer ? "game" : "simulationclient";
 			String moduleClassName = (isServer ? "" : "Client") + module + "Handler";
 			String handlerPackage = isServer ? serverHandlerPackage : clientHandlerPackage;
-			String handlerPath = workspace + "/" + projectDir + "/src/main/java/" + handlerPackage.replace(".", "/") + "/"
-					+ moduleClassName + ".java";
+			String handlerPath = workspace + "/" + projectDir + "/src/main/java/" + handlerPackage.replace(".", "/")
+					+ "/" + moduleClassName + ".java";
 			File file = new File(handlerPath);
 			if (!file.exists()) {
-				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, moduleClassName, "0x" + messageModule, function);
+				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, moduleClassName, "0x" + messageModule,
+						function);
 			}
 			if (isServer) {
 				ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
 			} else {
 				ClassGenerator.updateClientHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
 			}
-//			ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
+			//			ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
 		}
 	}
 
@@ -616,14 +629,15 @@ public class PbProtocolGenerator {
 			throw new IllegalArgumentException("需要设置 metafolder");
 		}
 		initialProp = new Properties();
-		InputStream inpurtStream = PbProtocolGenerator.class.getClassLoader().getResourceAsStream("proto_gen.properties");
+		InputStream inpurtStream = PbProtocolGenerator.class.getClassLoader()
+				.getResourceAsStream("proto_gen.properties");
 		initialProp.load(inpurtStream);
 
 		velocityProp = new Properties();
 		inpurtStream = PbProtocolGenerator.class.getClassLoader().getResourceAsStream("velocity.properties");
-//			inpurtStream.
+		//			inpurtStream.
 		velocityProp.load(inpurtStream);
-//			velocityEngine.init("./config/velocity.properties");
+		//			velocityEngine.init("./config/velocity.properties");
 		velocityEngine.init(velocityProp);
 
 		String inputTemplate = "protocol_pb_impl.vm";
@@ -646,12 +660,12 @@ public class PbProtocolGenerator {
 		}
 		notParseRequestPrefix = initialProp.getProperty("not.parse.request.prefix");
 
-//		List<MessageObject> messages = readMessageObject(protoPath, inputTemplate, output + "/PbProtocol.java", charset);
-//		
-//		String jsPath = initialProp.getProperty("client.js.dir");
-//
-//		generateClient(messages, "protos.d.ts.vm", jsPath + File.separator + "protos.d.ts", "utf-8");
-//		generateClient(messages, "ProtosEnum.ts.vm", jsPath + File.separator + "ProtosEnum.ts", "utf-8");
+		//		List<MessageObject> messages = readMessageObject(protoPath, inputTemplate, output + "/PbProtocol.java", charset);
+		//		
+		//		String jsPath = initialProp.getProperty("client.js.dir");
+		//
+		//		generateClient(messages, "protos.d.ts.vm", jsPath + File.separator + "protos.d.ts", "utf-8");
+		//		generateClient(messages, "ProtosEnum.ts.vm", jsPath + File.separator + "ProtosEnum.ts", "utf-8");
 
 		if (protoToJava) {
 			Proto2Java.main(new String[] { protoPath, javaSrc });
@@ -661,14 +675,13 @@ public class PbProtocolGenerator {
 
 		System.out.println("PbProtocol.java gen complete !");
 
-
-
 		// 手写枚举，生成excel，给客户端用。
 		EnumToExcel.main(args);
 	}
 
 	public static boolean isNotRequestMessage(MessageObject message) {
-		return !message.isRequest() || (notParseRequestPrefix != null && message.getShortName().startsWith(notParseRequestPrefix))
+		return !message.isRequest()
+				|| (notParseRequestPrefix != null && message.getShortName().startsWith(notParseRequestPrefix))
 				|| notGenRequestMessages.contains(message.getShortName());
 	}
 }
