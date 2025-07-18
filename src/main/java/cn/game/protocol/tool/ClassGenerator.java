@@ -45,10 +45,10 @@ public class ClassGenerator {
 		cu.setPackageDeclaration(pkg);
 
 		cu.addImport("org.springframework.stereotype.Component");
-		cu.addImport("cn.game.core.net.socket.handler.BaseHandler");
+		cu.addImport("cn.game.games.net.game.handler.GameBaseHandler");
 
 		ClassOrInterfaceDeclaration classDeclaration = cu.addClass(className, Modifier.Keyword.PUBLIC);
-		classDeclaration.addExtendedType("BaseHandler");
+		classDeclaration.addExtendedType("GameBaseHandler");
 		classDeclaration.addMarkerAnnotation("Component");
 		// 添加getModule方法
 		MethodDeclaration methodGetModule = classDeclaration.addMethod("getModule", Modifier.Keyword.PROTECTED);
