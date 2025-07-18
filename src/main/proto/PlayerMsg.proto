@@ -398,7 +398,7 @@ message PlayerAllInfo{
    int32 shareReliveCount = 34 ;     // 每天分享复活次数。
    int32 adReliveCount = 35 ;     // 每天看广告复活次数。
    repeated DefenceSkinInfo defenceSkins = 36;	// 已经拥有的防线皮肤
-   int32 defenceSkinUsessssss = 37;				// 当前使用的防线皮肤id，DefenceSkin表id
+   string defenceSkinUsed = 37;				// 当前使用的防线皮肤唯一id
 
 
    repeated MonthCardProto monthCards  = 40;        //月卡

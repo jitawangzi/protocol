@@ -174,6 +174,8 @@ public enum OpType{
 
 	EquipDecompose(280, "装备分解"),
 	EquipPartStrength(281, "装备部位强化"),
+	DefenceLevelUp(282, "防线升级"),
+	DefenceSkinStarUp(283, "防线皮肤升星"),
 
 	GemCompose(290, "宝石合成"),
 

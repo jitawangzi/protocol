@@ -6,6 +6,9 @@ import "RewardMsg.proto" ;
 import "BaseMsg.proto" ;
 
 //一些玩家级别的养成
+//@HandlerPackage cn.game.games.net.game.module.develop
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@MessageModule 25
 
 // 潜力修炼，升级
 message DevelopPotentialLvUpRequest_25000001{
@@ -83,6 +86,32 @@ message QianKunMirrorSpiritualRootUnlockRequest_25000024{
 }
 
 message QianKunMirrorSpiritualRootUnlockResponse_25000025{
+}
+
+// 防线升级
+message DefenceLevelUpRequest_25000031{
+}
+
+message DefenceLevelUpResponse_25000032{
+}
+// 防线皮肤升星
+message DefenceSkinStarUpRequest_25000033{
+	string starUpUid = 1; //需要升星的防线皮肤唯一id
+	repeated string ConsumedUids = 2; // 选择消耗的防线皮肤唯一id
+}
+
+// 防线皮肤升星返回
+message DefenceSkinStarUpResponse_25000034{
+  // 客户端自己+1星，扣掉消耗的皮肤
+}
+
+
+// 防线皮肤更换
+message DefenceSkinChangeRequest_25000035{
+  string uid = 1; //选择使用的皮肤唯一id
+}
+
+message DefenceSkinChangeResponse_25000036{
 }
 
 

@@ -1,9 +1,7 @@
 syntax = "proto3";
 package cn.game.protocol.protobuf;
 
-import "BaseMsg.proto" ;
 import "RewardMsg.proto" ;
-
 
 //@HandlerPackage cn.game.games.net.game.module.develop.equip
 //@ClientHandlerPackage cn.game.simulation.client.handler
