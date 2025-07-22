@@ -74,6 +74,14 @@ message EquipPartInfo{
   map<string, int32> gemMap = 6; //这个装备部位上安装的宝石, key: 宝石唯一id，value: 位置，0 - 4
 
 }
+
+//装备、宝石等的展示数据
+message EquipPartShowInfo{
+  uint32 type  = 1; //部位类型，1-6
+  uint32 strength = 2; //强化等级
+  EquipInfo equip  = 4; //这个部位上安装的装备
+  repeated GemInfo gems = 6; //这个装备部位上安装的宝石
+}
 // 英雄时装
 message HeroFashionInfo{
 	string uid = 1;//时装唯一id
@@ -171,6 +179,7 @@ message SimplePlayerInfo{
 	string serverId = 10; // 玩家所在服务器id，暂时用不到
 	string serverName = 11; // 玩家所在服务器名，暂时用不到
 	uint32 tiandaoLevel = 12; // 天道修为等级。
+	uint32 figure = 15; // 玩家的形象， PlayerFigure 表id
 }
 
 // 玩家展示的名片数据
@@ -178,6 +187,7 @@ message PlayerShowInfo{
 	int32 battleId = 1;   // 主线关卡进度  Battle表id
 	string guild = 2; 		// 公会名称
   	repeated HeroInfo heros  = 7;        //当前阵容。
+  	repeated EquipPartShowInfo parts = 8;  // 装备、宝石等数据
 }
 
 message PaymentOrderProto{
