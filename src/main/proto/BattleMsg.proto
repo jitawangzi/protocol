@@ -120,7 +120,7 @@ message HCBattleRewardResponse_13000028{
 }
 
 
-//关卡扫荡
+//关卡扫荡=====这个协议废弃了。
 message BattleSweepRequest_13000024{
    uint32 id = 1; 			// Battle表的id
 }
