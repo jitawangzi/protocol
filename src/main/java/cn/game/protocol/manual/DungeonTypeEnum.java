@@ -28,8 +28,9 @@ public enum DungeonTypeEnum{
 	ShiLuoZhenJing(20, "失落真经"),
 
 	XiangYaoFuMo(22, "降妖伏魔"),
-
-	LingShanWenChan(28, "灵山问禅"),
+	GemTower(23, "龙渊秘藏"),
+	GemTowerBranch(27, "龙渊秘藏分塔"),
+	LingShanWenChan(30, "灵山问禅"),
 
 	/** 突发事件 */
 	BattleEvent(33, "突发事件"),
