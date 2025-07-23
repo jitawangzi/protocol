@@ -562,7 +562,7 @@ message BattleLingShanRequest_13000511
 message BattleLingShanResponse_13000512
 {
 	int32 battleTimes = 1;  // 每日挑战+扫荡次数
-	int32 lastCompleteBattleId = 2;  // 最后通关的最高id  Battle表id
+	int32 lastCompleteFloor = 2;  // 最后通关的最高层数，LingShan 表
 	int32 payTimes = 3;		// 付费购买的次数
 	repeated int32 rewardBattleIds = 4; // 领取过层数宝箱奖励的索引，从0开始
 
