@@ -598,4 +598,23 @@ message BattleSecretscriptInfo{
 	repeated SecretscriptInfo secretscriptList = 2; // 神通信息
 }
 //@NotUseEnd
+//--------------------------------------------------爬塔--龙渊秘藏--------------------------------
+// 塔数据请求
+message BattleTowerDataRequest_13000521{
 
+}
+// 塔数据返回
+message BattleTowerDataResponse_13000522{
+   int32 rewardCount =1;    // 剩余奖励次数   主塔用
+   int32 floorCount =2;     //  剩余爬塔层高   全部共享用
+   int32 radomBuff =3;    // 随机BUFFID
+   map<int32,int32> curFloor =4;       //  当前层数 已完成的最高层
+}
+// 0点塔数据刷新推送
+message BattleTowerDataPush_13100523{
+   int32 rewardCount =1;    // 剩余奖励次数   主塔用
+   int32 floorCount =2;     //  剩余爬塔层高   全部共享用
+   int32 radomBuff =3;    // 随机BUFFID
+   map<int32,int32> curFloor =4;       //  当前层数 已完成的最高层
+}
+//-------------------------------------------爬塔--龙渊秘藏--------------------------------
