@@ -178,6 +178,8 @@ public enum OpType{
 	DefenceSkinStarUp(283, "防线皮肤升星"),
 
 	GemCompose(290, "宝石合成"),
+	GemTowerFirstFinish(138, "龙渊秘藏首通奖励"),
+	GemTowerSweep(139, "龙渊秘藏扫荡奖励"),
 
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;

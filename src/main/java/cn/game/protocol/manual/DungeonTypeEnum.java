@@ -29,7 +29,14 @@ public enum DungeonTypeEnum{
 
 	XiangYaoFuMo(22, "降妖伏魔"),
 	GemTower(23, "龙渊秘藏"),
-	GemTowerBranch(27, "龙渊秘藏分塔"),
+
+	GemTowerIce(24,"龙渊秘藏-冰塔"),
+	/** 龙渊秘藏-雷塔 */
+	GemTowerThunder(25,"龙渊秘藏-雷塔"),
+	/** 龙渊秘藏-火塔 */
+	GemTowerFire(26,"龙渊秘藏-火塔"),
+	/** 龙渊秘藏-毒塔 */
+	GemTowerPoison(27,"龙渊秘藏-毒塔"),
 	LingShanWenChan(30, "灵山问禅"),
 
 	/** 突发事件 */
