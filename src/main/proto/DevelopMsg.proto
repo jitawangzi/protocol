@@ -108,7 +108,7 @@ message DefenceSkinStarUpResponse_25000034{
 
 // 防线皮肤更换
 message DefenceSkinChangeRequest_25000035{
-  string uid = 1; //选择使用的皮肤唯一id
+  string uid = 1; //选择使用的皮肤唯一id,如果不传值，表示卸下皮肤。
 }
 
 message DefenceSkinChangeResponse_25000036{
