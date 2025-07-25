@@ -617,4 +617,15 @@ message BattleTowerDataPush_13100523{
    int32 radomBuff =3;    // 随机BUFFID
    map<int32,int32> curFloor =4;       //  当前层数 已完成的最高层
 }
+// 扫荡
+message BattleTowerQuickEndRequest_13100524{
+   int32 battleId =1;    //  扫荡ID
+   int32 quickCount =2;     //  扫荡次数
+}
+
+// 扫荡响应
+message BattleTowerQuickEndResponse_13100525{
+	repeated RewardInfo rewards = 1;		// 获得的奖励
+	int32 rewardCount =2;    // 剩余奖励次数   主塔用
+}
 //-------------------------------------------爬塔--龙渊秘藏--------------------------------
