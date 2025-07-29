@@ -10,27 +10,62 @@ import "BaseMsg.proto" ;
 //@Function Guild
 //@MessageModule 40
 
-//宗门简单信息
-message ZongMenSimpleInfoProto{
+//宗门的最基础信息,成员和非成员都可以看到的数据
+message ZongMenSimpleInfo{
   uint32 id = 1; //宗门id
   string name = 2; //宗门名称
   int32 level = 3; //宗门等级
   int32 icon = 4; //宗门ICON
   int32 memberNum = 5; //成员数量
   int32 totalPower = 6; //总战力
-  int32  isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
-  repeated uint32 applyPidList = 9;//当前的申请加入列表
+  int32 isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
+  string masterName= 8; //会长名字
+  string declaration = 9; // 宣言
 }
+
+//宗门的展示数据,成员和非成员都可以看到的数据
+message ZongMenShowInfo{
+  // 一般需要显示ZongMenShowInfo这个数据的时候，之前应该都能获取到ZongMenSimpleInfo
+  // 这个数据，所以这里就不单独下发 ZongMenSimpleInfo
+  ZongMenSimpleInfo simpleInfo = 1;
+  repeated ZongMenMemberInfo members = 9;//成员列表
+}
+
 //宗门成员信息
-message ZongMenMemberProto{
+message ZongMenMemberInfo{
   uint32 pid = 1;//玩家id
-  SimplePlayerInfo simplePlayer = 2;//玩家信息
+  SimplePlayerInfo simplePlayer = 2;//玩家基本信息
   int32 todayContribute = 3;//今日贡献
   int32 totalContribute = 4;//累计历史贡献
   int32 joinTime = 5;//加入时间
   int32 position = 6;//职位
 
 }
+
+//宗门的完整数据，一般用在查看自己的宗门时使用
+message ZongMenAllInfo{
+  ZongMenShowInfo showInfo = 2; //  公共的展示数据
+  ZongMenSharedInfo sharedInfo = 3; // 全体工会成员看到的数据
+  ZongMenPersonalInfo personalInfo = 4; // 自己在工会里的个人数据
+}
+
+//所有的工会成员都可以查看到的数据,所有成员看到的应该是一样的数据
+//可能根据成员的职位和权限，有些数据有，有些没有
+message ZongMenSharedInfo{
+  int32 exp = 1; //宗门经验
+  int32 liveness = 2;//活跃度
+  string notice = 3;  // 通知
+  repeated SimplePlayerInfo applyPlayerList = 10;//申请入会的玩家
+  ZongMenSettingProto setting = 20; //设置信息
+  ZongMenBargainSharedInfo bargain = 21;//砍价相关
+}
+
+//自己在宗门里的个人数据，一般是和具体的玩法相关的，职位等数据暂时在ZongMenMemberInfo 里面
+message ZongMenPersonalInfo{
+    bool isBargain = 5;//是否砍过价
+    bool isBargainBuy = 6;//是否购买了砍价的物品
+}
+
 //宗门设置相关
 message ZongMenSettingProto{
   string wx = 1;//宗主的微信号
@@ -42,13 +77,10 @@ message ZongMenSettingProto{
   int32 lastChangeWxTimer = 7;//最后修改微信号时间
 }
 //宗门砍价相关
-message ZongMenBargainProto{
+message ZongMenBargainSharedInfo{
   int32 bargainItemId = 1;//刷新出来的砍价物品id ： GuildBargain 表id
   int32 totalMemberCount = 2;//累计砍价的人数
   int32 totalBargainCount = 3;//累计砍掉的价格
-
-  bool isBargain = 5;//是否砍过价
-  bool isBargainBuy = 6;//是否购买了砍价的物品
   //宗门砍价记录 key: 砍价人的名字 value: 砍掉的数量
   map<string,int32> bargainLogMap = 7;
 }
@@ -60,23 +92,12 @@ message ZongMenLogProto{
   repeated string params = 4;//参数 更具操作类型不同
 }
 
-//宗门相关
-message ZongMenInfoProto{
-  ZongMenSimpleInfoProto simpleInfo = 1; //简单信息
-  int32 exp = 2; //宗门经验
-  ZongMenSettingProto setting = 3; //设置信息
-  repeated ZongMenMemberProto memberList = 4; //成员列表
-  repeated SimplePlayerInfo applyList = 5;//申请列表
-  int32 liveness = 9;//活跃度
-  ZongMenBargainProto bargain = 15;//砍价相关，一般只有查看自己所在宗门，这个数据才有效
-}
-
 //宗门列表
 message  getZongMenListRequest_40000001{
   int32 page = 1;//页码 从1开始 默认1页20条数据
 }
 message  getZongMenListResponse_40000002{
-  repeated ZongMenSimpleInfoProto zongMenList = 1;
+  repeated ZongMenSimpleInfo zongMenList = 1;
   int32 total = 2;//总条数
   int32 page = 3;//当前页码
 }
@@ -86,7 +107,7 @@ message  findZongMenRequest_40000003{
   uint32 id = 1;//宗门id
 }
 message  findZongMenResponse_40000004{
-  ZongMenInfoProto zongMen = 1;
+  ZongMenShowInfo zongMen = 1;
 }
 
 //创建宗门
@@ -97,7 +118,7 @@ message  createZongMenRequest_40000005{
   int32 icon = 4;//ICON
 }
 message  createZongMenResponse_40000006{
-  ZongMenInfoProto zongMen = 1;
+  ZongMenAllInfo zongMen = 1;
 }
 
 //申请加入宗门
@@ -105,7 +126,7 @@ message  applyJoinZongMenRequest_40000007{
   uint32 id = 1;//宗门id
 }
 message  applyJoinZongMenResponse_40000008{
-  ZongMenInfoProto zongMen = 1;
+  ZongMenAllInfo zongMen = 1;
 }
 
 //解散宗门
@@ -122,7 +143,6 @@ message  setZongMenSettingRequest_40000013{
   string declaration = 3;//宣言
   int32 icon = 4;//ICON
   int32 autoJoin = 5;//1 快速加入、2 需要验证加入、3 不可加入；
-  int32 tianDaoLevel = 6;//天道的等级
   string name = 7;//宗门名称
 }
 message  setZongMenSettingResponse_40000014{
@@ -150,7 +170,7 @@ message  quitZongMenResponse_40000018{
 message  getZongMenInfoRequest_40000021{
 }
 message getZongMenInfoResponse_40000022{
-  ZongMenInfoProto info = 1;
+  ZongMenAllInfo info = 1;
 }
 
 //解散宗门 通知玩家退出宗门
@@ -178,7 +198,7 @@ message updateMemberAuthResponse_40000042{
 //通知目标加入宗门
 message notifyJoinZongMen_40000044 {
   repeated uint32 targetPids = 1;//被通知的对象
-  ZongMenInfoProto zongMen = 2;//宗门对象
+  ZongMenSimpleInfo zongMen = 2;//宗门对象
 }
 
 //领取宗门活跃度奖励
@@ -204,18 +224,11 @@ message ZongMenBargainBuyResponse_40000063{
   repeated RewardInfo rewards = 1; //
 }
 
-//获取我已经申请的宗门id列表
-message ZongMenGetMyApplyZongMenIdListRequest_40000055{
-}
-message ZongMenGetMyApplyZongMenIdListResponse_40000056{
-  repeated uint32 zongMenIdList = 1;//宗门id集合
-}
-
 //快速一键加入宗门
 message ZongMenQuickJoinRequest_40000065{
 }
 message ZongMenQuickJoinResponse_40000066{
-  ZongMenInfoProto info = 1;
+  ZongMenShowInfo info = 1;
 }
 
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻下面的客户端不用看了，用不到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
