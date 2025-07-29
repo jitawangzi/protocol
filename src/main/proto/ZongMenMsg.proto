@@ -10,7 +10,7 @@ import "BaseMsg.proto" ;
 //@Function Guild
 //@MessageModule 40
 
-//宗门的最基础信息,成员和非成员都可以看到的数据
+//宗门的最基础信息,成员和非成员都可以看到的数据，一般在排行榜中使用
 message ZongMenSimpleInfo{
   uint32 id = 1; //宗门id
   string name = 2; //宗门名称
@@ -20,10 +20,10 @@ message ZongMenSimpleInfo{
   int32 totalPower = 6; //总战力
   int32 isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
   string masterName= 8; //会长名字
-  string declaration = 9; // 宣言
+  string notice = 10;//公告、宣言 ，外部可见
 }
 
-//宗门的展示数据,成员和非成员都可以看到的数据
+//宗门的展示数据,成员和非成员都可以看到的数据，查看某个宗门时使用。
 message ZongMenShowInfo{
   // 一般需要显示ZongMenShowInfo这个数据的时候，之前应该都能获取到ZongMenSimpleInfo
   // 这个数据，所以这里就不单独下发 ZongMenSimpleInfo
@@ -33,7 +33,6 @@ message ZongMenShowInfo{
 
 //宗门成员信息
 message ZongMenMemberInfo{
-  uint32 pid = 1;//玩家id
   SimplePlayerInfo simplePlayer = 2;//玩家基本信息
   int32 todayContribute = 3;//今日贡献
   int32 totalContribute = 4;//累计历史贡献
@@ -54,7 +53,6 @@ message ZongMenAllInfo{
 message ZongMenSharedInfo{
   int32 exp = 1; //宗门经验
   int32 liveness = 2;//活跃度
-  string notice = 3;  // 通知
   repeated SimplePlayerInfo applyPlayerList = 10;//申请入会的玩家
   ZongMenSettingProto setting = 20; //设置信息
   ZongMenBargainSharedInfo bargain = 21;//砍价相关
@@ -70,8 +68,7 @@ message ZongMenPersonalInfo{
 message ZongMenSettingProto{
   string wx = 1;//宗主的微信号
   int32 wxChangeNum = 2;//微信号修改次数
-  string notice = 3;//公告
-  string declaration = 4;//宣言
+  string notification = 4;//通知，只有本宗门内的成员可以看到
   map<int32,int32> iconList = 5;//解锁的ICON列表 key ICON id, value 剩余时间戳 秒， -1 表示永久
   int32 lastChangeNameTimer = 6;//最后修改名称时间
   int32 lastChangeWxTimer = 7;//最后修改微信号时间
