@@ -180,6 +180,7 @@ message SimplePlayerInfo{
 	string serverName = 11; // 玩家所在服务器名，暂时用不到
 	uint32 tiandaoLevel = 12; // 天道修为等级。
 	uint32 figure = 15; // 玩家的形象， PlayerFigure 表id
+	repeated string equipBattleRecord  = 16; // 装备本战报
 }
 
 // 玩家展示的名片数据
@@ -202,6 +203,11 @@ message PlayerRankInfo{
 	string score = 3; //参与排行的分数，例如等级数、战力值、关卡id等等。
 }
 
+message EquipTowerHelpRewardInfo{
+	int32 helpfloor = 1;  //助战层数
+	int32 helpReward = 2; //助战奖励 0 未领取  1已领取
+	int64 helpID = 3; //助战唯一ID
+}
 
 
 enum UpdateType{

@@ -180,7 +180,9 @@ public enum OpType{
 	GemCompose(290, "宝石合成"),
 	GemTowerFirstFinish(138, "龙渊秘藏首通奖励"),
 	GemTowerSweep(139, "龙渊秘藏扫荡奖励"),
-
+	EquipTowerTicket(140, "踏破凌霄门票"),
+	EquipTowerFinish(141, "踏破凌霄通关奖励"),
+	EquipTowerHelp(142, "龙渊秘藏助战奖励"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 
