@@ -37,7 +37,7 @@ public enum DungeonTypeEnum{
 	GemTowerFire(26,"龙渊秘藏-火塔"),
 	/** 龙渊秘藏-毒塔 */
 	GemTowerPoison(27,"龙渊秘藏-毒塔"),
-	LingShanWenChan(30, "灵山问禅"),
+	LingShanWenChan(28, "灵山问禅"),
 	EquipTower(31, "踏碎凌霄"),
 	/** 突发事件 */
 	BattleEvent(33, "突发事件"),
