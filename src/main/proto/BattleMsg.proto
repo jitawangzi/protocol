@@ -45,6 +45,7 @@ message BattleFieldEndRequest_13000003{
 	uint32 battleTime = 4;	        // 战斗时长（秒）
 	uint32 damage = 8;	        // 战斗伤害，例如世界boss战斗需要这个数值。
 	repeated int32 richManItems = 10;	        //RichManItem表id： 战斗中产生的特殊大富翁地格，需要服务器处理的
+	string  equipBattleRecord = 11;	        //踏碎凌霄胜利胜利的战报
 }
 
 // 结束关卡战斗

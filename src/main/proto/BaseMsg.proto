@@ -180,7 +180,7 @@ message SimplePlayerInfo{
 	string serverName = 11; // 玩家所在服务器名，暂时用不到
 	uint32 tiandaoLevel = 12; // 天道修为等级。
 	uint32 figure = 15; // 玩家的形象， PlayerFigure 表id
-	repeated string equipBattleRecord  = 16; // 装备本战报
+	map<uint32,string> equipBattleRecord  = 16; // 装备本战报
 }
 
 // 玩家展示的名片数据
