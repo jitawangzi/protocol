@@ -157,13 +157,15 @@ public enum ErrorMsgEnum {
 	zong_men_name_repeat(414, "宗门名称重复"),
 	zong_men_apply_exist(415, "该宗门已经申请过，不可重复申请"),
 	zong_men_player_apply_has(416, "该玩家已经在宗门中，不可重复加入"),
-	zong_men_full(418, "宗门成员数量达到上限"),
 	zong_men_permission_not_enough(417, "宗门权限不足，不可操作"),
+	zong_men_full(418, "宗门成员数量达到上限"),
 	zong_men_apply_join_timer(419, "宗门申请加入冷却时间未到，不可申请"),
 	zong_men_player_member_not_exist(420, "宗门成员不存在"),
 	zong_men_position_member_num_not_enough(421, "宗门职位成员数量不足，不可操作"),
 	zong_men_active_reward_already_get(422, "宗门活跃度奖励已经领取过了"),
 	zong_men_not_allow_join(423, "宗门不让加入"),
+	zong_men_name_too_long(424, "宗门名字太长"),
+
 	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
 	zong_men_create_failed(428, "宗门创建失败"),
 
