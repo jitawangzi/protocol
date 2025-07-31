@@ -592,6 +592,29 @@ message BattleLingShanRewardResponse_13000516
 }
 
 
+// 灵山问禅跳关
+message BattleLingShanFloorSkipRequest_13000517
+{
+  int32 floor = 1; // 跳到哪层
+}
+
+message BattleLingShanFloorSkipResponse_13000518
+{
+  repeated RewardInfo rewards = 1; // 获得的奖励
+}
+
+// 结束灵山问禅
+message BattleLingShanEndRequest_13000519
+{
+}
+
+message BattleLingShanEndResponse_1300051a
+{
+  repeated RewardInfo rewards = 1; // 获得的奖励
+}
+
+
+
 
 //@NotUseStart
 //神通秘术 消息
