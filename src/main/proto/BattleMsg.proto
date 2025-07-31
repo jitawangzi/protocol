@@ -643,13 +643,6 @@ message BattleEquipTowerDataResponse_13000527{
    int32 curFloor =3;    // 当前可以打得层数 
    
 }
-// 0点装备塔数据刷新推送
-message BattleEquipTowerDataPush_13100528{
-   int32 ticketCount =1;    // 门票剩余次数      
-   int64 nextTicketTime =2;     //  门票刷新时间戳  客户端删除助战奖励相关数据  保留助战列表数据
-   int32 curFloor =3;    // 当前可以打得层数 
-}
-
 // 助战玩家列表点击刷新
 message BattleEquipTowerHelpPlayerRequest_13000531{
    int32 floor =1;

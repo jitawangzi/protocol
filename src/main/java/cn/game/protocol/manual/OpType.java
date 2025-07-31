@@ -183,6 +183,7 @@ public enum OpType{
 	EquipTowerTicket(140, "踏破凌霄门票"),
 	EquipTowerFinish(141, "踏破凌霄通关奖励"),
 	EquipTowerHelp(142, "龙渊秘藏助战奖励"),
+	EquipTowerStart(143, "龙渊秘藏开始战斗"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 
