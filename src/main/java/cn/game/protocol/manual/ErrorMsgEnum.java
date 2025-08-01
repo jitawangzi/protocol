@@ -39,6 +39,7 @@ public enum ErrorMsgEnum {
 	gm_cmd_not_exist(18, "不存在的gm指令"),
 	gm_cmd_param(19, "gm指令参数错误"),
 	system_overload(20, "系统过载，拒绝处理请求", true),
+	player_logouting(22, "玩家正在退出，拒绝处理请求", true),
 
 	// #通用错误 50 - 99
 	/** 玩家数据校验错误。 */
