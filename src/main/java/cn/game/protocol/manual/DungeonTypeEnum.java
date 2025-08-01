@@ -43,7 +43,7 @@ public enum DungeonTypeEnum{
 	BattleEvent(33, "突发事件"),
 	/** 探索战斗 */
 	ExploreBattle(44, "探索战斗"),
-
+	MountainBattle(35, "大圣来巡山"),
 	// 合成游戏的战斗
 	HCBattleChapter(11, "合成游戏主线章节"),
 	DayChallenge(12, "合成每日挑战"),
