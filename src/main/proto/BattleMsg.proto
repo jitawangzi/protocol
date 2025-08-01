@@ -687,9 +687,8 @@ message BattleEquipTowerGetTicketResponse_13000534{
 }
 // 领取助战奖励请求
 message BattleEquipTowerGetHelpRewardRequest_13000535{
-   int64  battleID =1;   // helpRewardMap 中的value  的 key
-   int32  floor=2;        // helpRewardMap 中的key  
-   int32  type=3;           // 0 单次领取  1  一键领取 
+  repeated int64  battleID =1;   //
+  repeated int32  floor=2;        // 
 }
 
 // 领取助战奖励返回
