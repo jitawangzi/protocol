@@ -226,7 +226,7 @@ message ZongMenBargainBuyResponse_40000063{
 message ZongMenQuickJoinRequest_40000065{
 }
 message ZongMenQuickJoinResponse_40000066{
-  ZongMenShowInfo info = 1;
+  ZongMenAllInfo zongmen = 1;
 }
 
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻下面的客户端不用看了，用不到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
