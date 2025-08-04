@@ -5,9 +5,8 @@ public enum MountainNodeType {
     Battle(1),
     Event(2),
     Shop(3),
-    Reward(4),
+    Hp(4),
     Boss(5),
-    Hp(6),
     ;
     private int type;
     MountainNodeType(int type) {

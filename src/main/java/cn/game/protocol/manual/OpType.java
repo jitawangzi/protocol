@@ -184,6 +184,9 @@ public enum OpType{
 	EquipTowerFinish(141, "踏破凌霄通关奖励"),
 	EquipTowerHelp(142, "龙渊秘藏助战奖励"),
 	EquipTowerStart(143, "龙渊秘藏开始战斗"),
+	MountainBattleBuffShop(144, "大圣来巡山Buff商店掉落"),
+	MountainBattle(145, "大圣来巡山战斗掉落"),
+	MountainBattleEvent(146, "大圣来巡山事件掉落"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 
