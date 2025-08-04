@@ -112,7 +112,8 @@ message AttrGrowInfo{
 message GemInfo{
   string uid	   = 1; //唯一id
   uint32 configId  = 2; //Gem配置表id
-  map<uint32, uint32> attrs = 3; //宝石附加属性条目---目前宝石只有一条附加属性
+  map<uint32, uint32> attrs = 3; //宝石附加属性条目---目前宝石只有一条附加属性  属性
+  repeated uint32 skills = 6; //宝石附加技能条目--- 针对技能生效
   bool isLock = 4;  // 锁定状态，true：锁定了。
 }
 
