@@ -748,7 +748,7 @@ message BattleMountainMapResetRequest_13000545{
 
 }
 // 重置返回
-message BattleMountainGetRewardResponse_13000546{
+message BattleMountainMapResetResponse_13000546{
     repeated MountainMapNodeData  mapdata=1;
    	int32 curNodeId = 2; //当前停留节点
 	int32 score = 3; 
@@ -762,7 +762,37 @@ message BattleMountainNextFloorRequest_13000547{
 	int32 floor = 1; 
 }
 // 下一层返回
-message BattleMountainGetRewardResponse_13000548{
+message BattleMountainNextFlooResponse_13000548{
    	int32 curNodeId = 1; //当前停留节点
 }
 //--------------------------------------------------双人爬塔--踏碎凌霄--------------------------------
+//--------------------------------------------------大圣擂台--------------------------------
+// 大圣擂台数据请求
+message BattlePVEVPDataRequest_13000549{
+
+
+}
+// 大圣擂台数据返回
+message BattlePVEVPDataResponse_1300054a{
+   int32 challengeCount =1;    // 剩余挑战次数   
+   int32 endTime =2;     //  结束时间 
+}
+// 大圣擂台战斗记录数据
+message BattlePVEVPRecordRequest_13000550{
+    
+
+}
+// 大圣擂台战斗记录数据返回
+message BattlePVEVPRecordResponse_13000551{
+ repeated PVEVPRecordData recordList = 1;//列表 
+}
+// 大圣擂台挑战数据
+message BattlePVEVPChallengeRequest_13000552{
+    
+
+}
+// 大圣擂台挑战数据返回
+message BattlePVEVPChallengeResponse_13000553{
+ 	repeated PlayerRankInfo players = 1;
+}
+//-------------------------------------------------大圣擂台--------------------------------
