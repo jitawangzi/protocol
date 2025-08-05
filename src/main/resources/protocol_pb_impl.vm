@@ -95,6 +95,11 @@ public class PbProtocol implements ProtocolParser {
 		return id ;
 	}
 	
+	@Override	
+	public Integer getMsgIdOrNull(String name){
+		return nameIdMap.get(name);
+	}
+	
 	@Override
 	public String getMsgName(int id) {
 		String name = idNameMap.get(id);

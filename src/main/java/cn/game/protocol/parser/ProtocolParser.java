@@ -9,6 +9,8 @@ public interface ProtocolParser {
 	public Object parseFrom(int msgID, ByteBuffer data);
 
 	public int getMsgId(String name);
+	
+	public Integer getMsgIdOrNull(String name);
 
 	public String getMsgName(int id);
 }
