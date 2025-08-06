@@ -229,6 +229,17 @@ message ZongMenQuickJoinResponse_40000066{
   ZongMenAllInfo zongmen = 1;
 }
 
+
+//宗门捐献
+message ZongMenDonateRequest_40000067{
+  int32 id = 1;  // 捐献id， GuildDonate 表id
+}
+message ZongMenDonateResponse_40000068{
+  repeated RewardInfo rewards = 1; // 获得的奖励
+}
+
+
+
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻下面的客户端不用看了，用不到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
 
 

@@ -172,6 +172,9 @@ public class ClassGenerator {
 			} else {
 				respInsatnce = "defaultInstance";
 			}
+			if (!respDescriptor.getFields().isEmpty()) {
+				blockStmtMessage.addStatement(respMessage + ".Builder resp = " + respMessage + ".newBuilder();\n");
+			}
 			blockStmtMessage.addStatement("Player player = PlayerManager.getInstance().getPlayer(client.getPlayerId());");
 
 			/*			if (function != null) {
@@ -194,10 +197,6 @@ public class ClassGenerator {
 						}
 						*/
 			// 逻辑代码。。。
-
-			if (!respDescriptor.getFields().isEmpty()) {
-				blockStmtMessage.addStatement(respMessage + ".Builder resp = " + respMessage + ".newBuilder();\n");
-			}
 //			blockStmtMessage.addStatement(new EmptyStmt());
 			blockStmtMessage.addStatement(String.format("client.sendProtocol(%s);", respInsatnce));
 			lambda.setBody(blockStmtMessage);
