@@ -31,7 +31,6 @@ enum ChatType {
   SYSTEM_CHAT = 2;//系统公告
   PRIVATE_CHAT = 4;//私聊，同服聊天
   MARQUEE = 6;//跑马灯
-	UNINON_OPT_LOG =7;//工会日志
 }
 
 message ChatMessageInfo{
