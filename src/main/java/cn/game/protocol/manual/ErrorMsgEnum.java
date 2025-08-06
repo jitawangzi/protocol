@@ -172,7 +172,9 @@ public enum ErrorMsgEnum {
 	zong_men_create_failed(428, "宗门创建失败"),
 
 	draw_refresh_gold(450, "抽卡刷新时，元宝消耗校验错误"),
-
+	PVEVP_No_Ticket(451, "大圣擂台门票不足"),
+	PVEVP_No_Player(452, "大圣擂台挑战玩家错误"),
+	PVEVP_Season_Over(453, "大圣擂台赛季结束"),
 	max_error_id(999, "占位错误码");
 
 	/** id */

@@ -787,9 +787,8 @@ message BattlePVEVPRecordResponse_13000551{
  repeated PVEVPRecordData recordList = 1;//列表 
 }
 // 大圣擂台挑战数据
-message BattlePVEVPChallengeRequest_13000552{
-    
-
+message BattlePVEVPChallengeRequest_13000552{    
+  int32 type =1;     //  1 请求 2 刷新
 }
 // 大圣擂台挑战数据返回
 message BattlePVEVPChallengeResponse_13000553{
