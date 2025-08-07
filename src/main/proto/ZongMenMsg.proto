@@ -67,6 +67,11 @@ message ZongMenPersonalInfo{
   map<int32,int32> donate = 5;//key: GuildDonate 表id  value: 对应id的已经捐献次数
 
 }
+// 跨服进程返回的宗门数据----这个只有服务器用到，客户端可以忽略。
+message ZongMenServiceInfo {
+    ZongMenShowInfo showInfo = 1;
+    ZongMenSharedInfo sharedInfo = 2;
+}
 
 //宗门设置相关
 message ZongMenSettingProto{
