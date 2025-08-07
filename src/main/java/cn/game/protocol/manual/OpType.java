@@ -156,6 +156,9 @@ public enum OpType{
 	ZongMenShopReward(233,"宗门商店掉落"),
 	zongMenChangeName(234,"宗门改名"),
 	ZongMenBargain(236, "宗门购买砍价物品"),
+	ZongMenQuestReward(137, "宗门任务积分奖励"),
+	ZongMenDonate(138, "宗门捐献"),
+
 	
 
 	HeroFragmentCompose(250, "英雄合成"), 

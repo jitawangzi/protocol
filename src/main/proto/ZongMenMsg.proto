@@ -60,8 +60,12 @@ message ZongMenSharedInfo{
 
 //自己在宗门里的个人数据，一般是和具体的玩法相关的，职位等数据暂时在ZongMenMemberInfo 里面
 message ZongMenPersonalInfo{
-    bool isBargain = 5;//是否砍过价
-    bool isBargainBuy = 6;//是否购买了砍价的物品
+  // 砍价相关
+  int32 bargainCount = 1;//当日砍过的次数
+  bool isBargainBuy = 2;//是否购买了砍价的物品
+   // 当日捐献记录
+  map<int32,int32> donate = 5;//key: GuildDonate 表id  value: 对应id的已经捐献次数
+
 }
 
 //宗门设置相关
@@ -78,7 +82,7 @@ message ZongMenBargainSharedInfo{
   int32 bargainItemId = 1;//刷新出来的砍价物品id ： GuildBargain 表id
   int32 totalMemberCount = 2;//累计砍价的人数
   int32 totalBargainCount = 3;//累计砍掉的价格
-  //宗门砍价记录 key: 砍价人的名字 value: 砍掉的数量
+  //宗门砍价记录 key: 砍价人的名字 value: 当日累计砍掉的数量
   map<string,int32> bargainLogMap = 7;
 }
 
@@ -228,6 +232,17 @@ message ZongMenQuickJoinRequest_40000065{
 message ZongMenQuickJoinResponse_40000066{
   ZongMenAllInfo zongmen = 1;
 }
+
+
+//宗门捐献
+message ZongMenDonateRequest_40000067{
+  int32 id = 1;  // 捐献id， GuildDonate 表id
+}
+message ZongMenDonateResponse_40000068{
+  repeated RewardInfo rewards = 1; // 获得的奖励
+}
+
+
 
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻下面的客户端不用看了，用不到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
 
