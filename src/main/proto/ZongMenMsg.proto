@@ -157,7 +157,7 @@ message  setZongMenSettingResponse_40000014{
   bool result = 1;//是否成功
 }
 
-//宗门权限管理
+//宗门职位更改
 message  setZongMenMemberPositionRequest_40000015{
   uint32 targetPid = 1;//目标玩家id
   int32 position = 2;//新的职位
@@ -194,7 +194,7 @@ message getZongMenLogRequest_40000025{
 message getZongMenLogResponse_40000026{
     repeated ZongMenLogProto logList = 1;
 }
-//宗门成员权限管理
+//宗门成员权限管理,同意申请，踢人等。
 message updateMemberAuthRequest_40000041 {
   repeated uint32  targetPidList = 1;//操作的玩家id集合
   int32 optType = 2; //1 申请同意加入， 2 申请拒绝加入， 3 踢人
