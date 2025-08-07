@@ -702,6 +702,15 @@ message BattleEquipTowerFindHelpRewardRequest_13000537{
 message BattleEquipTowerFindHelpRewardResponse_13000538{
    repeated  EquipTowerHelpRewardInfo helpReward=1; //当前助战信息
 }
+// 查看战斗记录上传请求
+message BattleEquipTowerRecordRequest_13000528{
+  int32   floor=1;    
+  string  record=2;   
+}
+// 查看战斗记录上传请求
+message BattleEquipTowerRecordResponse_13000529{
+
+}
 //-------------------------------------------双人爬塔--踏碎凌霄--------------------------------
 //--------------------------------------------------大圣来巡山--------------------------------
 // 巡山数据请求
