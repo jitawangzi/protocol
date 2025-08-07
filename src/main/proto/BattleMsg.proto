@@ -51,9 +51,8 @@ message BattleFieldEndRequest_13000003{
 // 结束关卡战斗
 message BattleFieldEndResponse_13000004{
 	repeated RewardInfo rewards = 1;		// 获得的奖励
+	uint32  score = 2;		// 积分变化
 }
-
-
 // 关卡快速战斗请求,也可以当扫荡来使用
 message BattleFieldQuickEndRequest_13000005{
 	uint32 type = 1; 	// 玩法类型，主线战役推图，日常挑战等。 1代表主线战役，2 道心磨砺 3心魔试炼   11 合成的主线战役12 每日挑战 20 失落真经
@@ -776,6 +775,7 @@ message BattlePVEVPDataRequest_13000549{
 message BattlePVEVPDataResponse_1300054a{
    int32 challengeCount =1;    // 剩余挑战次数   
    int32 endTime =2;     //  结束时间 
+   int32 buyCount =3;     //  剩余购买次数 
 }
 // 大圣擂台战斗记录数据
 message BattlePVEVPRecordRequest_13000550{
@@ -793,5 +793,14 @@ message BattlePVEVPChallengeRequest_13000552{
 // 大圣擂台挑战数据返回
 message BattlePVEVPChallengeResponse_13000553{
  	repeated PlayerRankInfo players = 1;
+}
+// 大圣擂台购买次数数据请求
+message BattleBuyTicketRequest_13000554{
+
+
+}
+// 大圣擂台购买次数数据返回
+message BattleBuyTicketResponse_13000555{
+   int32 buyCount =1;     //  剩余购买次数 
 }
 //-------------------------------------------------大圣擂台--------------------------------
