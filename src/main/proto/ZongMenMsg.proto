@@ -49,7 +49,7 @@ message ZongMenAllInfo{
 }
 
 //所有的工会成员都可以查看到的数据,所有成员看到的应该是一样的数据
-//可能根据成员的职位和权限，有些数据有，有些没有
+//可能根据成员的职位和权限，有些数据客户端不能看到，可以先简单屏蔽一下。
 message ZongMenSharedInfo{
   int32 exp = 1; //宗门经验
   int32 liveness = 2;//活跃度
@@ -59,6 +59,7 @@ message ZongMenSharedInfo{
 }
 
 //自己在宗门里的个人数据，一般是和具体的玩法相关的，职位等数据暂时在ZongMenMemberInfo 里面
+// 这些数据只有自己才能看到
 message ZongMenPersonalInfo{
   // 砍价相关
   int32 bargainCount = 1;//当日砍过的次数
@@ -208,20 +209,12 @@ message notifyJoinZongMen_40000044 {
   ZongMenSimpleInfo zongMen = 2;//宗门对象
 }
 
-//领取宗门活跃度奖励
-message ZongMenActiveRewardRequest_40000045{
-  repeated int32 indexList = 1;//要领取的活跃度 下标集合
-}
-message ZongMenActiveRewardResponse_40000046{
-  repeated int32 rewardIndexList = 1;//当前领取的集合
-  repeated RewardInfo drops = 2;//掉落
-}
-
 //宗门砍价
 message ZongMenBargainRequest_40000060{
 }
 message ZongMenBargainResponse_40000061{
   int32 count = 1;//	砍掉了多少
+  repeated RewardInfo rewards = 2; // 砍价给的奖励
 }
 
 //购买宗门砍价物品
@@ -253,33 +246,6 @@ message ZongMenDonateResponse_40000068{
 
 
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻只服务器用到的协议︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
-
-
-//更新宗门资产 宗门活跃度 宗门经验 个人贡献 ...
-message updateZongMenAssetRequest_40000037 {
-  repeated RewardInfo zongMenAssetMaps = 1;
-}
-message updateZongMenAssetResponse_40000038{
-
-}
-
-//更新宗门贡献值
-message ZongMenUpdateContributeValueReq_40000057{
-  bool isAdd = 1;//是否增加
-  int32 value = 2;//增加的值
-}
-message ZongMenUpdateContributeValueRes_40000058{
-  bool result = 1;
-}
-
-//更新玩家战斗力
-message ZongMenUpdateMemberFightPowerRequest_40000051{
-  int64 pid = 1;//玩家id
-  int32 fightPower = 2;//战斗力
-}
-message ZongMenUpdateMemberFightPowerResponse_40000052{
-  bool result = 1;
-}
 
 
 //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼只服务器用到的协议︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼

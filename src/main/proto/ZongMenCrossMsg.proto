@@ -5,7 +5,7 @@ package cn.game.protocol.protobuf;
 
 
 // 宗门 gameServer => 发送到zongMenServer 的消息
-message ZongMenMsgRequest_41000045{
+message ZongMenMsgPush_41000045{
 	int32 msgId = 1; //宗门相关的协议
 	bytes data = 2; //数据
 	int64 playerId = 3; //玩家id
