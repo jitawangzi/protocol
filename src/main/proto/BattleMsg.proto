@@ -801,7 +801,7 @@ message BattlePVEVPChallengeRequest_13000552{
 }
 // 大圣擂台挑战数据返回
 message BattlePVEVPChallengeResponse_13000553{
- 	repeated PlayerRankInfo players = 1;
+ 	repeated PlayerRankInfo challengePlayers = 1;
 }
 // 大圣擂台购买次数数据请求
 message BattleBuyTicketRequest_13000554{
