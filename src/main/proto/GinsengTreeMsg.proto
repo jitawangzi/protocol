@@ -31,6 +31,7 @@ message GinsengTreeInfo{
 	int32 hangUpSeconds = 11; 		// 挂机时长，秒
 	map<int32 ,int32> hangUpRandomRewardMap = 12; // 挂机的随机奖励部分，key 道具或资源id，value  数量
 	repeated int32  heroIdList = 13;    // 上阵凑羁绊的英雄id
+	int32  energyFruitCount = 15;    // 当前可以领的时辰果匣数量
 
 }
 
@@ -102,6 +103,16 @@ message GinsengTreeHeroRequest_39000017{
 }
 
 message GinsengTreeHeroResponse_39000018{
+}
+
+
+//人参果树领取体力果实
+message GinsengTreeEnergyRequest_39000021{
+	int32  count = 1;    // 领取几个，如果是0表示一键领取所有
+}
+
+message GinsengTreeEnergyResponse_39000022{
+    repeated  RewardInfo rewards =1; // 增加的体力
 }
 
 
