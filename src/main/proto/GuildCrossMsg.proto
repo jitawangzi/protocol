@@ -4,16 +4,16 @@ package cn.game.protocol.protobuf;
 
 
 
-// 宗门 gameServer => 发送到zongMenServer 的消息
-message ZongMenMsgPush_41000045{
-	int32 msgId = 1; //宗门相关的协议
+// 公会 gameServer => 发送到guildServer 的消息
+message GuildMsgPush_41000045{
+	int32 msgId = 1; //公会相关的协议
 	bytes data = 2; //数据
 	int64 playerId = 3; //玩家id
-	int64 zongMenId = 4; //宗门id
+	int64 guildId = 4; //公会id
 	repeated string params = 5;// 上下文参数
 }
 
-message ZongMenMsgResponse_41000046{
+message GuildMsgResponse_41000046{
 	int32 	errorCode = 1; //错误码
 	int32 	msgId = 2; //消息id
 	bytes data = 4; //数据

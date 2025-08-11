@@ -456,11 +456,11 @@ message PlayerAllInfo{
 
    WechatSetting wechatSetting = 114;//微信设置相关
 
-  //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼宗门相关独有的数据︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
-  int64 zongMenId = 115;//大于0 则为宗门id
-  string zongMenName = 116;//宗门名称
-  repeated int64 applyZongMenIds = 117;//申请过的宗门id
-  int32 zongMenQuitCount = 118;//宗门退出次数，如果次数大于0，表示退出过宗门。 退出宗门后，有些宗门操作会有cd
+  //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼公会相关独有的数据︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
+  int64 guildId = 115;//大于0 则为公会id
+  string guildName = 116;//公会名称
+  repeated int64 applyGuildIds = 117;//申请过的公会id
+  int32 guildQuitCount = 118;//公会退出次数，如果次数大于0，表示退出过公会。 退出公会后，有些公会操作会有cd
 
 //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼合并游戏独有的数据︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
    string disableIosPayVersion  = 200;        //禁用ios充值的客户端版本，一般在提审中使用。

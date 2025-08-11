@@ -264,8 +264,8 @@ message NotifyWechatSubscribeMessageResponse_7d000044{
 	bool  result = 1;
 }
 
-//ZongMenServer notify to GameServer
-message NotifyZongMenMsgToGame_7d000047{
+//GuildServer notify to GameServer
+message NotifyGuildMsgToGame_7d000047{
 	int32 	msgId = 1; //消息id
 	bytes data = 2; //数据
 	repeated int64 playerId = 3; //玩家id

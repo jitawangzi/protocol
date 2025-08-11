@@ -152,12 +152,12 @@ public enum OpType{
 	HeroSkinBreakdown(230, "英雄皮肤分解"),
 	HeadPortraitRepeat(231, "头像重复获取"),
 
-	ZongMenActive(232, "宗门活跃度奖励"),
-	ZongMenShopReward(233,"宗门商店掉落"),
-	zongMenChangeName(234,"宗门改名"),
-	ZongMenBargain(236, "宗门购买砍价物品"),
-	ZongMenQuestReward(137, "宗门任务积分奖励"),
-	ZongMenDonate(138, "宗门捐献"),
+	GuildActive(232, "公会活跃度奖励"),
+	GuildShopReward(233,"公会商店掉落"),
+	guildChangeName(234,"公会改名"),
+	GuildBargain(236, "公会购买砍价物品"),
+	GuildQuestReward(137, "公会任务积分奖励"),
+	GuildDonate(138, "公会捐献"),
 
 	
 

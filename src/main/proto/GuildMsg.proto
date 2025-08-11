@@ -5,17 +5,17 @@ package cn.game.protocol.protobuf;
 import "RewardMsg.proto" ;
 import "BaseMsg.proto" ;
 
-//@HandlerPackage cn.game.games.net.game.module.zongmen
+//@HandlerPackage cn.game.games.net.game.module.guild
 //@ClientHandlerPackage cn.game.simulation.client.handler
 //@Function Guild
 //@MessageModule 40
 
-//宗门的最基础信息,成员和非成员都可以看到的数据，一般在排行榜中使用
-message ZongMenSimpleInfo{
-  uint32 id = 1; //宗门id
-  string name = 2; //宗门名称
-  int32 level = 3; //宗门等级
-  int32 icon = 4; //宗门ICON
+//公会的最基础信息,成员和非成员都可以看到的数据，一般在排行榜中使用
+message GuildSimpleInfo{
+  uint32 id = 1; //公会id
+  string name = 2; //公会名称
+  int32 level = 3; //公会等级
+  int32 icon = 4; //公会ICON
   int32 memberNum = 5; //成员数量
   int32 totalPower = 6; //总战力
   int32 isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
@@ -23,16 +23,16 @@ message ZongMenSimpleInfo{
   string notice = 10;//公告、宣言 ，外部可见
 }
 
-//宗门的展示数据,成员和非成员都可以看到的数据，查看某个宗门时使用。
-message ZongMenShowInfo{
-  // 一般需要显示ZongMenShowInfo这个数据的时候，之前应该都能获取到ZongMenSimpleInfo
-  // 这个数据，所以这里就不单独下发 ZongMenSimpleInfo
-  ZongMenSimpleInfo simpleInfo = 1;
-  repeated ZongMenMemberInfo members = 9;//成员列表
+//公会的展示数据,成员和非成员都可以看到的数据，查看某个公会时使用。
+message GuildShowInfo{
+  // 一般需要显示GuildShowInfo这个数据的时候，之前应该都能获取到GuildSimpleInfo
+  // 这个数据，所以这里就不单独下发 GuildSimpleInfo
+  GuildSimpleInfo simpleInfo = 1;
+  repeated GuildMemberInfo members = 9;//成员列表
 }
 
-//宗门成员信息
-message ZongMenMemberInfo{
+//公会成员信息
+message GuildMemberInfo{
   SimplePlayerInfo simplePlayer = 2;//玩家基本信息
   int32 todayContribute = 3;//今日贡献
   int32 totalContribute = 4;//累计历史贡献
@@ -41,26 +41,26 @@ message ZongMenMemberInfo{
 
 }
 
-//宗门的完整数据，一般用在查看自己的宗门时使用
-message ZongMenAllInfo{
-  ZongMenShowInfo showInfo = 2; //  公共的展示数据
-  ZongMenSharedInfo sharedInfo = 3; // 全体工会成员看到的数据
-  ZongMenPersonalInfo personalInfo = 4; // 自己在工会里的个人数据
+//公会的完整数据，一般用在查看自己的公会时使用
+message GuildAllInfo{
+  GuildShowInfo showInfo = 2; //  公共的展示数据
+  GuildSharedInfo sharedInfo = 3; // 全体工会成员看到的数据
+  GuildPersonalInfo personalInfo = 4; // 自己在工会里的个人数据
 }
 
 //所有的工会成员都可以查看到的数据,所有成员看到的应该是一样的数据
 //可能根据成员的职位和权限，有些数据客户端不能看到，可以先简单屏蔽一下。
-message ZongMenSharedInfo{
-  int32 exp = 1; //宗门经验
+message GuildSharedInfo{
+  int32 exp = 1; //公会经验
   int32 liveness = 2;//活跃度
   repeated SimplePlayerInfo applyPlayerList = 10;//申请入会的玩家
-  ZongMenSettingProto setting = 20; //设置信息
-  ZongMenBargainSharedInfo bargain = 21;//砍价相关
+  GuildSettingProto setting = 20; //设置信息
+  GuildBargainSharedInfo bargain = 21;//砍价相关
 }
 
-//自己在宗门里的个人数据，一般是和具体的玩法相关的，职位等数据暂时在ZongMenMemberInfo 里面
+//自己在公会里的个人数据，一般是和具体的玩法相关的，职位等数据暂时在GuildMemberInfo 里面
 // 这些数据只有自己才能看到
-message ZongMenPersonalInfo{
+message GuildPersonalInfo{
   // 砍价相关
   int32 bargainCount = 1;//当日砍过的次数
   bool isBargainBuy = 2;//是否购买了砍价的物品
@@ -68,175 +68,175 @@ message ZongMenPersonalInfo{
   map<int32,int32> donate = 5;//key: GuildDonate 表id  value: 对应id的已经捐献次数
 
 }
-// 跨服进程返回的宗门数据----这个只有服务器用到，客户端可以忽略。
-message ZongMenServiceInfo {
-    ZongMenShowInfo showInfo = 1;
-    ZongMenSharedInfo sharedInfo = 2;
+// 跨服进程返回的公会数据----这个只有服务器用到，客户端可以忽略。
+message GuildServiceInfo {
+    GuildShowInfo showInfo = 1;
+    GuildSharedInfo sharedInfo = 2;
 }
 
-//宗门设置相关
-message ZongMenSettingProto{
+//公会设置相关
+message GuildSettingProto{
   string wx = 1;//宗主的微信号
   int32 wxChangeNum = 2;//微信号修改次数
-  string notification = 4;//通知，只有本宗门内的成员可以看到
+  string notification = 4;//通知，只有本公会内的成员可以看到
   map<int32,int32> iconList = 5;//解锁的ICON列表 key ICON id, value 剩余时间戳 秒， -1 表示永久
   int32 lastChangeNameTimer = 6;//最后修改名称时间
   int32 lastChangeWxTimer = 7;//最后修改微信号时间
 }
-//宗门砍价相关
-message ZongMenBargainSharedInfo{
+//公会砍价相关
+message GuildBargainSharedInfo{
   int32 bargainItemId = 1;//刷新出来的砍价物品id ： GuildBargain 表id
   int32 totalMemberCount = 2;//累计砍价的人数
   int32 totalBargainCount = 3;//累计砍掉的价格
-  //宗门砍价记录 key: 砍价人的名字 value: 当日累计砍掉的数量
+  //公会砍价记录 key: 砍价人的名字 value: 当日累计砍掉的数量
   map<string,int32> bargainLogMap = 7;
 }
 
-//宗门操作日志
-message ZongMenLogProto{
+//公会操作日志
+message GuildLogProto{
   int32  createTimer = 1;//创建时间
   int32  type = 3;//操作类型
   repeated string params = 4;//参数 更具操作类型不同
 }
 
-//宗门列表
-message  getZongMenListRequest_40000001{
+//公会列表
+message  GuildListRequest_40000001{
   int32 page = 1;//页码 从1开始 默认1页20条数据
 }
-message  getZongMenListResponse_40000002{
-  repeated ZongMenSimpleInfo zongMenList = 1;
+message  GuildListResponse_40000002{
+  repeated GuildSimpleInfo guildList = 1;
   int32 total = 2;//总条数
   int32 page = 3;//当前页码
 }
 
-//查找宗门
-message  findZongMenRequest_40000003{
-  uint32 id = 1;//宗门id
+//查找公会
+message  GuildFindRequest_40000003{
+  uint32 id = 1;//公会id
 }
-message  findZongMenResponse_40000004{
-  ZongMenShowInfo zongMen = 1;
+message  GuildFindResponse_40000004{
+  GuildShowInfo guild = 1;
 }
 
-//创建宗门
-message  createZongMenRequest_40000005{
-  string name = 1;//宗门名称
+//创建公会
+message  GuildCreateRequest_40000005{
+  string name = 1;//公会名称
   string notice = 2;//公告
   string declaration = 3;//宣言
   int32 icon = 4;//ICON
 }
-message  createZongMenResponse_40000006{
-  ZongMenAllInfo zongMen = 1;
+message  GuildCreateResponse_40000006{
+  GuildAllInfo guild = 1;
 }
 
-//申请加入宗门
-message  applyJoinZongMenRequest_40000007{
-  uint32 id = 1;//宗门id
+//申请加入公会
+message  GuildApplyJoinRequest_40000007{
+  uint32 id = 1;//公会id
 }
-message  applyJoinZongMenResponse_40000008{
-  // 只有在宗门设置自动加入时，则申请后会返回完整的宗门数据，否则没有数据。
-  ZongMenAllInfo zongMen = 1;
+message  GuildApplyJoinResponse_40000008{
+  // 只有在公会设置自动加入时，则申请后会返回完整的公会数据，否则没有数据。
+  GuildAllInfo guild = 1;
 }
 
-//解散宗门
-message  dissolveZongMenRequest_40000011{
+//解散公会
+message  GuildDissolveRequest_40000011{
 }
-message  dissolveZongMenResponse_40000012{
+message  GuildDissolveResponse_40000012{
   bool result = 1;//是否成功
 }
 
-//宗门设置相关 有值 则替换，没有值 则不修改
-message  setZongMenSettingRequest_40000013{
+//公会设置相关 有值 则替换，没有值 则不修改
+message  GuildSettingRequest_40000013{
   string wx = 1;//微信号
   string notice = 2;//公告
   string declaration = 3;//宣言
   int32 icon = 4;//ICON
   int32 autoJoin = 5;//1 快速加入、2 需要验证加入、3 不可加入；
-  string name = 7;//宗门名称
+  string name = 7;//公会名称
 }
-message  setZongMenSettingResponse_40000014{
+message  GuildSettingResponse_40000014{
   bool result = 1;//是否成功
 }
 
-//宗门职位更改
-message  setZongMenMemberPositionRequest_40000015{
+//公会职位更改
+message  GuildMemberPositionSetRequest_40000015{
   uint32 targetPid = 1;//目标玩家id
   int32 position = 2;//新的职位
 }
-message  setZongMenMemberPositionResponse_40000016{
+message  GuildMemberPositionSetResponse_40000016{
   bool result = 1;//是否成功
   int32 position = 2;//新的职位
   uint32 targetPid = 3;//目标玩家id
 }
-//退出宗门
-message  quitZongMenRequest_40000017{
+//退出公会
+message  GuildQuitRequest_40000017{
 }
-message  quitZongMenResponse_40000018{
+message  GuildQuitResponse_40000018{
   bool result = 1;//是否成功
 }
 
-//获取宗门信息
-message  getZongMenInfoRequest_40000021{
+//获取公会信息
+message  GuildInfoRequest_40000021{
 }
-message getZongMenInfoResponse_40000022{
-  ZongMenAllInfo info = 1;
+message GuildInfoResponse_40000022{
+  GuildAllInfo info = 1;
 }
 
-//解散宗门 通知玩家退出宗门
-message notifyQuitZongMen_40000024
+//解散公会 通知玩家退出公会
+message GuildQuitPush_40000024
 {
 }
 
 
-//宗门日志请求
-message getZongMenLogRequest_40000025{
+//公会日志请求
+message GuildLogRequest_40000025{
 
 }
-message getZongMenLogResponse_40000026{
-    repeated ZongMenLogProto logList = 1;
+message GuildLogResponse_40000026{
+    repeated GuildLogProto logList = 1;
 }
-//宗门成员权限管理,同意申请，踢人等。
-message updateMemberAuthRequest_40000041 {
+//公会成员权限管理,同意申请，踢人等。
+message GuildMemberAuthRequest_40000041 {
   repeated uint32  targetPidList = 1;//操作的玩家id集合
   int32 optType = 2; //1 申请同意加入， 2 申请拒绝加入， 3 踢人
 }
-message updateMemberAuthResponse_40000042{
+message GuildMemberAuthResponse_40000042{
   bool result = 1;
 }
 
-//通知目标加入宗门
-message notifyJoinZongMen_40000044 {
+//通知目标加入公会
+message GuildJoinPush_40000044 {
   repeated uint32 targetPids = 1;//被通知的对象
-  ZongMenSimpleInfo zongMen = 2;//宗门对象
+  GuildSimpleInfo guild = 2;//公会对象
 }
 
-//宗门砍价
-message ZongMenBargainRequest_40000060{
+//公会砍价
+message GuildBargainRequest_40000060{
 }
-message ZongMenBargainResponse_40000061{
+message GuildBargainResponse_40000061{
   int32 count = 1;//	砍掉了多少
   repeated RewardInfo rewards = 2; // 砍价给的奖励
 }
 
-//购买宗门砍价物品
-message ZongMenBargainBuyRequest_40000062{
+//购买公会砍价物品
+message GuildBargainBuyRequest_40000062{
 }
-message ZongMenBargainBuyResponse_40000063{
+message GuildBargainBuyResponse_40000063{
   repeated RewardInfo rewards = 1; //
 }
 
-//快速一键加入宗门
-message ZongMenQuickJoinRequest_40000065{
+//快速一键加入公会
+message GuildQuickJoinRequest_40000065{
 }
-message ZongMenQuickJoinResponse_40000066{
-  ZongMenAllInfo zongmen = 1;
+message GuildQuickJoinResponse_40000066{
+  GuildAllInfo guild = 1;
 }
 
 
-//宗门捐献
-message ZongMenDonateRequest_40000067{
+//公会捐献
+message GuildDonateRequest_40000067{
   int32 id = 1;  // 捐献id， GuildDonate 表id
 }
-message ZongMenDonateResponse_40000068{
+message GuildDonateResponse_40000068{
   repeated RewardInfo rewards = 1; // 获得的奖励
 }
 
@@ -253,15 +253,15 @@ message ZongMenDonateResponse_40000068{
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻悬赏，目前没有这个功能，协议暂时保留︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
 
 //悬赏相关
-message ZongMenBountyProto{
-  ZongMenBountyMissionProto bountyMission = 1;
+message GuildBountyProto{
+  GuildBountyMissionProto bountyMission = 1;
   int32 acceptCount = 3;  // 当天已经接取的悬赏次数。
   int32 refreshCount = 4; // 目标刷新次数
   int32 challengeCount = 5; // 挑战次数
 }
 
 //悬赏任务数据
-message ZongMenBountyMissionProto{
+message GuildBountyMissionProto{
   int32 id = 1;       //悬赏任务id： GuildBountyBar 表id
   int32 startPlace = 2;   //  悬赏任务的起点 GuildBargainPlace 表id
   int32 endPlace = 3;   //  悬赏任务的终点 GuildBargainPlace 表id
@@ -270,12 +270,12 @@ message ZongMenBountyMissionProto{
   int32 endTime = 6 ;     // 针对state是3 已接的任务，任务的实际结束时间(秒时间戳，算上了)
 }
 //参与悬赏任务的玩家
-message ZongMenBountyPlayerProto{
+message GuildBountyPlayerProto{
   SimplePlayerInfo player = 1;//玩家信息
-  ZongMenBountyMissionProto mission = 2; //悬赏任务数据
+  GuildBountyMissionProto mission = 2; //悬赏任务数据
 }
-//宗门悬赏任务战报
-message ZongMenBountyBattleReport{
+//公会悬赏任务战报
+message GuildBountyBattleReport{
   string uid = 1;     // 战报唯一id
   int32 id = 2;       //悬赏任务id： GuildBountyBar 表id
   int32 attackTime = 3;   //挑战时间， 秒时间戳
@@ -286,67 +286,67 @@ message ZongMenBountyBattleReport{
   bool isWin = 9;       //挑战结果
   bool isLoss = 10;     //挑战成功时， 是否损失了奖励
 }
-//宗门悬赏任务战报,带有挑战者的状态
-message ZongMenBountyBattleReportAttacker{
-  ZongMenBountyBattleReport report = 1;
+//公会悬赏任务战报,带有挑战者的状态
+message GuildBountyBattleReportAttacker{
+  GuildBountyBattleReport report = 1;
   bool isAttatckerMission = 2;      //挑战者是否正在进行悬赏任务
 }
 
 
 
 // 接悬赏任务
-message ZongMenBountyAcceptRequest_40000070{
+message GuildBountyAcceptRequest_40000070{
 }
-message ZongMenBountyAcceptResponse_40000071{
+message GuildBountyAcceptResponse_40000071{
 }
 
 // 领取当前悬赏任务奖励
-message ZongMenBountyRewardRequest_40000072{
+message GuildBountyRewardRequest_40000072{
 }
-message ZongMenBountyRewardResponse_40000073{
+message GuildBountyRewardResponse_40000073{
   int32 event = 1;          //悬赏结束时产生的奇遇事件， GuildAdventureEvent 表id
   repeated RewardInfo eventRewards = 2; // 奇遇事件奖励
   repeated RewardInfo bountyRewards = 3; // 悬赏奖励
-  ZongMenBountyProto bounty = 4;      // 更新悬赏数据，会有新的悬赏任务
+  GuildBountyProto bounty = 4;      // 更新悬赏数据，会有新的悬赏任务
 }
 
 
 // 刷新悬赏的目标列表
-message ZongMenBountyTargetRefreshRequest_40000074{
+message GuildBountyTargetRefreshRequest_40000074{
 }
-message ZongMenBountyTargetRefreshResponse_40000075{
-  repeated ZongMenBountyPlayerProto players = 1;
+message GuildBountyTargetRefreshResponse_40000075{
+  repeated GuildBountyPlayerProto players = 1;
 }
 
 
 // 悬赏挑战、 反击  开始战斗
-message ZongMenBountyBattleStartRequest_40000076{
+message GuildBountyBattleStartRequest_40000076{
   string playerId = 1;  // 攻击的玩家id
 }
-message ZongMenBountyBattleStartResponse_40000077{
+message GuildBountyBattleStartResponse_40000077{
 }
 
 // 悬赏挑战、 反击  结束战斗
-message ZongMenBountyBattleEndRequest_40000078{
+message GuildBountyBattleEndRequest_40000078{
   string playerId = 1;  // 攻击的玩家id
   bool isWin = 2;     // 是否胜利
 }
-message ZongMenBountyBattleEndResponse_40000079{
+message GuildBountyBattleEndResponse_40000079{
 }
 // 悬赏战报
-message ZongMenBountyBattleReportRequest_4000007a{
-  bool isZongMen = 1;  // true ：查看宗门战报， false：查看个人战报
+message GuildBountyBattleReportRequest_4000007a{
+  bool isGuild = 1;  // true ：查看公会战报， false：查看个人战报
 }
-message ZongMenBountyBattleReportResponse_4000007b{
-  repeated  ZongMenBountyBattleReportAttacker reports = 1;
+message GuildBountyBattleReportResponse_4000007b{
+  repeated  GuildBountyBattleReportAttacker reports = 1;
 }
 // 查看某个玩家当前的悬赏详情
-message ZongMenBountyPlayerRequest_4000007c{
+message GuildBountyPlayerRequest_4000007c{
   string playerId = 1;
 }
-message ZongMenBountyPlayerResponse_4000007d{
+message GuildBountyPlayerResponse_4000007d{
    SimplePlayerInfo player = 1;//玩家基本数据
-   ZongMenBountyMissionProto mission = 2; // 悬赏数据，如果没有进行中的悬赏任务，则为null
+   GuildBountyMissionProto mission = 2; // 悬赏数据，如果没有进行中的悬赏任务，则为null
 }
 
 //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼悬赏，目前没有这个功能，协议暂时保留︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
