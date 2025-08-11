@@ -811,5 +811,6 @@ message BattleBuyTicketRequest_13000554{
 // 大圣擂台购买次数数据返回
 message BattleBuyTicketResponse_13000555{
    int32 buyCount =1;     //  剩余购买次数 
+   int32 challengeCount =2;    // 剩余挑战次数   
 }
 //-------------------------------------------------大圣擂台--------------------------------
