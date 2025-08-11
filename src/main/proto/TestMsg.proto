@@ -17,6 +17,7 @@ message TestGmCmdRequest_6f000001{
 }
 
 message TestGmCmdResponse_6f000002{
+  string debugInfo = 1; // gm指令如果需要一些额外的显示数据
 
 }
 
