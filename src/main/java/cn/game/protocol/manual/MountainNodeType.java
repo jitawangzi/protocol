@@ -2,11 +2,12 @@ package cn.game.protocol.manual;
 
 public enum MountainNodeType {
     Start(0),
-    Battle(1),
-    Event(2),
-    Shop(3),
+    Easy(1),
+    Hard(2),
+    Boss(3),
     Hp(4),
-    Boss(5),
+    Shop(5),
+    Event(6),
     ;
     private int type;
     MountainNodeType(int type) {

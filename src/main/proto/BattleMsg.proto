@@ -46,6 +46,7 @@ message BattleFieldEndRequest_13000003{
 	uint32 damage = 8;	        // 战斗伤害，例如世界boss战斗需要这个数值。
 	repeated int32 richManItems = 10;	        //RichManItem表id： 战斗中产生的特殊大富翁地格，需要服务器处理的
 	string  equipBattleRecord = 11;	        //踏碎凌霄胜利胜利的战报
+	uint32  daShengNodeId = 12;	        //大圣来巡山节点Id
 }
 
 // 结束关卡战斗
@@ -728,7 +729,7 @@ message BattleMountainDataResponse_1300053a{
 	map<int32, int32> scoreReward = 6; // key ID   value  0 未领 1已领
 	int32 scoreMax = 7; //本赛季历史最高积分
 	int32 refreshNum = 8; //剩余刷新次数
-	repeated int32 buffBag = 10;//buff列表  
+	map<int32,int32>  buffBag = 10;//buff列表  
 }
 // 完成节点请求
 message BattleMountainFinishNodeRequest_13000541{
@@ -740,6 +741,7 @@ message BattleMountainFinishNodeResponse_13000542{
 	int32 score = 1; 
 	int32 hp = 2; //剩余血量万分比
 	int32 scoreMax = 3; //本赛季历史最高积分 
+	map<int32,int32>  buffBag = 4;//buff列表  
 }
 // 完成进度奖励请求
 message BattleMountainGetRewardRequest_13000543{
@@ -749,6 +751,7 @@ message BattleMountainGetRewardRequest_13000543{
 // 完成进度奖励返回
 message BattleMountainGetRewardResponse_13000544{
    repeated RewardInfo rewards = 1;		// 获得的奖励
+   	map<int32, int32> scoreReward = 2; // key ID   value  0 未领 1已领
 }
 // 重置
 message BattleMountainMapResetRequest_13000545{

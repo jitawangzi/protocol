@@ -193,6 +193,7 @@ public enum OpType{
 	MountainBattle(298, "大圣来巡山战斗掉落"),
 	MountainBattleEvent(299, "大圣来巡山事件掉落"),
 	PVEVPBattleBuyTicket(300, "PVEVP战斗购买门票"),
+	MountainBattleEventAdd(301, "大圣来巡山事件掉落加成"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 
