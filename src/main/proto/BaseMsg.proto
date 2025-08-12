@@ -219,16 +219,18 @@ message MountainMapNodeData{
 	repeated int32 shopId = 8  ;      // 物品信息
 }
 message PVEVPRecordData{
-	int32 result = 1; //1 胜利 2 失败
-	string name = 2; 		//名称
-	uint32 level = 3; 		// 等级
-	uint32 combatEffectiveness = 4; // 战力
-	int32 scoreChange = 5; //变化后排名
-	uint32 head = 6; 		// 头像id
-	uint32 headFrame = 7; 		// 头像框
-	int64 battleTime = 8;  //战斗记录ID
-	int32 type = 9; //1 进攻 2 防守
+	optional int32 result = 1; //1 胜利 2 失败
+	optional string name = 2; 		//名称
+	optional int32 level = 3; 		// 等级
+    optional int32 combatEffectiveness = 4; // 战力
+	optional int32 scoreChange = 5; //变化后排名
+	optional int32 head = 6; 		// 头像id
+	optional int32 headFrame = 7; 		// 头像框
+	optional int64 battleTime = 8;  //战斗记录ID
+	optional int32 type = 9; //1 进攻 2 防守
+	optional int64 playerId =10;  //对战玩家
 }
+
 enum UpdateType{
   UPDATE = 0; // 更新
   ADD = 1; //增加
