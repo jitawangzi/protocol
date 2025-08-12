@@ -41,6 +41,7 @@ public enum ErrorMsgEnum {
 	system_overload(20, "系统过载，拒绝处理请求", true),
 	player_logouting(22, "玩家正在退出，拒绝处理请求", true),
 	race_condition(23, "并发错误"),
+	production_gm_not_allow(24, "生产环境下，不允许执行某些gm指令"),
 
 	// #通用错误 50 - 99
 	/** 玩家数据校验错误。 */
