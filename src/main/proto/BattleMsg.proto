@@ -52,7 +52,7 @@ message BattleFieldEndRequest_13000003{
 // 结束关卡战斗
 message BattleFieldEndResponse_13000004{
 	repeated RewardInfo rewards = 1;		// 获得的奖励
-	uint32  score = 2;		// 积分变化
+	repeated  int32 params = 2;	        //附带参数 各类型自定会议
 }
 // 关卡快速战斗请求,也可以当扫荡来使用
 message BattleFieldQuickEndRequest_13000005{
