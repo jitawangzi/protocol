@@ -25,6 +25,7 @@ message ShopItemProto{
 message ShopItemBuyRequest_15000003{
 	uint32 shopId = 1; // 商店id  Shop表id
 	uint32 itemId = 2; // 商品表ShopItem 表id
+	uint32 count = 3; // 购买次数，在可以多次购买的商品里面，可以选择次数进行购买
 }
 
 message ShopItemBuyResponse_15000004{
