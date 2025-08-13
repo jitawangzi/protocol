@@ -729,13 +729,15 @@ message BattleMountainDataResponse_1300053a{
 	map<int32, int32> scoreReward = 6; // key ID   value  0 未领 1已领
 	int32 scoreMax = 7; //本赛季历史最高积分
 	int32 refreshNum = 8; //剩余刷新次数
+	int32 levelPro = 9; //等级系数
 	map<int32,int32>  buffBag = 10;//buff列表  
 	int32 rankId = 11; //排行榜ID 
+	
 }
-// 完成节点请求
+// 完成节点请求 用于非战斗节点操作
 message BattleMountainFinishNodeRequest_13000541{
    int32 nodeId = 1; //当前完成节点 
-   repeated int32 param = 2; //参数 
+   repeated int32 param = 2; // 事件和加血 ：参数  1  MountainResult 参数2 bufffid  参数3 bufffid   商店参数1 bufffid
 }
 // 完成节点返回
 message BattleMountainFinishNodeResponse_13000542{
@@ -763,10 +765,9 @@ message BattleMountainMapResetRequest_13000545{
 message BattleMountainMapResetResponse_13000546{
     repeated MountainMapNodeData  mapdata=1;
    	int32 curNodeId = 2; //当前停留节点
-	int32 score = 3; 
-	int32 hp = 5; //剩余血量万分比
-	int32 refreshNum = 8; //剩余刷新次数
-	repeated int32 buffBag = 10;//buff列表 
+	int32 refreshNum = 3; //剩余刷新次数
+	int32 levelPro = 4; //等级系数
+	int32 rankId = 5; //排行榜ID
 }
 // 下一层
 message BattleMountainNextFloorRequest_13000547{
@@ -784,7 +785,7 @@ message BattleMountainBuffBagRequest_1300053b{
 }
 //请求buff背包返回
 message BattleMountainBuffBagResponse_1300053c{
-   	repeated int32 buffBag = 1;//buff列表 
+  map<int32,int32> buffBag = 1;//buff列表 
 }
 //--------------------------------------------------双人爬塔--踏碎凌霄--------------------------------
 //--------------------------------------------------大圣擂台--------------------------------
