@@ -146,12 +146,19 @@ message HCBattleSweepResponse_13000041{
 message BattlePatrolRewardRequest_13000044{
 	bool isFast = 1; // true ：快速巡逻，直接领取固定时长收益。 false： 根据时长领取收益
 	bool advertising = 2; // 看广告领取快速巡逻收益，只有是快速巡逻是这个值才有用。
+	int32 multiple = 3;   // 倍数， 有某个月卡是，可以多倍巡逻，同时消耗多倍体力
 }
 
 message BattlePatrolRewardResponse_13000045{
+  // 巡逻奖励，目前按时间挂机奖励，和快速巡逻的奖励配置不一样，
+  // 所以下面这3个字段，暂时只给按时间挂机的巡逻类型使用，老功能使用
+  // 在快速巡逻的时候，下面3个字段没有值
 	repeated RewardInfo rewards = 1;// 随机掉落的奖励
 	int32 exp = 2;					// 增加的经验  --- 客户端需本地增加经验
 	int32 gold = 3;					// 增加的金币 --- 客户端需本地增加金币
+  // 快速巡逻时的奖励
+	 repeated RewardInfo fastRewards = 5;// 快速巡逻的奖励
+
 }
 
 // 战役信息
