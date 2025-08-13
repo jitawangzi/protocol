@@ -737,11 +737,12 @@ message BattleMountainDataResponse_1300053a{
 	int32 scoreMax = 7; //本赛季历史最高积分
 	int32 refreshNum = 8; //剩余刷新次数
 	map<int32,int32>  buffBag = 10;//buff列表  
+	int32 rankId = 11; //排行榜ID 
 }
 // 完成节点请求
 message BattleMountainFinishNodeRequest_13000541{
    int32 nodeId = 1; //当前完成节点 
-   int32 param = 2; //事件ID  商店物品ID  回血 
+   repeated int32 param = 2; //参数 
 }
 // 完成节点返回
 message BattleMountainFinishNodeResponse_13000542{
@@ -782,6 +783,15 @@ message BattleMountainNextFloorRequest_13000547{
 // 下一层返回
 message BattleMountainNextFlooResponse_13000548{
    	int32 curNodeId = 1; //当前停留节点
+}
+// 请求buff背包列表
+message BattleMountainBuffBagRequest_1300053b{
+ 
+
+}
+//请求buff背包返回
+message BattleMountainBuffBagResponse_1300053c{
+   	repeated int32 buffBag = 1;//buff列表 
 }
 //--------------------------------------------------双人爬塔--踏碎凌霄--------------------------------
 //--------------------------------------------------大圣擂台--------------------------------

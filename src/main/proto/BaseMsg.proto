@@ -213,22 +213,22 @@ message MountainMapNodeData{
 	int32 nodeID = 1;  //助战层数 floor * 1000 + line * 10 + index  1011 1层1行1点  
 	int32 nodeStatus = 2; //节点状态 0 未打 1 已打
 	int32 nodeType = 3; //节点类型
-	int32 monsterId = 4; // 怪物id
+	repeated int32 monsterId = 4; // 怪物id
 	int32 levelpro = 6; 		// 等级参数
 	int32 eventId = 7; 		// 事件
 	repeated int32 shopId = 8  ;      // 物品信息
 }
 message PVEVPRecordData{
-	optional int32 result = 1; //1 胜利 2 失败
-	optional string name = 2; 		//名称
-	optional int32 level = 3; 		// 等级
-    optional int32 combatEffectiveness = 4; // 战力
-	optional int32 scoreChange = 5; //变化后排名
-	optional int32 head = 6; 		// 头像id
-	optional int32 headFrame = 7; 		// 头像框
-	optional int64 battleTime = 8;  //战斗记录ID
-	optional int32 type = 9; //1 进攻 2 防守
-	optional int64 playerId =10;  //对战玩家
+	 int32 result = 1; //1 胜利 2 失败
+	 string name = 2; 		//名称
+	 int32 level = 3; 		// 等级
+     int32 combatEffectiveness = 4; // 战力
+	 int32 scoreChange = 5; //变化后排名
+	 int32 head = 6; 		// 头像id
+	 int32 headFrame = 7; 	// 头像框
+	 int64 battleTime = 8;  //战斗记录ID
+	 int32 type = 9; //1 进攻 2 防守
+	 string playerId =10;  //对战玩家
 }
 
 enum UpdateType{
