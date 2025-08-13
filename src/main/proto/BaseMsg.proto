@@ -213,7 +213,7 @@ message MountainMapNodeData{
 	int32 nodeID = 1;  //助战层数 floor * 1000 + line * 10 + index  1011 1层1行1点  
 	int32 nodeStatus = 2; //节点状态 0 未打 1 已打
 	int32 nodeType = 3; //节点类型
-	int32 monsterId = 4; // 怪物id
+	repeated int32 monsterId = 4; // 怪物id
 	int32 levelpro = 6; 		// 等级参数
 	int32 eventId = 7; 		// 事件
 	repeated int32 shopId = 8  ;      // 物品信息

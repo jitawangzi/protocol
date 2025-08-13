@@ -735,7 +735,7 @@ message BattleMountainDataResponse_1300053a{
 // 完成节点请求
 message BattleMountainFinishNodeRequest_13000541{
    int32 nodeId = 1; //当前完成节点 
-   int32 param = 2; //事件ID  商店物品ID  回血 
+   repeated int32 param = 2; //参数 
 }
 // 完成节点返回
 message BattleMountainFinishNodeResponse_13000542{
