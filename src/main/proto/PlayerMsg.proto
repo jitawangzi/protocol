@@ -436,6 +436,7 @@ message PlayerAllInfo{
 	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id
     map<int32, int32> figureMap = 88;		// 玩家拥有的形象，key：PlayerFigure表id value： 还剩多少秒过期，0表示不过期
     int32 figure = 89;		// 当前使用的形象，PlayerFigure表id
+    repeated LimitedTimeGiftInfo limitedTimeGift = 91; // 已经产生的限时礼包
 
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
