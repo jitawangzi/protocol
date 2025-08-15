@@ -173,7 +173,7 @@ message NotifyRefreshGlobalGmMailResponse_7d000059{
 
 // GM  添加全局gm邮件 请求
 message NotifyAddGlobalGmMailRequest_7d000060{
-	int32 addGmMailId = 1;
+	int64 addGmMailId = 1;
 }
 // GM  添加全局gm邮件 响应
 message NotifyAddGlobalGmMailResponse_7d000061{
