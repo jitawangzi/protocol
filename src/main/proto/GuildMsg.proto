@@ -20,7 +20,7 @@ message GuildSimpleInfo{
   int32 totalPower = 6; //总战力
   int32 isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
   string masterName= 8; //会长名字
-  string notice = 10;//公告、宣言 ，外部可见
+  string declaration = 10;//宣言，工会内外都可见
 }
 
 //公会的展示数据,成员和非成员都可以看到的数据，查看某个公会时使用。
@@ -78,7 +78,7 @@ message GuildServiceInfo {
 message GuildSettingProto{
   string wx = 1;//宗主的微信号
   int32 wxChangeNum = 2;//微信号修改次数
-  string notification = 4;//通知，只有本公会内的成员可以看到
+  string notice = 4;//公告,或者说通知，工会内可见
   map<int32,int32> iconList = 5;//解锁的ICON列表 key ICON id, value 剩余时间戳 秒， -1 表示永久
   int32 lastChangeNameTimer = 6;//最后修改名称时间
   int32 lastChangeWxTimer = 7;//最后修改微信号时间
@@ -120,8 +120,8 @@ message  GuildFindResponse_40000004{
 //创建公会
 message  GuildCreateRequest_40000005{
   string name = 1;//公会名称
-  string notice = 2;//公告
-  string declaration = 3;//宣言
+  string notice = 2;//公告,或者说通知，工会内可见
+  string declaration = 3;//宣言，工会内外都可见
   int32 icon = 4;//ICON
 }
 message  GuildCreateResponse_40000006{
@@ -147,8 +147,8 @@ message  GuildDissolveResponse_40000012{
 //公会设置相关 有值 则替换，没有值 则不修改
 message  GuildSettingRequest_40000013{
   string wx = 1;//微信号
-  string notice = 2;//公告
-  string declaration = 3;//宣言
+  string notice = 2;//公告,或者说通知，工会内可见
+  string declaration = 3;//宣言，工会内外都可见
   int32 icon = 4;//ICON
   int32 autoJoin = 5;//1 快速加入、2 需要验证加入、3 不可加入；
   string name = 7;//公会名称
