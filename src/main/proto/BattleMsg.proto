@@ -670,7 +670,7 @@ message BattleEquipTowerDataRequest_13000526{
 message BattleEquipTowerDataResponse_13000527{
    int32 ticketCount =1;    // 门票剩余次数      
    int64 nextTicketTime =2;     //  门票刷新时间戳
-   int32 curFloor =3;    // 当前可以打得层数 
+   map<int32,bool> floorData =3;       //  当前层数  true 已通关 false 未通关
    
 }
 // 助战玩家列表点击刷新

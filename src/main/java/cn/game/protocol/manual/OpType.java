@@ -196,6 +196,7 @@ public enum OpType{
 	MountainBattleEventAdd(301, "大圣来巡山事件掉落加成"),
 	MountainRefresh(302, "大圣来巡山刷新"),
 	MountainPointReward(303, "大圣来巡山积分奖励"),
+	PVEVPBattleQuickEnd(304, "PVEVP战斗快速结束"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 
