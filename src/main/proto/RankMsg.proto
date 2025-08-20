@@ -24,5 +24,3 @@ message RankInfo{
 	repeated PlayerRankInfo players = 3;  // 榜单数据
 }
 
-
-

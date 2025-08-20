@@ -20,6 +20,7 @@ public enum OpType{
 	EventOptin(17, "选择事件"),
 	/** 装备强化 */
 	EquipmentStrengthen(19, "装备强化"),
+	Expired(20, "过期"),
 
 	/** 英雄升级 */
 	HeroLevelUp(50, "英雄升级"),

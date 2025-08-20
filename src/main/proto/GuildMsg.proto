@@ -21,6 +21,7 @@ message GuildSimpleInfo{
   int32 isAutoJoin = 7; //1 快速加入、2 需要验证加入、3 不可加入；
   string masterName= 8; //会长名字
   string declaration = 10;//宣言，工会内外都可见
+  string creatorName = 12;//创始人名字
 }
 
 //公会的展示数据,成员和非成员都可以看到的数据，查看某个公会时使用。
@@ -33,11 +34,13 @@ message GuildShowInfo{
 
 //公会成员信息
 message GuildMemberInfo{
-  SimplePlayerInfo simplePlayer = 2;//玩家基本信息
+  SimplePlayerInfo simplePlayer = 1;//玩家基本信息
   int32 todayContribute = 3;//今日贡献
-  int32 totalContribute = 4;//累计历史贡献
-  int32 joinTime = 5;//加入时间
-  int32 position = 6;//职位
+  int32 weekContribute = 4;//本周贡献
+  int32 totalContribute = 5;//累计历史贡献
+  int32 totalDonateCount = 7;//累计捐献次数
+  int32 joinTime = 10;//加入时间
+  int32 position = 11;//职位
 
 }
 
@@ -76,12 +79,12 @@ message GuildServiceInfo {
 
 //公会设置相关
 message GuildSettingProto{
-  string wx = 1;//宗主的微信号
-  int32 wxChangeNum = 2;//微信号修改次数
+  string wx = 1;//宗主的微信号，已废弃，暂时保留
+  int32 wxChangeNum = 2;//微信号修改次数，已废弃，暂时保留
+  int32 lastChangeWxTimer = 7;//最后修改微信号时间，已废弃，暂时保留
   string notice = 4;//公告,或者说通知，工会内可见
   map<int32,int32> iconList = 5;//解锁的ICON列表 key ICON id, value 剩余时间戳 秒， -1 表示永久
   int32 lastChangeNameTimer = 6;//最后修改名称时间
-  int32 lastChangeWxTimer = 7;//最后修改微信号时间
 }
 //公会砍价相关
 message GuildBargainSharedInfo{
@@ -123,6 +126,7 @@ message  GuildCreateRequest_40000005{
   string notice = 2;//公告,或者说通知，工会内可见
   string declaration = 3;//宣言，工会内外都可见
   int32 icon = 4;//ICON
+  int32 autoJoin = 5;//1 快速加入、2 需要验证加入、3 不可加入；
 }
 message  GuildCreateResponse_40000006{
   GuildAllInfo guild = 1;
@@ -240,6 +244,28 @@ message GuildDonateResponse_40000068{
   repeated RewardInfo rewards = 1; // 获得的奖励
 }
 
+
+
+//请求工会排行榜数据
+message GuildRankListRequest_40000081{
+  int32 page = 2; // 分页显示使用，当前页，从1开始，如果不分页设置1
+  int32 pageSize = 3; // 每页显示数量。
+}
+
+message GuildRankListResponse_40000082{
+  GuildRankList rankList = 1;
+}
+
+message GuildRankList{
+  GuildRankInfo myRankInfo = 1; // 专门用来显示自己公会的排名数据
+  repeated GuildRankInfo guildRanks = 3;  // 榜单数据
+}
+
+message GuildRankInfo{
+  GuildSimpleInfo guild = 1;  //公会基本数据
+  int32 rank = 2; //排名，-1或0表示没有进入排行榜，没有名次
+  string score = 3; //参与排行的分数，这里是所有成员的战力总和
+}
 
 
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻下面的客户端不用看了，用不到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
