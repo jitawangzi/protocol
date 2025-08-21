@@ -145,6 +145,7 @@ public enum OpType{
 	ZhuanPanDraw(218, "转盘抽奖"), 
 	ZhuanPanItemBuy(219, "购买转盘抽奖道具"),
 	ActivityMeiRiTeHui(220, "每日特惠礼包购买"),
+	LimitedTimeGift(221, "新的限时礼包"),
 
 
 	Rename(225, "改名"),
