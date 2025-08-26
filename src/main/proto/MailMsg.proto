@@ -52,7 +52,7 @@ message MailNewPush_12010001{
 
 // 单个邮件数据
 message MailInfo{
-	// 邮件类型，1: 公告邮件 2 : 系统邮件  3：特殊邮件，一般做提示用
+	// 邮件类型，1: 公告邮件 2 : 系统邮件  3   4 公会加入提示
 	uint32 type = 1  ;
 	string uid = 2 ;			//邮件唯一id
 	uint32 id = 3 ;			    //Mail表id
