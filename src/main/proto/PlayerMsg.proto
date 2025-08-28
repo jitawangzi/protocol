@@ -431,6 +431,7 @@ message PlayerAllInfo{
 
 	repeated QualityStar heroStars = 78; // 领取过图鉴奖励的英雄数据
 	int32 rewardLevel = 79;	// 领取过图鉴等级奖励的等级
+	map<int32, bool> IllustrationsMonsterReward = 80;	// key： 图鉴里已经出现过的怪物id； value： 对应的怪物是否已经领取了奖励
 	repeated int32 heroSkinIds = 82;	// 拥有的英雄皮肤，HeroSkin表id
 	repeated int32 headPortraits = 84;	// 玩家的获取的头像（通过奖励获取的，靠获取英雄解锁的不算）
 	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id

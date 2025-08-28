@@ -146,6 +146,24 @@ message HeroIllustrationsLevelRewardResponse_16000045{
 	repeated RewardInfo reward = 1;	// 获得的奖励
 }
 
+//增加新图鉴怪物
+message HeroIllustrationsMonsterAddRequest_16000046{
+  repeated int32 id = 1;// 怪物id
+}
+
+message HeroIllustrationsMonsterAddResponse_16000047{
+}
+
+//领取怪物图鉴奖励
+message HeroIllustrationsMonsterRewardRequest_16000048{
+  int32 id = 1;// 怪物id
+}
+
+message HeroIllustrationsMonsterRewardResponse_16000049{
+    repeated RewardInfo reward = 1; // 获得的奖励
+}
+
+
 
 //使用英雄碎片合成英雄
 message HeroFragmentComposeRequest_16000050{

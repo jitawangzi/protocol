@@ -83,6 +83,7 @@ public enum OpType{
 	YaoWangComplete(147, "妖王快跑通关奖励"),
 
 	llustrationsReward(148, "英雄图鉴奖励"),
+	llustrationsMonsterReward(149, "图鉴怪物奖励"),
 
 	PotentialLvUp(150, "潜力升级"),
 	PotentialBreak(151, "潜力突破"),
@@ -161,7 +162,8 @@ public enum OpType{
 	GuildQuestReward(137, "公会任务积分奖励"),
 	GuildDonate(138, "公会捐献"),
 
-	
+	ServerOpenRankDayReward(150, "开服7日排行榜每日奖励"),
+
 
 	HeroFragmentCompose(250, "英雄合成"), 
 	HeroDisassemble(251, "英雄分解"),
