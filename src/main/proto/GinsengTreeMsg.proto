@@ -115,4 +115,13 @@ message GinsengTreeEnergyResponse_39000022{
     repeated  RewardInfo rewards =1; // 增加的体力
 }
 
+//保存手操卡
+message GinsengTreeHandCardRequest_39000025{
+  repeated int32 id = 1;    //手操卡道具id
+}
+
+message GinsengTreeHandCardResponse_39000026{
+}
+
+
 
