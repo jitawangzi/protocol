@@ -11,7 +11,7 @@ import "BaseMsg.proto" ;
 //请求排行榜数据
 message RankListRequest_35000001{
   int32 type = 1; // RankType表id
-  int32 page = 2; // 分页显示使用，当前页，从1开始，如果不分页设置1
+  int32 page = 2; // 分页显示使用，当前页，从1开始
   int32 pageSize = 3; // 每页显示数量。
 }
 
