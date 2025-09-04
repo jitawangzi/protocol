@@ -191,7 +191,7 @@ message NotifyNewXianShiLiBao_15000054{
 message LimitedTimeGiftInfo{
   int32 id = 1;         //LimitedTimeGift 表id
   int32 buyCount = 2;   //已经购买过的次数
-  int32 remainingSurvivalSeconds = 3; //这个礼包还剩多少秒消失
+  int32 endTime = 3; //这个礼包结束时间（秒时间戳）
 }
 
 
