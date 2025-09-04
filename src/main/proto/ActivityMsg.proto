@@ -181,6 +181,9 @@ message ActivityWestLuckyInfoResponse_11000092{
   map<int32,int32> buyMap =2;//购买的物品的数量
   map<int32,int32> dramaMap =3;//转盘格子抽奖的次数
   int32 outDrawNum = 4;//外圈抽取次数
+  int32 todayCount = 7;//今天抽取次数
+  int32 totalCount = 8;//总抽取次数
+  repeated int32 rewardIndex = 9;//已经领取过的抽取次数进度奖励索引，从0开始
 
 }
 //抽取转盘
@@ -206,6 +209,13 @@ message ActivityWestLuckyBuyResponse_11000096{
   repeated RewardInfo drops = 3;//购买的物品
 }
 
+//领取次数进度奖励
+message ActivityWestLuckyCountRewardRequest_11000097{
+  repeated int32 rewardIndex = 1;//领取抽取次数进度奖励索引，从0开始
+}
+message ActivityWestLuckyCountRewardResponse_11000098{
+  repeated RewardInfo reward = 3;//获得的物品
+}
 
 
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻每日特惠礼包︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
