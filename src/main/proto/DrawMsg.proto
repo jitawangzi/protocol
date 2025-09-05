@@ -72,7 +72,7 @@ message DrawHeroInfo{
 	repeated int32 itemId = 1;		// 英雄碎片id
 	repeated int32 itemCount = 2;	// 英雄碎片id对应的数量
 	repeated int32	recruitedPos = 3;  // 已经招募过的英雄碎片位置，从0开始
-	int32 freeRefreshRemaningSeconds = 4;  // 还剩多少秒自动刷新
+	int32 freeRefreshRemaningSeconds = 4;  // 还剩多少秒自动刷新,如果是-1则不自动刷新
 	bool canMultiple = 5; 			// 是否可以开启多倍招募
 	int32 multiple = 6;   			// 招募时选择的倍数
 	int32 luckyValue = 8;   			// 当前保底幸运值
