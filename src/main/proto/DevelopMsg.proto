@@ -42,6 +42,7 @@ message DevelopHeavenlyDaoLvUpRequest_25000010{
 }
 
 message DevelopHeavenlyDaoLvUpResponse_25000011{
+  repeated RewardInfo rewards = 1; // 晋升获得的奖励
 }
 
 //  **************************** 乾坤镜 ***************************

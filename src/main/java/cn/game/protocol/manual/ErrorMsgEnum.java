@@ -168,8 +168,8 @@ public enum ErrorMsgEnum {
 	zong_men_active_reward_already_get(422, "公会活跃度奖励已经领取过了"),
 	zong_men_not_allow_join(423, "公会不让加入"),
 	zong_men_name_too_long(424, "公会名字太长"),
-
 	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
+	zong_men_apply_max(426, "公会申请数量达到上限"),
 	zong_men_create_failed(428, "公会创建失败"),
 
 	draw_refresh_gold(450, "抽卡刷新时，元宝消耗校验错误"),
