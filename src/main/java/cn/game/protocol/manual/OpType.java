@@ -88,6 +88,8 @@ public enum OpType{
 	PotentialLvUp(150, "潜力升级"),
 	PotentialBreak(151, "潜力突破"),
 	RescueLvUp(152, "强援升级"),
+	
+	TianDaoLvUp(153, "天道修为提升等级"),
 
 	BattleStart(160, "战役开始"),
 
