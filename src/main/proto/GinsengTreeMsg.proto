@@ -62,6 +62,8 @@ message GinsengTreeInsecticidesRequest_39000007{
 
 message GinsengTreeInsecticidesResponse_39000008{
 	GinsengTreeInfo treeInfo = 1;
+	 // 灵叶奖励。
+    repeated  RewardInfo rewards =2;
 }
 
 // 人参果树施肥
