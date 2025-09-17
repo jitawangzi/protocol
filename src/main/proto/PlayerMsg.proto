@@ -288,6 +288,13 @@ message PlayerAssetDataResponse_01000201{
    map<uint32, uint64> assets = 2;   // 主要是货币，附带一些经验体力等数据。   key:Asset表id
    repeated ItemInfo items  = 5;        //道具  Item表
 }
+/*** 请求定时恢复的资源剩余时间，一般用在客户端从后台切换回来时使用，确保倒计时正确  **/
+message PlayerAssetRecoverRequest_01000210{
+
+}
+message PlayerAssetRecoverResponse_01000211{
+   map<uint32, uint64> assetRecover = 1;  // key:Asset表id。一些定时恢复的资源，例如体力，value：上次恢复的时间戳（毫秒）
+}
 
 
 /*** 请求玩家的调查问卷数据  **/
