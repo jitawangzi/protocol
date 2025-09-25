@@ -26,6 +26,10 @@ message PlayerLoginRequest_01000001{
 
     string deviceId = 25; //设备唯一标识：MAC或者UUID或者IMEI，这里小游戏变为账号id ，即微信的openid
     string accountId = 26; //登录账号id，如果接畅游sdk，则是sdk分配的userid，如果直接微信，则是微信的unionid
+
+    string unionid = 60; //微信小程序中的unionid，如果是微信小程序需要传递此参数
+    string openid = 61; //微信小程序中的openid，如果是微信小程序需要传递此参数
+
 	// 这两个暂时用不到
 	//  int32 accountType = 10; //渠道类型
 	//	string sdkDeviceId = 24;
