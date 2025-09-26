@@ -621,7 +621,16 @@ message BattleLingShanEndResponse_1300051a
 }
 
 
+// 使用手操卡
+message BattleHandCardRequest_13000600
+{
+    int32 id = 1; // 手操卡id
+}
 
+message BattleHandCardResponse_13000601
+{
+  bool consume = 1; // 是否被消耗掉了
+}
 
 //@NotUseStart
 //神通秘术 消息
