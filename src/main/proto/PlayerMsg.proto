@@ -490,5 +490,11 @@ message WechatSetting{
     bool isOpenNotifyFirstRechargeReward = 3; //是否开启首充次日领取微信 推送
     bool isOpenNotifyMonthSignReward = 4; //是否开启月签到微信 推送
 }
+//广告BI
+message PlayerAdBIInfoRequest_01100603{
+  repeated string adBIinfo = 1;  // bi 信息 按顺序添加即可
+}
+message PlayerBIInfoResponse_01100604{
 
+}
 
