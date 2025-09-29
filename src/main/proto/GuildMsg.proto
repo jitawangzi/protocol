@@ -170,6 +170,7 @@ message  GuildMemberPositionSetResponse_40000016{
   bool result = 1;//是否成功
   int32 position = 2;//新的职位
   uint32 targetPid = 3;//目标玩家id
+  uint32 oldPosition = 4;//老的职位
 }
 //退出公会
 message  GuildQuitRequest_40000017{

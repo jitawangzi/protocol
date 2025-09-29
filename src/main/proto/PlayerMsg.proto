@@ -181,8 +181,8 @@ message PlayerLevelUpResponse_01000056{
 
 /*** 保存新手引导步骤 ***/
 message PlayerGuideRequest_01000060{
-	uint32 type = 1;  	//类型
-    uint32 step = 2;	//该类型下进行到哪一步了
+	uint32 type = 1;  	//类型    1
+    uint32 step = 2;	//该类型下进行到哪一步了 1
 }
 
 message PlayerGuideResponse_01000061{
