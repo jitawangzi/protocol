@@ -271,4 +271,41 @@ message ActivityServerOpenRankRewardResponse_11000206{
   repeated RewardInfo rewards = 1;  //获得的奖励
 }
 //︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼开服7天排行榜︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼︼
+//==================================30天活动登录通行证===============================
 
+
+message FundPassSignInfo{
+  int32 day = 1;         //
+  int32 finish = 2;   //// 1已完成   0 未完成
+  int32 reward = 3; /// 1已领取奖励 0 未领取 
+  int32 unlock = 4; /// 1 已经解锁  0 未解锁 
+  int32 Id = 5;         //表格ID
+}
+
+
+//购买通行证
+message FundPassSignBuyRequest_11000301{
+  int32 activityId = 1;//
+  int32 id = 2;//
+}
+message FundPassSignBuyResponse_11000302{
+  repeated FundPassSignInfo info = 1;//通行证信息
+}
+
+//请求所有的购买通行证
+message FundPassSignAllRequest_11000303{
+ int32 activityId = 1;//
+}
+message FundPassSignAllResponse_11000304{
+ repeated FundPassSignInfo info= 1;
+}
+//领取通行证
+message FundPassSignReceiveRequest_11000305{
+  int32 activityId = 1;//
+  int32 id = 2;//
+}
+message FundPassSignReceiveResponse_11000306{
+  repeated RewardInfo rewards = 2;//获得的奖励
+}
+
+//==================================30天活动登录通行证===============================
