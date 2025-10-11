@@ -159,7 +159,7 @@ public enum ErrorMsgEnum {
 	zong_men_exist(413, "公会已经存在,不可重复加入"),
 	zong_men_name_repeat(414, "公会名称重复"),
 	zong_men_apply_exist(415, "该公会已经申请过，不可重复申请"),
-	zong_men_player_apply_has(416, "该玩家已经在公会中，不可重复加入"),
+	zong_men_player_in(416, "该玩家已经在公会中"),
 	zong_men_permission_not_enough(417, "公会权限不足，不可操作"),
 	zong_men_full(418, "公会成员数量达到上限"),
 	zong_men_apply_join_timer(419, "公会申请加入冷却时间未到，不可申请"),
@@ -171,6 +171,7 @@ public enum ErrorMsgEnum {
 	zong_men_player_not_bargain(425, "还没有砍价就购买了"),
 	zong_men_apply_max(426, "公会申请数量达到上限"),
 	zong_men_create_failed(428, "公会创建失败"),
+
 
 	draw_refresh_gold(450, "抽卡刷新时，元宝消耗校验错误"),
 	PVEVP_No_Ticket(451, "大圣擂台门票不足"),
