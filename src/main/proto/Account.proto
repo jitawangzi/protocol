@@ -23,9 +23,10 @@ message AccountLogin{
 }
 
 message AccountLoginResponse{
-  HttpResult result                    = 1;
-  string passport_session_id = 2;			// 登陆会话id，请求服务器列表时使用
-  string user_id = 3;						//
+  HttpResult result = 1;
+  string passport_session_id = 2;	// 登陆会话id，请求服务器列表时使用
+  string user_id = 3;				// 游戏服的玩家账号id
+  string sdk_user_id = 4 ;       //sdk的账号id，如果登陆时的AccountChannelType 是CHANGYOU，则表示是畅游sdk的user_id
   bool isNew = 10;				// 是否是新注册的账号
   string ext = 11;  			// 扩展参数，WECHAT渠道为openid
 }
