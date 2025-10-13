@@ -192,6 +192,7 @@ message PlayerShowInfo{
   	repeated EquipPartShowInfo parts = 8;  // 装备、宝石等数据
 }
 
+// 微信支付的相关参数
 message PaymentOrderProto{
 	string signData = 1;
 	string paySig = 2;
