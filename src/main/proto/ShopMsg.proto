@@ -117,6 +117,7 @@ message PaymentOrderPush_15010020{
 	PaymentOrderProto order = 1; // 这个是微信支付的相关参数
 	string orderId = 2;        // 订单的唯一流水id
 	string sdkGoodsId = 3;     // 畅游sdk支付时的商品id
+	string serverId = 4;     // 畅游sdk支付时使用的服务器id
 }
 
 
