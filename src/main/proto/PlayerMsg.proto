@@ -480,7 +480,7 @@ message PlayerAllInfo{
    string disableIosPayVersion  = 200;        //禁用ios充值的客户端版本，一般在提审中使用。
    repeated int32 closeFuncs = 202;  // 关闭的功能列表， FuncOpen表id
    bool shabiyincangguanggao = 250;  // 隐藏广告
-
+   int64 loginDay = 251;  // 累计登陆天数
 }
 
 //微信设置相关
