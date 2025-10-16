@@ -481,6 +481,8 @@ message PlayerAllInfo{
    repeated int32 closeFuncs = 202;  // 关闭的功能列表， FuncOpen表id
    bool shabiyincangguanggao = 250;  // 隐藏广告
    int64 loginDay = 251;  // 累计登陆天数
+   int32 playerCreateTime = 255;//角色创建时间， 秒时间戳
+
 }
 
 //微信设置相关

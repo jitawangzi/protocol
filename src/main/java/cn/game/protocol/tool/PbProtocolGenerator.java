@@ -272,15 +272,17 @@ public class PbProtocolGenerator {
 	}
 
 	private static void genMessageDescCSV(List<MessageObject> messages) throws FileNotFoundException {
-		String[] headers = new String[] { "序号", "协议名", "协议号", "模块", "功能组", "组顺序", "权重", "描述" };
+		String[] headers = new String[] { "序号", "协议名", "协议号", "模块", "功能组", "组顺序", "组权重", "描述" };
 		String filePath = System.getProperty("user.dir") + "/../simulationclient/messages.csv";
 		Set<String> protoNameSet = new HashSet<String>();
 		List<List<String>> oldDataList = new ArrayList<>();
-		;
 		if (new File(filePath).exists()) {
 			oldDataList = CSVUtil.read(filePath, headers);
 			for (List<String> list : oldDataList) {
-				protoNameSet.add(list.get(1));
+				String string = list.get(1); 
+				if (!StringUtils.isEmpty(string)) {
+					protoNameSet.add(string);
+				}
 			}
 		}
 		List<List<String>> dataList = new ArrayList<>();
@@ -290,7 +292,11 @@ public class PbProtocolGenerator {
 		int i = 1;
 		if (!oldDataList.isEmpty()) {
 			for (List<String> list : dataList) {
-				int seq = Integer.parseInt(list.get(0));
+				String string = list.get(0); 
+				if (StringUtils.isEmpty(string) || string.startsWith("#")) {
+					continue;
+				}
+				int seq = Integer.parseInt(string);
 				if (seq > i) {
 					i = seq;
 				}
