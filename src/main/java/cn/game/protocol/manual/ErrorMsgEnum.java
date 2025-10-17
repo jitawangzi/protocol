@@ -42,6 +42,7 @@ public enum ErrorMsgEnum {
 	player_logouting(22, "玩家正在退出，拒绝处理请求", true),
 	race_condition(23, "并发错误"),
 	production_gm_not_allow(24, "生产环境下，不允许执行某些gm指令"),
+	gm_not(25, "不是gm账号，不允许执行gm指令"),
 
 	// #通用错误 50 - 99
 	/** 玩家数据校验错误。 */

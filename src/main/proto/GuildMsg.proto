@@ -191,8 +191,8 @@ message GuildQuitPush_40000024
 {
 }
 
-//拒绝玩家加入公会的通知
-message GuildApplyRejectedPush_40100001
+//处理玩家申请通知，不管是同意还是拒绝
+message GuildApplyProcessedPush_40100001
 {
     int64 guildId = 1;//
     int64 playerId = 2;//
