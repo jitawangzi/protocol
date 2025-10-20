@@ -76,6 +76,7 @@ enum AccountErrorCode{
 	CHANNEL_CHECK_FAIL=6; // 渠道账号校验错误
 	ACCOUNT_CREATE_FAIL=8; // 账号创建失败
 	ACCOUNT_BANNED=10; // 账号被封---目前在畅游sdk登陆，有可能有这个错误
+	ACCOUNT_REGISTER_NOT_ALLOWED =15; //正式运行环境不允许自己注册账号
 	INVALID_REQUEST=20; //请求数据不合法
 	SYSTEM_ERROR=30; //服务器异常
 }
