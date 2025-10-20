@@ -38,6 +38,7 @@ message MailReceiveResponse_12000006{
 //删除邮件
 message MailDeleteRequest_12000007{
 	string uid = 1 ;	//邮件id,如果是null表示删除所有已读邮件
+	int32 type = 2;    // 删除指定类型的所有邮件
 }
 
 //删除邮件返回
