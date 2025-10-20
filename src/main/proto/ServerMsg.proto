@@ -117,6 +117,7 @@ message PaymentOrderCreateResponse_7d000021{
 message PaymentOrderShipRequest_7d000022{
 	uint64 playerId = 1; // 玩家id
 	uint64 uid = 3; //
+	string sdkOrderId = 5; //
 }
 message PaymentOrderShipResponse_7d000023{
 	bool success = 1; //是否发货成功
