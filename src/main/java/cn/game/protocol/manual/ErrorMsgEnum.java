@@ -161,7 +161,7 @@ public enum ErrorMsgEnum {
 	zong_men_player_in(416, "该玩家已经在仙会中"),
 	zong_men_permission_not_enough(417, "仙会权限不足，不可操作"),
 	zong_men_full(412, "仙会成员数量达到上限"),
-	zong_men_apply_join_timer(419, "仙会申请加入冷却时间未到，不可申请"),
+	zong_men_apply_join_timer(419, "加入仙会冷却CD中"),
 	zong_men_player_member_not_exist(420, "仙会成员不存在"),
 	zong_men_position_member_num_not_enough(421, "仙会职位成员数量不足，不可操作"),
 	zong_men_active_reward_already_get(422, "仙会活跃度奖励已经领取过了"),
