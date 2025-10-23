@@ -191,6 +191,13 @@ message GuildQuitPush_40000024
 {
 }
 
+//拒绝玩家加入公会的通知
+message GuildApplyRejectedPush_40100001
+{
+    int64 guildId = 1;//
+    int64 playerId = 2;//
+}
+
 
 //公会日志请求
 message GuildLogRequest_40000025{
