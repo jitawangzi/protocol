@@ -5,6 +5,11 @@ package cn.game.protocol.protobuf;
 import "BaseMsg.proto" ;
 import "RewardMsg.proto" ;
 
+//@HandlerPackage cn.game.games.net.game.module.mail
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@Function Letter
+//@MessageModule 12
+
 //请求邮件列表。
 message MailListRequest_12000001{
 

@@ -5,6 +5,11 @@ package cn.game.protocol.protobuf;
 import "BaseMsg.proto" ;
 import "RewardMsg.proto" ;
 
+//@HandlerPackage cn.game.games.net.game.module.friend
+//@ClientHandlerPackage cn.game.simulation.client.handler
+//@Function Friend
+//@MessageModule 30
+
 // 请求好友列表
 message FriendListRequest_30000001{
 }
