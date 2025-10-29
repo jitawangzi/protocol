@@ -189,6 +189,7 @@ message GuildInfoResponse_40000022{
 //解散公会 通知玩家退出公会
 message GuildQuitPush_40000024
 {
+  int32 quitType = 1; // 0 自己退出 1 会长踢出 2 会长主动解散 3 公会活跃度低强制解散
 }
 
 //处理玩家申请通知，不管是同意还是拒绝
