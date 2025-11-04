@@ -205,6 +205,7 @@ public enum OpType{
 	MountainPointReward(303, "大圣来巡山积分奖励"),
 	PVEVPBattleQuickEnd(304, "PVEVP战斗快速结束"),
 	FundPassSignActivity(305, "登录通行证活动"),
+	GuildGVEOpenCard(306, "GVE翻咔"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 
