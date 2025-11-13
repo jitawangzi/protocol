@@ -275,7 +275,7 @@ message GuildRankInfo{
   int32 rank = 2; //排名，-1或0表示没有进入排行榜，没有名次
   string score = 3; //参与排行的分数，这里是所有成员的战力总和
 }
-
+//--------------------------------------GVE 翻咔----------------------
 message GuildGVECardData{
     int32 cardId = 1;//  ID 
     int32 cardStaus = 2;// 状态 0 未   1已
@@ -319,6 +319,75 @@ message GuildGVEOpenCardResponse_40000086{
   GuildGVECardData cardData=2;
   int32 result=3;
 }
+//--------------------------------------GVE 翻咔----------------------
+//--------------------------------------GVE PVE----------------------
+// 单个节点信息
+message GuildGVEMapNode{
+  int32 nodeID = 1;// 节点ID
+  int32 nodeStatus = 2;// 节点状态  0完成 1未完成
+  int32 nodeProgress = 3;// 节点进度   10000
+  repeated int64 playing = 4;// 正在玩的
+  repeated GuildGVEMapNodeRankData rank = 5;// 排行榜
+}
+// 单个节点里的排行榜数据
+message GuildGVEMapNodeRankData{
+  int64 playerId = 1;// 
+  string playerName = 2;// 
+  int32 playerprogress = 3;//
+  int32 playerScore = 4;// 
+  int32 playerCoin = 5;// 
+}
+// 地图信息
+message GuildGVEMap{
+   repeated GuildGVEMapNode mapData = 1;// 地图数据
+   int32 leftBuyCount = 2;// 剩余购买次数
+   int32 endTime = 3;// 结束时间戳
+   int32 curMapId = 4;// 当前地图
+   int32 floorCount = 5;// 这周期已经打了几张图
+}
+// 服务器-》联盟服 战斗开始回包
+message GuildGVEBattleStart{
+  GuildGVEMapNode nodeData=1;
+  int32 result=2;  // 1 认定有效  2 认定无效
+  int32 newFloor=3; // 无论是否有效 进行地图比对 换地图了就拉数据 
+}
+// 服务器-》联盟服 战斗结束回包
+message GuildGVEBattleEnd{
+  GuildGVEMapNode nodeData=1;
+  int32 progress=2;//真正打的血量
+  int32 result=3;  // 1 认定有效  2 认定无效（需返还） 
+  int32 newFloor=4; // 无论是否有效 进行地图比对 换地图了  就拉数据 
+  int32 getScore=5; // 
+  int32 getCoin=6;
+}
+//   打开地图
+message GuildGVEOpenMapRequest_40000087{
+
+}
+
+//  打开地图回包
+message GuildGVEOpenMapResponse_40000088{
+    GuildGVEMap mapdata=1;
+}
+//推送战斗结束信息 在battleEnd 之前
+message GuildGVEMapBattleEndPush_40000089
+{
+   GuildGVEBattleEnd battleEndData=1;
+}
+//推送节点信息  在battleStart 之前 
+message GuildGVEMapBattleStartPush_4000008a
+{
+   GuildGVEBattleStart battleStartData=1;
+}
+//   买次数
+message GuildGVEBuyTicketRequest_40000090{
+ 
+}
+//  买次数回包
+message GuildGVEBuyTicketResponse_40000091{
+    int32 leftBuyCount = 1;// 剩余购买次数
+}
+//--------------------------------------GVE PVE----------------------
 //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻下面的客户端不用看了，用不到︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
 
 

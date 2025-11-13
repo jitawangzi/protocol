@@ -49,6 +49,7 @@ public enum DungeonTypeEnum{
 	HCBattleChapter(11, "合成游戏主线章节"),
 	DayChallenge(12, "合成每日挑战"),
 	CHAPTER_TYPE_DA_DAO(50, "大道争锋玩法"),
+	GVEPVEBattle(51, "轮回西行"),
     ;
 	/** id */
 	private int id ; 

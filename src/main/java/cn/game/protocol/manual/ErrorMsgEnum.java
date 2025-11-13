@@ -177,6 +177,7 @@ public enum ErrorMsgEnum {
 	PVEVP_No_Ticket(451, "大圣擂台门票不足"),
 	PVEVP_No_Player(452, "大圣擂台挑战玩家错误"),
 	PVEVP_Season_Over(453, "大圣擂台赛季结束"),
+	GVE_START_FAIL(454, "GVEPVE开始失败"),
 	max_error_id(999, "占位错误码");
 
 	/** id */
