@@ -22,6 +22,7 @@ message GuildSimpleInfo{
   string masterName= 8; //会长名字
   string declaration = 10;//宣言，工会内外都可见
   string creatorName = 12;//创始人名字
+  string serverId = 20;   // 哪个服的工会
 }
 
 //公会的展示数据,成员和非成员都可以看到的数据，查看某个公会时使用。
