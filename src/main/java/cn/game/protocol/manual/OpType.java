@@ -207,6 +207,7 @@ public enum OpType{
 	FundPassSignActivity(305, "登录通行证活动"),
 	GuildGVEOpenCard(306, "GVE翻咔"),
 	GuildGVEPVETicket(307, "GVEPVE门票"),
+	GemXilian(308, "宝石洗炼"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 

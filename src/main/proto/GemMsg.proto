@@ -2,7 +2,7 @@ syntax = "proto3";
 package cn.game.protocol.protobuf;
 
 import "RewardMsg.proto" ;
-
+import "BaseMsg.proto" ;
 //@HandlerPackage cn.game.games.net.game.module.develop.gem
 //@ClientHandlerPackage cn.game.simulation.client.handler
 //@MessageModule 10
@@ -46,4 +46,12 @@ message GemComposeRequest_10000007 {
 message GemComposeResponse_10000008 {
 	// 生成的新的宝石,客户端自己删除掉参与合成的宝石
 	repeated RewardInfo rewards = 1;
+}
+//宝石洗练
+message GemXiLianRequest_10000010 {
+   string uids = 1; //已有的宝石
+}
+
+message GemXiLianResponse_10000011 {
+	GemInfo gem = 1;
 }
