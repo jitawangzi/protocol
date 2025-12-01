@@ -46,4 +46,9 @@ message RewardShowPush_55002501{
 }
 
 
+//资源更新推送，客户端收到这个协议之后，更新本地的物品，一般用来更新资源和道具
+message GoodsUpdatePush_55003501{
+  repeated GoodsInfo update = 1;   // 更新后的物品数量
+}
+
 
