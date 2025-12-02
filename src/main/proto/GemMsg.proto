@@ -68,4 +68,6 @@ message GemGacheResponse_10000013 {
 	repeated RewardInfo rewards = 1;    
 	int32 gemGacheFreeTimesNormal = 2;  //宝石抽奖剩余免费广告次数
     int32 gemGacheFreeTimesHigh = 3;  //宝石抽奖剩余免费广告次数
+   int32 gemGacheBaoDiNormal = 4;  //BaoDiNormal
+   int32 gemGacheBaoDiHigh = 5;  //BaoDiHigh
 }

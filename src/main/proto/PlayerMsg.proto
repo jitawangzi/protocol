@@ -487,6 +487,8 @@ message PlayerAllInfo{
    
    int32 gemGacheFreeTimesNormal = 256;  //宝石抽奖剩余免费广告次数
    int32 gemGacheFreeTimesHigh = 257;  //宝石抽奖剩余免费广告次数
+   int32 gemGacheBaoDiNormal = 258;  //BaoDiNormal
+   int32 gemGacheBaoDiHigh = 259;  //BaoDiHigh
 }
 
 //微信设置相关
