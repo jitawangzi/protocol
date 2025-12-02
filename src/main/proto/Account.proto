@@ -47,15 +47,49 @@ message AccountServerList{
 message AccountServerListResponse{
 	  HttpResult result                    = 1;
 	  repeated ServerInfo servers = 2;
+      // 总逻辑服数量
+	  int32 totalServerCount = 5;
+	  // 我进入过的逻辑服务器
+	  repeated MyServerInfo myServerList = 6;
 }
 
+/*** 请求逻辑服务器列表****/
+message AccountLogicServerList{
+    string passport_session_id = 1;
+    int32 page = 4; // 分页显示使用，当前页，从1开始
+    int32 pageSize = 5; // 每页显示数量,默认10个
+}
+
+message AccountLogicServerListResponse{
+    HttpResult result  = 1;
+    repeated LogicServerInfo logicServerList = 3;
+}
+
+// 实际的物理服务器地址，客户端连接时使用
 message ServerInfo {
-	string serverId = 1;  // 服务器唯一id
+	string serverId = 1;  // 服务器唯一id，实际的物理服务器id
 	string name = 2;	// 服务器名字
 	string ip = 3;		// ip，建立连接使用
 	int32 port = 4;    // 端口，建立连接使用
-	int32 status = 5;  // 运行状态,1正常开启 2 维护 4 停服，一般只有状态是1才能进入
+	int32 status = 5;  //运行状态,1正常开启 2 维护 4 停服，一般只有状态是1才能进入
 	string version = 6;  // 1.0.0.1这样的格式，前3个数字一样才可以进入这个服务器。
+}
+
+// 逻辑服务器地址，游戏中玩家创建账号选择的服务器
+message LogicServerInfo {
+  string serverId = 1;  // 服务器唯一id，选服依据
+  string name = 2;  // 服务器名字
+  int32 seq = 3;  // 服务器序号，可以用来排序，一般从1开始代表1服
+  int32 openTime = 6; // 服务器开服时间，秒时间戳，看情况使用，例如默认进最新的服务器
+  int32 status = 7;  // 运行状态,1正常开启（火爆） 2 维护
+  bool isNew = 8;  // 是否是新服
+}
+// 我进入过的服务器
+message MyServerInfo {
+  string serverId = 1;  // 服务器唯一id，对应LogicServerInfo中的serverId
+  string name = 2;  // 玩家名字
+  int32 level = 3;  // 等级
+  int32 lastEnterTime = 4;  // 最后一次进入该服务器的时间，秒时间戳
 }
 
 
