@@ -30,6 +30,7 @@ message PlayerLoginRequest_01000001{
     string unionid = 60; //微信小程序中的unionid，如果是微信小程序需要传递此参数
     string openid = 61; //微信小程序中的openid，如果是微信小程序需要传递此参数
 
+    string serverId = 70; // 进入哪个逻辑服务器，几服
 	// 这两个暂时用不到
 	//  int32 accountType = 10; //渠道类型
 	//	string sdkDeviceId = 24;
