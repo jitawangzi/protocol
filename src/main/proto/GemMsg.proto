@@ -3,6 +3,7 @@ package cn.game.protocol.protobuf;
 
 import "RewardMsg.proto" ;
 import "BaseMsg.proto" ;
+import "PlayerMsg.proto" ;
 //@HandlerPackage cn.game.games.net.game.module.develop.gem
 //@ClientHandlerPackage cn.game.simulation.client.handler
 //@MessageModule 10
@@ -54,4 +55,17 @@ message GemXiLianRequest_10000010 {
 
 message GemXiLianResponse_10000011 {
 	GemInfo gem = 1;
+}
+
+//宝石抽奖
+message GemGacheRequest_10000012 {
+   int32  gemPool=1;  // 1 普池  2 高池
+   int32  gemcount=2;  // 1 单抽  10 10连抽
+   int32  gemType=3;  // 1 看视频免费  2 扣道具 3 扣钻石
+}
+//宝石抽奖
+message GemGacheResponse_10000013 {
+	repeated RewardInfo rewards = 1;    
+	int32 gemGacheFreeTimesNormal = 2;  //宝石抽奖剩余免费广告次数
+    int32 gemGacheFreeTimesHigh = 3;  //宝石抽奖剩余免费广告次数
 }

@@ -208,6 +208,7 @@ public enum OpType{
 	GuildGVEOpenCard(306, "GVE翻咔"),
 	GuildGVEPVETicket(307, "GVEPVE门票"),
 	GemXilian(308, "宝石洗炼"),
+	GemGache(309, "宝石抽奖"),
 	PressureTest(888, "压力测试"),
 	None(999, "未定义"),;
 

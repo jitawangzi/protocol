@@ -485,7 +485,9 @@ message PlayerAllInfo{
    bool shabiyincangguanggao = 250;  // 隐藏广告
    int64 loginDay = 251;  // 累计登陆天数
    int32 playerCreateTime = 255;//角色创建时间， 秒时间戳
-
+   
+   int32 gemGacheFreeTimesNormal = 256;  //宝石抽奖剩余免费广告次数
+   int32 gemGacheFreeTimesHigh = 257;  //宝石抽奖剩余免费广告次数
 }
 
 //微信设置相关
