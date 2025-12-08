@@ -90,6 +90,7 @@ message MyServerInfo {
   string name = 2;  // 玩家名字
   int32 level = 3;  // 等级
   int32 lastEnterTime = 4;  // 最后一次进入该服务器的时间，秒时间戳
+  string playerId = 8;  // 在这个服务器的玩家id
 }
 
 

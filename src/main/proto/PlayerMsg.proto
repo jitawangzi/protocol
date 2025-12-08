@@ -14,6 +14,7 @@ import "FairyFriendMsg.proto";
 message PlayerLoginRequest_01000001{
 	string sessionId = 1; //登陆服产生的会话id
 	bool reconnect = 2; // 是否是断线重连,true:断线重连，false:普通登陆
+	string playerId = 5; // 如果是断线重连,需要这个参数,或者选择一个已经有角色的服务器，也需要这个参数
 
 	//其他一些和BI相关的参数
 	string verstion = 3; // 客户端版本，如果版本不匹配不能登陆（暂时不做这个，只用在bi）
@@ -31,6 +32,7 @@ message PlayerLoginRequest_01000001{
     string openid = 61; //微信小程序中的openid，如果是微信小程序需要传递此参数
 
     string serverId = 70; // 进入哪个逻辑服务器，几服
+
 	// 这两个暂时用不到
 	//  int32 accountType = 10; //渠道类型
 	//	string sdkDeviceId = 24;
@@ -116,7 +118,6 @@ message PlayerReconnecRequest_01000065{
 message PlayerReconnecResponse_01000066{
 	PlayerAllInfo playerInfo = 1;					// 用户的所有游戏数据
 	string time = 2;			// 服务器当前时间,毫秒时间戳
-
 }
 
 /*** 心跳 ****/

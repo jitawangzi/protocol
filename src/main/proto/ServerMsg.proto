@@ -104,6 +104,7 @@ message LoginPlayerUidResponse_7d000019{
 message PaymentOrderCreateRequest_7d000020{
 	uint64 playerId = 1; // 玩家id
 	string sessionId = 2; //
+	uint64 userId = 3; // 玩家账号id
 	uint32 goodsPrice = 4; // 单价（分）
 	string itemId = 5; // 道具id
 	string platform = 6; // 平台 Android/IOS
