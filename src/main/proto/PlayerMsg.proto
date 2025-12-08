@@ -490,6 +490,8 @@ message PlayerAllInfo{
    int32 gemGacheFreeTimesHigh = 257;  //宝石抽奖剩余免费广告次数
    int32 gemGacheBaoDiNormal = 258;  //BaoDiNormal
    int32 gemGacheBaoDiHigh = 259;  //BaoDiHigh
+   map<int32, int32> titleMap = 260;   // 玩家拥有的称号，key：title表id value： 过期的秒时间戳，0表示不过期
+   map<int32, int32> chatBoxMap = 261;   // 玩家拥有的聊天气泡，key：chatBox表id value： 过期的秒时间戳，0表示不过期
 }
 
 //微信设置相关
@@ -506,4 +508,17 @@ message PlayerAdBIInfoRequest_01100603{
 message PlayerBIInfoResponse_01100604{
 
 }
-
+/*** 修改称号 **/
+message PlayerTitleRequest_01000701{
+    int32 title = 1;
+}
+/*** 修改称号返回 **/
+message PlayerTitleResponse_01000702{
+}
+/*** 修改聊天框 **/
+message PlayerChatBoxRequest_01000703{
+    int32 chatbox = 1;
+}
+/*** 修改聊天返回 **/
+message PlayerChatBoxResponse_01000704{
+}

@@ -27,6 +27,8 @@ message RewardInfo{
     int32 headPortrait = 30;		// 头像
     int32 figure = 32;		// 形象
     DefenceSkinInfo defenceSkin = 33;		// 防线皮肤奖励
+    int32 title = 34;		// 称号
+	int32 chatBox = 35;		// 聊天框
 }
 
 //奖励推送,客户端收到这个协议之后，将奖励增加到本地。
