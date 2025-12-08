@@ -51,6 +51,11 @@ public enum GoodsTypeEnum{
 	/** 皮肤 */
 	Skin(88, "皮肤"),
 	GemMMM(81, "宝石"),
+
+	/** 头像框*/
+	Title(82, "头像框"),
+	/** 聊天框*/
+	ChatBox(83, "聊天框"),
     ;
 	/** id */
 	private int id ; 
