@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 import com.github.javaparser.ParserConfiguration.LanguageLevel;
 import com.github.javaparser.StaticJavaParser;
@@ -37,7 +38,7 @@ public class ClassGenerator {
 	 * @param moduleCode  模块号， msg中定义 //@MessageModule 19
 	 * @throws IOException
 	 */
-	public static void createHandlerJavaFile(String handlerPath, String pkg, String className, String moduleCode, String function)
+	public static void createHandlerJavaFile(Map<String, MessageObject> idMessageMap,String handlerPath, String pkg, String className, String moduleCode, String function,boolean isServer)
 			throws IOException {
 		// 首先设置语言级别
 		StaticJavaParser.getConfiguration().setLanguageLevel(LanguageLevel.JAVA_17);
@@ -45,10 +46,15 @@ public class ClassGenerator {
 		cu.setPackageDeclaration(pkg);
 
 		cu.addImport("org.springframework.stereotype.Component");
-		cu.addImport("cn.game.games.net.game.handler.GameBaseHandler");
-
 		ClassOrInterfaceDeclaration classDeclaration = cu.addClass(className, Modifier.Keyword.PUBLIC);
-		classDeclaration.addExtendedType("GameBaseHandler");
+		if (isServer) {
+			cu.addImport("cn.game.games.net.game.handler.GameBaseHandler");
+			classDeclaration.addExtendedType("GameBaseHandler");
+		}else {
+			classDeclaration.addExtendedType("BaseHandler");
+			cu.addImport("cn.game.core.net.socket.handler.BaseHandler");
+		}
+
 		classDeclaration.addMarkerAnnotation("Component");
 		// 添加getModule方法
 		MethodDeclaration methodGetModule = classDeclaration.addMethod("getModule", Modifier.Keyword.PROTECTED);
@@ -56,7 +62,7 @@ public class ClassGenerator {
 		methodGetModule.setType(com.github.javaparser.ast.type.PrimitiveType.intType());
 		methodGetModule.setBody(StaticJavaParser.parseBlock(String.format("{ return %s; }", moduleCode)));
 		// 添加功能模块
-		if (function != null) {
+		if (function != null && isServer) {
 			MethodDeclaration methodFunctionModule = classDeclaration.addMethod("getInitialUI", Modifier.Keyword.PROTECTED);
 			methodFunctionModule.addMarkerAnnotation("Override");
 			methodFunctionModule.setType(new com.github.javaparser.ast.type.ClassOrInterfaceType("InitialUI"));
@@ -85,7 +91,7 @@ public class ClassGenerator {
 	 * @param function  功能开启的枚举名，msg中定义  //@Function SoulPets
 	 * @throws Exception
 	 */
-	public static void updateHandlerJavaFile(String handlerPath, String className, String module, List<String> requestMessages,
+	public static void updateHandlerJavaFile(Map<String, MessageObject> idMessageMap,String handlerPath, String className, String module, List<String> requestMessages,
 			String function) throws Exception {
 		// 首先设置语言级别
 		StaticJavaParser.getConfiguration().setLanguageLevel(LanguageLevel.JAVA_17);
@@ -126,7 +132,7 @@ public class ClassGenerator {
 		boolean hasMap = false;
 		boolean hasList = false;
 		for (String reqMessage : requestMessages) {
-			String respMessage = getRespMessage(reqMessage);
+			String respMessage = getRespMessage(idMessageMap,reqMessage);
 			checkImport("cn.game.protocol.protobuf." + module + "Msg", reqMessage, cu);
 			checkImport("cn.game.protocol.protobuf." + module + "Msg", respMessage, cu);
 			// 增加putInvoker
@@ -224,7 +230,7 @@ public class ClassGenerator {
 		Files.write(filePath, cu.toString().getBytes());
 	}
 
-	public static void updateClientHandlerJavaFile(String handlerPath, String className, String module, List<String> messages,
+	public static void updateClientHandlerJavaFile(Map<String, MessageObject> idMessageMap,String handlerPath, String className, String module, List<String> messages,
 			String function) throws Exception {
 		// 首先设置语言级别
 		StaticJavaParser.getConfiguration().setLanguageLevel(LanguageLevel.JAVA_17);
@@ -345,9 +351,13 @@ public class ClassGenerator {
 	 * @param reqMessage
 	 * @return
 	 */
-	public static String getRespMessage(String reqMessage) {
-		int msgId = PbProtocol.getInstance().getMsgId(reqMessage);
-		return PbProtocol.getInstance().getMsgName(msgId + 1);
+	public static String getRespMessage(Map<String, MessageObject> idMessageMap,String reqMessage) {
+		String msgId = "0x" +  reqMessage.split("_")[1] ;
+		MessageObject messageObject = idMessageMap.get(msgId); 
+		String pairId = messageObject.getPairId(); 
+		MessageObject messageObject2 = idMessageMap.get(pairId);
+		return messageObject2.getShortName();
+		
 	}
 
 	/** 

@@ -47,6 +47,7 @@ public class PbProtocolGenerator {
 	private static Properties velocityProp;
 	private static String workspace;
 	private static String metafolder;
+	private static boolean genClientTest = false;
 	/** 一般是开发中的，或者是其他游戏的proto */
 	private static Set<String> notParseProtos = new HashSet<String>();
 	private static Set<String> notGenRequestMessages = new HashSet<String>();
@@ -185,10 +186,18 @@ public class PbProtocolGenerator {
 
 		generate(messages, outClass, packages, prefixs, inputTemplate, outputFile, chareset);
 
-		// 生成客户端测试类
+		Map<String, MessageObject> idMessageMap = new HashMap<String, MessageObject>(); 
 		for (MessageObject m : messages) {
-
-			generateRequestTest(m, chareset);
+			idMessageMap.put(m.getId(), m); 
+		}
+		if (genClientTest) {
+			// 生成客户端测试类
+			for (MessageObject m : messages) {
+				if (isNotRequestMessage(m)) {
+					continue;
+				}
+				generateRequestTest(m, idMessageMap.get(m.getPairId()), chareset);
+			}
 		}
 
 		// 生成前端用的json文件
@@ -197,11 +206,14 @@ public class PbProtocolGenerator {
 		// 生成协议列表，压测使用。
 		genMessageDescCSV(messages);
 		// 生成服务器的Handler类
-		updateHandler(handlerMap, classNameRequestMessageMap, true);
-		// 生成客户端的Handler类
-		updateHandler(handlerMap, classNameResponseMessageMap, false);
-
-		// 注意把MessageObject 的值修改了
+		updateHandler(idMessageMap,handlerMap, classNameRequestMessageMap, true);
+		if (genClientTest) {
+			// 生成模拟客户端工程的Handler类
+			updateHandler(idMessageMap,handlerMap, classNameResponseMessageMap, false);
+		}
+		
+		// 下面所有流程是生成给客户端使用的
+		// 给客户端生成10进制的消息id，注意把MessageObject 的值修改了，服务器不能继续使用了
 		for (MessageObject messageObject : messages) {
 
 			String id = messageObject.getId();
@@ -459,7 +471,7 @@ public class PbProtocolGenerator {
 
 		Template template = null;
 		try {
-			template = velocityEngine.getTemplate(inputTemplate);
+			template = velocityEngine.getTemplate(inputTemplate,chareset);
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 			System.out.println("error : cannot find template " + inputTemplate);
@@ -493,7 +505,7 @@ public class PbProtocolGenerator {
 		try {
 			context.put("messages", messages);
 
-			template = velocityEngine.getTemplate(inputTemplate);
+			template = velocityEngine.getTemplate(inputTemplate,chareset);
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 			System.out.println("error : cannot find template " + inputTemplate);
@@ -518,26 +530,27 @@ public class PbProtocolGenerator {
 		writer.close();
 	}
 
-	public static void generateRequestTest(MessageObject message, String charset) throws Exception {
+	public static void generateRequestTest(MessageObject reqMessage,MessageObject respMessage, String charset) throws Exception {
 		String outPath = workspace + initialProp.getProperty("client.test.dir");
 
 		String inputTemplate = "client_test.vm";
 
-		if (isNotRequestMessage(message)) {
+		if (isNotRequestMessage(reqMessage)) {
 			return;
 		}
 
-		File file = new File(outPath + File.separator + message.getShortName() + "Test.java");
+		File file = new File(outPath + File.separator + reqMessage.getShortName() + "Test.java");
 		if (file.exists()) {
 			return;
 		}
 
 		VelocityContext context = new VelocityContext();
-		context.put("m", message);
+		context.put("reqMessage", reqMessage);
+		context.put("respMessage", respMessage);
 
 		Template template = null;
 		try {
-			template = velocityEngine.getTemplate(inputTemplate);
+			template = velocityEngine.getTemplate(inputTemplate,charset);
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 			System.out.println("error : cannot find template " + inputTemplate);
@@ -562,31 +575,8 @@ public class PbProtocolGenerator {
 		writer.close();
 	}
 
-	@Deprecated
-	private static void updateHandlerOld(Map<String, HandlerParam> handlerMap,
-			Multimap<String, String> classNameRequestMessageMap) throws Exception {
-		Set<Entry<String, HandlerParam>> entrySet = handlerMap.entrySet();
-		for (Entry<String, HandlerParam> entry : entrySet) {
-			String k = entry.getKey();
-			HandlerParam v = entry.getValue();
-			String handlerPackage = v.getHandlerPackage();
-			String function = v.getFunction();
-			String messageModule = v.getMessageModule();
-			String className = k;
-			List<String> messages = (List<String>) classNameRequestMessageMap.get(className);
-			String module = className.replace("Msg", "");
-			String handlerPath = workspace + "/game/src/main/java/" + handlerPackage.replace(".", "/") + "/" + module
-					+ "Handler.java";
-			File file = new File(handlerPath);
-			if (!file.exists()) {
-				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, module + "Handler",
-						"0x" + messageModule, function);
-			}
-			ClassGenerator.updateHandlerJavaFile(handlerPath, module + "Handler", module, messages, function);
-		}
-	}
 
-	private static void updateHandler(Map<String, HandlerParam> handlerMap,
+	private static void updateHandler(Map<String, MessageObject> idMessageMap,Map<String, HandlerParam> handlerMap,
 			Multimap<String, String> classNameMessageMap, boolean isServer) throws Exception {
 		Set<Entry<String, HandlerParam>> entrySet = handlerMap.entrySet();
 		for (Entry<String, HandlerParam> entry : entrySet) {
@@ -612,13 +602,13 @@ public class PbProtocolGenerator {
 					+ "/" + moduleClassName + ".java";
 			File file = new File(handlerPath);
 			if (!file.exists()) {
-				ClassGenerator.createHandlerJavaFile(handlerPath, handlerPackage, moduleClassName, "0x" + messageModule,
-						function);
+				ClassGenerator.createHandlerJavaFile(idMessageMap, handlerPath, handlerPackage, moduleClassName, "0x" + messageModule,
+						function,isServer);
 			}
 			if (isServer) {
-				ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
+				ClassGenerator.updateHandlerJavaFile(idMessageMap,handlerPath, moduleClassName, module, messages, function);
 			} else {
-				ClassGenerator.updateClientHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
+				ClassGenerator.updateClientHandlerJavaFile(idMessageMap,handlerPath, moduleClassName, module, messages, function);
 			}
 			//			ClassGenerator.updateHandlerJavaFile(handlerPath, moduleClassName, module, messages, function);
 		}
@@ -655,6 +645,7 @@ public class PbProtocolGenerator {
 
 		String toJava = initialProp.getProperty("proto.to.java");
 		boolean protoToJava = Boolean.parseBoolean(toJava);
+		genClientTest = Boolean.parseBoolean(initialProp.getProperty("client.test.java"));
 
 		String charset = initialProp.getProperty("charset");
 

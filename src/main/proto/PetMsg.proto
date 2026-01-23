@@ -11,7 +11,7 @@ package cn.game.protocol.protobuf;
 
 //碎片合成宠物
 message PetCompositeRequest_19000001{
-  int32 id = 1; // SoulSoulPet表id
+  int32 id = 1; // Pet表id
 }
 
 message PetCompositeResponse_19000002{

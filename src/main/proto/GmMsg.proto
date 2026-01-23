@@ -339,7 +339,7 @@ message GmPlayerLogoutRequest_77000009{
 	string playerId = 1;
 }
 // 响应踢下线
-message GmPlayerLogouttResponse_7700000a{
+message GmPlayerLogoutResponse_7700000a{
 	uint32 errorCode = 1;
 }
 

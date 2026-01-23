@@ -3,8 +3,11 @@ package cn.game.protocol.tool;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.game.util.HexUtil;
+
 public class MessageObject implements Comparable<MessageObject> {
 	private String longName;
+	/** 16进制 */
 	private String id;
 	private String shortName ; 
 	private String prefix ; 
@@ -43,6 +46,26 @@ public class MessageObject implements Comparable<MessageObject> {
 	public boolean isResponse() {
 
 		return shortName.indexOf("Response") >= 0;
+	}
+	/** 
+	 * 如果是请求协议，则返回 返回的协议id
+	 * 如果是返回协议，则返回 请求协议的id
+	 * @return 16进制协议id
+	 */
+	public String getPairId() {
+		// 请求id+1是返回id
+ 		if (isRequest()) {
+			int reqId = Integer.parseInt(id.substring(2), 16);
+			int resId = reqId + 1;
+			String resIdHex = HexUtil.toHexString(resId);
+			return resIdHex;
+		} else if (isResponse()) {
+			int resId = Integer.parseInt(id.substring(2), 16);
+			int reqId = resId - 1;
+			String reqIdHex = HexUtil.toHexString(reqId);
+			return reqIdHex;
+		}
+		return null; // push 类的协议
 	}
 
 	public boolean isPush() {
