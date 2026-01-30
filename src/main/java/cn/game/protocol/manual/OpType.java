@@ -210,8 +210,9 @@ public enum OpType{
 	GemXilian(308, "宝石洗炼"),
 	GemGache(309, "宝石抽奖"),
 	PressureTest(888, "压力测试"),
-	None(999, "未定义"),;
-
+	        ShopBuy(600, "ShopBuy"),
+	        ShopRefresh(601, "ShopRefresh"),
+	        None(999, "None"),;
 	private int id ;
 	private String name ; 
 	private String desc ; 

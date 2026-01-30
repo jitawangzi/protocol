@@ -1,213 +1,65 @@
 syntax = "proto3";
 package cn.game.protocol.protobuf;
-//option optimize_for = LITE_RUNTIME;
 
-import "BaseMsg.proto" ;
-import "RewardMsg.proto" ;
-// 商店、充值 相关协议
+import "RewardMsg.proto";
 
-//@HandlerPackage cn.game.games.net.game.module.shop
-//@ClientHandlerPackage cn.game.simulation.client.handler
-//@MessageModule 15
-
-//查看商店里面的商品列表
-message ShopItemListRequest_15000001{
-  uint32 shopId = 1;  // 商店id  Shop表id
+// 商店页签类型
+enum ShopTabType {
+    ShopTabType_None = 0; // 占位
+    Grocery = 1;    // 杂货铺
+    Antique = 2;    // 中古店
+    Diamond = 3;    // 钻石充值
+    Pack = 4;       // 超值礼包
 }
 
-message ShopItemListResponse_15000002{
-	repeated ShopItemProto items = 1;
+// 限购重置类型
+enum ShopLimitType {
+    ShopLimitType_None = 0; // 不限购
+    Daily = 1;      // 每日重置
+    Weekly = 2;     // 每周重置
+    Permanent = 3;  // 终身限购
 }
 
-// 商品
-message ShopItemProto{
-	uint32 itemId = 2; // 商品表ShopItem 表id
-	uint32 buyTimes = 3; // 此商品已经购买次数
+// 商店商品信息
+message ShopItemInfo {
+    int32 shopId = 1;       // 商品配置ID (ShopItem.xlsx ID)
+    int32 buyCount = 2;     // 已购买次数 (周期限购使用)
+    bool isSoldOut = 3;     // 是否已售罄 (中古店使用)
+    int32 slotIndex = 4;    // 槽位索引 (中古店使用)
 }
 
-//购买商品
-message ShopItemBuyRequest_15000003{
-	uint32 shopId = 1; // 商店id  Shop表id
-	uint32 itemId = 2; // 商品表ShopItem 表id
-	uint32 count = 3; // 购买次数，在可以多次购买的商品里面，可以选择次数进行购买
+// 获取商店信息请求
+message ShopInfoRequest_50000001 {
+    int32 tabType = 1;      // 页签类型 (ShopTabType枚举)
 }
 
-message ShopItemBuyResponse_15000004{
-  repeated RewardInfo rewards = 1;  // 获得的具体物品
+// 获取商店信息响应
+message ShopInfoResponse_50000002 {
+    int32 tabType = 1;
+    repeated ShopItemInfo items = 2; // 商品列表
+    int64 nextRefreshTime = 3;       // 下次自动刷新时间戳 (中古店有效)
+    int32 manualRefreshCount = 4;    // 今日手动刷新次数 (中古店有效)
 }
 
-//手动刷新黑市请求
-message ShopHeishiRefreshRequest_15000005{
-	int32 shopId = 1;  // 刷新的Shop表id，目前只有类型是2的商店可以手动刷新。
+// 购买请求
+message ShopBuyRequest_50000003 {
+    int32 shopId = 1;       // 商品配置ID
+    int32 count = 2;        // 购买数量
 }
 
-message ShopHeishiRefreshResponse_15000006{
-	repeated ShopItemProto items = 1;  // 黑市商品
+// 购买响应
+message ShopBuyResponse_50000004 {
+    repeated RewardInfo rewards = 1; // 获得的奖励 (BaseMsg/RewardMsg 定义)
+    ShopItemInfo item = 2;           // 更新后的商品状态 (主要更新buyCount/isSoldOut)
 }
 
-//==================================月卡===============================
-
-//购买月卡
-message MonthCardBuyRequest_15000010{
-  uint32 id = 1; // MonthCard表id
+// 刷新请求
+message ShopRefreshRequest_50000005 {
+    int32 tabType = 1;      // 只有中古店(Type=2)支持
 }
 
-message MonthCardBuyResponse_15000011{
-	MonthCardProto monthCard = 1;
-	repeated RewardInfo rewards = 2;  // 月卡购买奖励
-
+// 刷新响应
+message ShopRefreshResponse_50000006 {
+    repeated ShopItemInfo items = 1; // 刷新后的新商品列表
+    int32 manualRefreshCount = 2;    // 更新后的刷新次数
 }
-
-//领取月卡购买奖励，每个月卡只能领取一次
-message MonthCardBuyRewardRequest_15000012{
-  uint32 id = 1; // MonthCard表id
-}
-
-message MonthCardBuyRewardResponse_15000013{
-}
-
-
-//领取月卡每日奖励
-message MonthCardDayRewardRequest_15000014{
-  uint32 id = 1; // MonthCard表id
-}
-
-message MonthCardDayRewardResponse_15000015{
-}
-
-
-//领取双月卡一次性奖励
-message MonthCardDoubleBonusRequest_15000016{
-}
-
-message MonthCardDoubleBonusResponse_15000017{
-	  repeated RewardInfo rewards = 1;  // 获得的具体物品
-}
-
-message MonthCardProto{
-	uint32 id = 1; // MonthCard表id
-	uint32 expireTime = 2; // 月卡过期时间（秒时间戳）,0表示不过期
-	bool isBuyRewards = 3; // 是否领取了购买奖励
-	bool isDayRewards = 4; // 是否领取了每日奖励
-}
-
-
-//==================================礼包===============================
-
-//购买章节礼包
-message ShopChapterPacksBuyRequest_15000020{
-  uint32 id = 1; // ChapterPacks表id
-}
-
-message ShopChapterPacksBuyResponse_15000021{
-  repeated RewardInfo rewards = 2;  // 获得的礼包物品
-}
-
-// 充值
-message ShopRechargeRequest_15000022{
-  uint32 id = 1; // Recharge表id
-}
-
-message ShopRechargeResponse_15000023{
-  repeated RewardInfo rewards = 2;  // 获得的资源
-}
-
-// 支付订单相关参数，客户端收到这个协议就可以利用里面的参数发起支付了
-message PaymentOrderPush_15010020{
-	PaymentOrderProto order = 1; // 这个是微信支付的相关参数
-	string orderId = 2;        // 订单的唯一流水id
-	string sdkGoodsId = 3;     // 畅游sdk支付时的商品id
-	string serverId = 4;     // 畅游sdk支付时使用的服务器id
-}
-
-
-//==================================通行证===============================
-//购买通行证
-message ShopFundPassBuyRequest_15000030{
-  uint32 id = 1; // FundPass表id
-}
-
-message ShopFundPassBuyResponse_15000031{
-}
-
-//领取通行证奖励
-message ShopFundPassRewardRequest_15000032{
-  repeated uint32 id = 1; // FundPassRewards表id
-}
-
-message ShopFundPassRewardResponse_15000033{
-  repeated RewardInfo rewards = 2;  // 获得的物品
-}
-
-// 通行证数据
-message FundPassInfo{
-  int32 id = 1;  // FundPass表id
-  repeated int32 rewardIds = 2;  // Fund PassReward表id，已经领取过的奖励id
-}
-
-message ShopGroupItemInfo{
-	uint32 shopId = 1;  // 商店id  Shop表id
-	repeated ShopItemProto items = 2;  // 商品
-}
-
-//==================================开宝箱===============================
-message ShopBoxOpenRequest_15000040{
-  bool watchAds = 1;   // 是看广告开宝箱，还是直接使用钻石开宝箱。
-}
-message ShopBoxOpenResponse_15000041{
-  repeated RewardInfo rewards = 2;  // 获得的物品
-}
-//==================================现时礼包===============================
-message XianShiLiBaoInfo{
-	int32 failTimer = 1;//过期时间戳  秒
-	int32 groupId = 2;//该组限时礼包的组id
-	repeated int32 buyIds = 3;//已经购买过的id
-}
-
-//获取现时礼包数据
-message GetXianShiLiBaoInfoRequest_15000050{
-
-}
-message GetXianShiLiBaoInfoResponse_15000051{
-	repeated XianShiLiBaoInfo infos = 1;
-}
-
-//购买限时礼包
-message BuyXianShiLiBaoRequest_15000052{
-	int32 id = 1;//限时礼包的id
-}
-message BuyXianShiLiBaoResponse_15000053{
-	int32 id = 1;//限时礼包的id
-	repeated RewardInfo rewards = 2;//购买的物品
-	XianShiLiBaoInfo info = 3;//该组礼包信息
-}
-//解锁新的限时礼包
-message NotifyNewXianShiLiBao_15000054{
-	XianShiLiBaoInfo info = 1;
-}
-
-
-//==================================新的限时礼包===============================
-
-
-message LimitedTimeGiftInfo{
-  int32 id = 1;         //LimitedTimeGift 表id
-  int32 buyCount = 2;   //已经购买过的次数
-  int32 endTime = 3; //这个礼包结束时间（秒时间戳）
-}
-
-
-//购买限时礼包
-message LimitedTimeGiftBuyRequest_15000061{
-  int32 id = 1;//限时礼包的id
-}
-message LimitedTimeGiftBuyResponse_15000062{
-  repeated RewardInfo rewards = 2;//获得的奖励
-}
-
-//产生新的限时礼包
-message LimitedTimeGiftPush_15100054{
-  LimitedTimeGiftInfo info = 1;
-}
-
-

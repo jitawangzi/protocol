@@ -84,6 +84,7 @@ public enum ErrorMsgEnum {
 	pre_condition_check_error(70, "前置条件校验错误"),
 	/** 没有该福利/特权，不能进行此项操作。 */
 	welfare_check_error(71, "没有该福利/特权，不能进行此项操作。"),
+	param_error(80, "请求参数错误"),
 	// 100+ 业务错误。
 
 	/** 创建角色名字重复 */
@@ -132,6 +133,8 @@ public enum ErrorMsgEnum {
 	shop_gift_condition(378, "礼包没有达到购买条件"),
 	shop_gift_repeated(379, "礼包重复购买"),
 
+	shop_sold_out(376, "Shop Sold Out"),
+	shop_expired(377, "Shop Expired"),
 	fundpass_not_buy(380, "没有购买通行证"),
 	hero_day_rent_max(390, "日租卡最多能上一个"),
 	stamina_expire(391, "体力过期了"),

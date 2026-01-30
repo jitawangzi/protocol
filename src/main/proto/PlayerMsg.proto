@@ -4,7 +4,7 @@ package cn.game.protocol.protobuf;
 
 import "RewardMsg.proto" ;
 import "BaseMsg.proto" ;
-import "ShopMsg.proto" ;
+//import "ShopMsg.proto" ;
 import "BattleMsg.proto" ;
 import "QuestMsg.proto";
 import "DevelopMsg.proto";
@@ -416,10 +416,10 @@ message PlayerAllInfo{
    string defenceSkinUsed = 37;				// 当前使用的防线皮肤唯一id
 
 
-   repeated MonthCardProto monthCards  = 40;        //月卡
+//   repeated MonthCardProto monthCards  = 40;        //月卡
    bool monthCardDoubleBonus = 42 ; 			// 是否可以领取双月卡奖励。
    repeated uint32 chapterPacks  = 41;        //购买过的章节礼包id(ChapterPacks表)
-   repeated FundPassInfo fundPass  = 44;        //领过的通行证奖励
+//   repeated FundPassInfo fundPass  = 44;        //领过的通行证奖励
    map<uint32, uint32> heishiFreshTimes = 46;        //黑市手动刷新次数,key shop表id
    repeated string freeDayRentHeros = 47;  //免费日租卡的英雄id
    string freeDayRentHeroUid = 49; // 当前选择使用的日租卡英雄唯一id。
@@ -452,12 +452,12 @@ message PlayerAllInfo{
 	int32 rescueSkillId = 86;	// 战斗选择的强援技能id，Rescue表id
     map<int32, int32> figureMap = 88;		// 玩家拥有的形象，key：PlayerFigure表id value： 还剩多少秒过期，0表示不过期
     int32 figure = 89;		// 当前使用的形象，PlayerFigure表id
-    repeated LimitedTimeGiftInfo limitedTimeGift = 91; // 已经产生的限时礼包
+//    repeated LimitedTimeGiftInfo limitedTimeGift = 91; // 已经产生的限时礼包
 
     repeated int32 handCardIds = 93;    //已经选择的手操卡id，可在战斗中使用
 
    //︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻合并游戏独有的数据︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻︻
-   repeated ShopGroupItemInfo shopGroupItems  = 100;        //商店数据
+//   repeated ShopGroupItemInfo shopGroupItems  = 100;        //商店数据
    int32 nextFreeOpenBoxTime  = 101;        //距离下一次看广告免费开宝箱时间(秒)，如果是0表示可以看广告开宝箱
    int32 mergeSweepTimes  = 102;        //当日已经扫荡次数
    repeated MergeEquipmentInfo  mergeEquips = 103; //装备数据
