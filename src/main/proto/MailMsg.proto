@@ -10,14 +10,24 @@ import "RewardMsg.proto" ;
 //@Function Letter
 //@MessageModule 12
 
+// 邮件筛选；缺省值保留旧请求查询全部邮件的含义。
+enum MailListFilter {
+	ALL = 0;
+	UNREAD = 1;
+	HAS_CLAIMABLE_ATTACHMENT = 2;
+}
+
 //请求邮件列表。
 message MailListRequest_12000001{
-
+	optional MailListFilter filter = 1; // 未知枚举值拒绝；设置ALL也会启用有限分页。
+	optional int32 page_size = 2; // 未设置为50；显式设置须在1到100之间。
+	string cursor = 3; // 上页返回的游标，只能用于相同玩家和筛选；重启后需重新开始。
 }
 
 //邮件列表数据
 message MailListResponse_12000002{
 	repeated MailInfo mails  = 1;        //
+	string next_cursor = 2; // 空表示本次扫描结束；页间按当前状态重新筛选，并非冻结快照。
 }
 
 //查看未读邮件
