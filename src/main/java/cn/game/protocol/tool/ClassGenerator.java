@@ -21,7 +21,6 @@ import com.google.protobuf.Descriptors;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Message;
 
-import cn.game.protocol.protobuf.PbProtocol;
 
 /**    
  * 基于JavaParser的类文件生成、修改。 

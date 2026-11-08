@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import cn.game.protocol.protobuf.PbProtocol;
 
 /**    
  * 根据消息id，生成对应Handler类的代码包括导入、初始化、方法体等
@@ -139,8 +138,7 @@ public class HandlerGenerator {
 	}
 
 	public static String getRespMessage(String reqMessage) {
-		int msgId = PbProtocol.getInstance().getMsgId(reqMessage);
-		return PbProtocol.getInstance().getMsgName(msgId + 1);
+		return reqMessage.replace("Request_", "Response_");
 	}
 
 	public static String getReqMethod(String reqMessage, String module) {
