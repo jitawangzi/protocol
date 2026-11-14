@@ -100,3 +100,63 @@ message TestConfigCheckResponse_6f000091{
 
 }
 
+// 查询已注册的GM指令元数据目录
+message TestGmSchemaRequest_6f000100{
+	string group_filter = 1;	// 分组过滤名，空表示返回全部允许的动作
+}
+message TestGmSchemaResponse_6f000101{
+	string schema_version = 1;	// 元数据协议版本号
+	string schema_json = 2;		// GM动作元数据目录JSON
+}
+
+// 结构化执行GM动作
+message TestGmExecRequest_6f000102{
+	string action = 1;			// 目标GM动作ID或命令名
+	string params_json = 2;		// 参数JSON对象字符串
+	int64 target_player_id = 3;	// 目标玩家ID，0表示当前连接玩家
+	string trace_id = 4;		// 调用方透传的追踪ID
+}
+message TestGmExecResponse_6f000103{
+	string result_json = 1;		// 标准GmResult JSON结果
+	int64 player_id = 2;		// 当前玩家ID
+	int32 msg_id = 3;			// 关联的请求消息号（如0x6f000102）
+	string msg_name = 4;		// 关联的请求消息名
+	int32 seq = 5;				// 请求序列号
+	int64 timestamp_ms = 6;		// 服务端响应时间戳（毫秒）
+	string trace_id = 7;		// 调用方透传的追踪ID
+}
+
+// 只读查询策划配置表数据
+message TestConfigQueryRequest_6f000104{
+	string op = 1;				// 操作类型：tables/listTables/list/get
+	string table = 2;			// 配置表名
+	int32 id = 3;				// 主键ID（op=get时使用）
+	int32 page = 4;				// 分页页码（从1开始）
+	int32 page_size = 5;		// 每页条数
+	string filter_json = 6;		// 过滤条件JSON字符串
+}
+message TestConfigQueryResponse_6f000105{
+	string schema_version = 1;	// 结果结构版本号
+	string result_json = 2;		// 查询结果JSON
+}
+
+// 查询服务端已注册网络协议目录
+message TestProtoCatalogRequest_6f000106{
+	int32 module_filter = 1;	// 按模块号过滤，0表示全部模块
+	bool include_schemas = 2;	// 是否附带消息字段结构元数据
+}
+message TestProtoCatalogResponse_6f000107{
+	string schema_version = 1;	// 目录结构版本号
+	string catalog_json = 2;	// 协议目录JSON
+}
+
+// 只读自省在线玩家模块内存及独立分表状态
+message TestInspectPlayerRequest_6f000108{
+	int64 target_player_id = 1;	// 目标玩家ID，0表示当前连接玩家
+	repeated string modules = 2;// 模块类名或简名过滤列表，空表示全部模块
+	string scope = 3;			// 自省作用域（仅支持player）
+}
+message TestInspectPlayerResponse_6f000109{
+	string schema_version = 1;	// 快照结构版本号
+	string result_json = 2;		// 只读模块快照JSON
+}
